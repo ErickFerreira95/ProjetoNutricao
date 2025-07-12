@@ -1,5 +1,7 @@
 package com.mycompany.view;
 
+import com.mycompany.model.Alimento;
+import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,6 +10,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -22,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class MainView extends JFrame {
-    
+
     private JTable tabela;
     private DefaultTableModel modelo;
     private JMenuBar menuBar = new JMenuBar();
@@ -36,10 +41,10 @@ public class MainView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
-        
+
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
-        
+
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
         setJMenuBar(menuBar);
@@ -47,7 +52,7 @@ public class MainView extends JFrame {
         // Painel de fundo
         JPanel backgroundPanel = new JPanel();
         backgroundPanel.setLayout(new GridBagLayout());
-        
+
         modelo = new DefaultTableModel(new String[]{"ID", "Nome Alimento", "Quantidade(g)", "Proteína(g)", "Carboidrato(g)", "Gordura(g)", "Kcal", "Ações"}, 0);
         tabela = new JTable(modelo);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
@@ -64,10 +69,10 @@ public class MainView extends JFrame {
         tabela.setFont(new Font("Calibri", Font.PLAIN, 14));
         tabela.setGridColor(Color.LIGHT_GRAY); // Cor das linhas da grade
         tabela.setRowHeight(30);
-        
+
         JTableHeader cabecalho = tabela.getTableHeader();
         cabecalho.setPreferredSize(new Dimension(cabecalho.getWidth(), 30));
-        
+
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
         centralizado.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -77,7 +82,7 @@ public class MainView extends JFrame {
             tabela.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tabela.getColumn("Ações").setCellRenderer(new PanelRenderer());
-            tabela.getColumn("Ações").setCellEditor(new PanelEditor(tabela)); 
+            tabela.getColumn("Ações").setCellEditor(new PanelEditor(tabela));
         }
 
         GridBagConstraints posicaoTable = new GridBagConstraints();
@@ -89,13 +94,45 @@ public class MainView extends JFrame {
         posicaoTable.fill = GridBagConstraints.NONE;
         posicaoTable.insets = new Insets(0, 0, 0, 0); // margem superior
         backgroundPanel.add(new JScrollPane(tabela), posicaoTable);
-        
+
         setContentPane(backgroundPanel);
-        
+
     }
-    
+
     public void mainView() {
         configurarUI();
         setVisible(true);
+        CadastroAlimentoView();
+        carregarTabela();
     }
+
+    // Adiciona ações
+    public void CadastroAlimentoView() {
+        cadastrarAlimento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CadastroAlimentoView().CadastroAlimentoView();
+            }
+        });
+    }
+    
+    private void carregarTabela() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentos();
+
+        for (Alimento a : alimentos) {
+            modelo.addRow(new Object[]{a.getId(), a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }
+    
+    /*public void calcularTmbView() {
+        botaoTmb.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new TelaCalculoTmb().TelaTmb();
+            }
+        });
+    }*/
 }

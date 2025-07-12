@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.util.dao.AlimentoDao;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,10 +23,20 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor{
 
     public PanelEditor(JTable table) {
         painel = new JPanel(new GridBagLayout());
-        btnEditar = new JButton(new ImageIcon("src/images/lapis.png"));
+        //btnEditar = new JButton(new ImageIcon("src/images/lapis.png"));
+        btnEditar = new JButton("Editar");
         btnEditar.setToolTipText("Editar");
-        btnExcluir = new JButton(new ImageIcon("src/images/lixeira.png"));
+        btnEditar.setBackground(new Color(0, 191, 255));
+        btnEditar.setOpaque(true);
+        btnEditar.setBorderPainted(false);
+        btnEditar.setForeground(Color.WHITE);
+        //btnExcluir = new JButton(new ImageIcon("src/images/lixeira.png"));
+        btnExcluir = new JButton("Excluir");
+        btnExcluir.setBackground(new Color(255, 99, 71));
+        btnExcluir.setOpaque(true);
+        btnExcluir.setBorderPainted(false);
         btnExcluir.setToolTipText("Excluir");
+        btnExcluir.setForeground(Color.WHITE);
 
         GridBagConstraints posicaoBtnEditar = new GridBagConstraints();
         posicaoBtnEditar.gridx = 0;
@@ -34,7 +45,7 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor{
         posicaoBtnEditar.weighty = 0; // ← isso força ele a ficar no topo
         posicaoBtnEditar.anchor = GridBagConstraints.CENTER;
         posicaoBtnEditar.fill = GridBagConstraints.NONE;
-        posicaoBtnEditar.insets = new Insets(0, 0, 0, 15); // margem superior
+        posicaoBtnEditar.insets = new Insets(0, 0, 0, 5); // margem superior
         painel.add(btnEditar, posicaoBtnEditar);
 
         GridBagConstraints posicaoBtnExcluir = new GridBagConstraints();

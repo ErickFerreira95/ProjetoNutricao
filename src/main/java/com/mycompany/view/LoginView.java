@@ -202,9 +202,8 @@ public class LoginView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dao.autenticarUsuario(txtEmail.getText(), txtPassword.getText())) {
-                    //signUpView.telaPrincipal();
-                    //dispose();
-                    System.out.println("Login bem sucedido!");
+                    dispose();
+                    new MainView().mainView();
                 } else {
                     System.out.println("Email ou senha inválidos.");
                 }

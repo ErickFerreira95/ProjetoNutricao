@@ -10,12 +10,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,7 +41,16 @@ public class CadastroAlimentoView extends JFrame {
         setLocationRelativeTo(null);
 
         // Painel de fundo
-        JPanel backgroundPanel = new JPanel();
+        // Painel de fundo
+        JPanel backgroundPanel = new JPanel() {
+            private final Image imagemFundo = new ImageIcon("/C:/Users/Erick/OneDrive/Documentos/NetBeansProjects/1-Projetos/AppNutricao/build/classes/images/background.jpg").getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagemFundo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         backgroundPanel.setLayout(new GridBagLayout());
 
         // Painel transparente com cantos arredondados

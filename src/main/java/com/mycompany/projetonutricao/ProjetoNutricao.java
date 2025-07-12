@@ -24,9 +24,9 @@ public class ProjetoNutricao {
         SwingUtilities.invokeLater(() -> {
             //new LoginView().login();
             //new SignUpView().setVisible(true);
-            //new MainView().mainView();
+            new MainView().mainView();
             //new CadastroAlimentoView().CadastroAlimentoView();
-            new CalculoTmbView().calculoTmbView();
+            //new CalculoTmbView().calculoTmbView();
         });
     }
 }

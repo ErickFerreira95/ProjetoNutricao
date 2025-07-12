@@ -50,7 +50,16 @@ public class MainView extends JFrame {
         setJMenuBar(menuBar);
 
         // Painel de fundo
-        JPanel backgroundPanel = new JPanel();
+        JPanel backgroundPanel = new JPanel() {
+            private final Image imagemFundo = new ImageIcon("/C:/Users/Erick/OneDrive/Documentos/NetBeansProjects/1-Projetos/AppNutricao/build/classes/images/background.jpg").getImage();
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(imagemFundo, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
         backgroundPanel.setLayout(new GridBagLayout());
 
         modelo = new DefaultTableModel(new String[]{"ID", "Nome Alimento", "Quantidade(g)", "Proteína(g)", "Carboidrato(g)", "Gordura(g)", "Kcal", "Ações"}, 0);
@@ -63,7 +72,7 @@ public class MainView extends JFrame {
         tabela.getColumnModel().getColumn(5).setPreferredWidth(200);
         tabela.getColumnModel().getColumn(6).setPreferredWidth(150);
         tabela.getColumnModel().getColumn(7).setPreferredWidth(350);
-        tabela.setPreferredScrollableViewportSize(new Dimension(900, 500));
+        tabela.setPreferredScrollableViewportSize(new Dimension(950, 500));
         tabela.getTableHeader().setBackground(Color.WHITE);
         tabela.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 14));
         tabela.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -116,7 +125,7 @@ public class MainView extends JFrame {
             }
         });
     }
-    
+
     private void carregarTabela() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentos();
@@ -125,7 +134,7 @@ public class MainView extends JFrame {
             modelo.addRow(new Object[]{a.getId(), a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
         }
     }
-    
+
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 

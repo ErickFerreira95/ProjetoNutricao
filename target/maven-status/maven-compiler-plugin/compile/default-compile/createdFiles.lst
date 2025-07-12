@@ -17,8 +17,11 @@ com\mycompany\view\SignUpView$2.class
 com\mycompany\view\LoginView.class
 com\mycompany\view\CadastroAlimentoView$1.class
 com\mycompany\view\SignUpView$4.class
+com\mycompany\view\CalculoTmbView$5.class
 com\mycompany\view\LoginView$2.class
+com\mycompany\view\CadastroAlimentoView$4.class
 com\mycompany\view\CalculoTmbView.class
+com\mycompany\view\MainView$3.class
 com\mycompany\view\MainView$1.class
 com\mycompany\view\PanelEditor.class
 com\mycompany\view\SignUpView$1.class

@@ -32,8 +32,6 @@ public class SignUpView extends JFrame {
     private JButton btnSignUp = new JButton("Sign Up");
     private JLabel lblBack = new JLabel("<html><a href=''>Back</a></html>");
 
-    
-
     private void configurarUI() {
         setTitle("Sign up");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

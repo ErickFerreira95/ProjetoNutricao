@@ -5,6 +5,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mycompany.view.CadastroAlimentoView;
+import com.mycompany.view.CalculoTmbView;
 import com.mycompany.view.LoginView;
 import com.mycompany.view.MainView;
 import com.mycompany.view.SignUpView;
@@ -23,8 +24,9 @@ public class ProjetoNutricao {
         SwingUtilities.invokeLater(() -> {
             //new LoginView().login();
             //new SignUpView().setVisible(true);
-            new MainView().mainView();
+            //new MainView().mainView();
             //new CadastroAlimentoView().CadastroAlimentoView();
+            new CalculoTmbView().calculoTmbView();
         });
     }
 }

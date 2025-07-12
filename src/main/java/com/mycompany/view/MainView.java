@@ -104,6 +104,7 @@ public class MainView extends JFrame {
         setVisible(true);
         CadastroAlimentoView();
         carregarTabela();
+        calculoTmbView();
     }
 
     // Adiciona ações
@@ -125,14 +126,14 @@ public class MainView extends JFrame {
         }
     }
     
-    /*public void calcularTmbView() {
-        botaoTmb.addActionListener(new ActionListener() {
+    public void calculoTmbView() {
+        calcularTmb.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new TelaCalculoTmb().TelaTmb();
+                new CalculoTmbView().calculoTmbView();
             }
         });
-    }*/
+    }
 }

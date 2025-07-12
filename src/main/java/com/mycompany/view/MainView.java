@@ -10,6 +10,9 @@ import java.awt.Image;
 import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,12 +25,24 @@ public class MainView extends JFrame {
     
     private JTable tabela;
     private DefaultTableModel modelo;
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menuCadastrarAlimento = new JMenu("Alimento");
+    private JMenu menuCalcularTmb = new JMenu("Calculadora");
+    private JMenuItem cadastrarAlimento = new JMenuItem("Cadastrar alimento");
+    private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
 
     private void configurarUI() {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
+        
+        menuCadastrarAlimento.add(cadastrarAlimento);
+        menuBar.add(menuCadastrarAlimento);
+        
+        menuCalcularTmb.add(calcularTmb);
+        menuBar.add(menuCalcularTmb);
+        setJMenuBar(menuBar);
 
         // Painel de fundo
         JPanel backgroundPanel = new JPanel();
@@ -76,6 +91,7 @@ public class MainView extends JFrame {
         backgroundPanel.add(new JScrollPane(tabela), posicaoTable);
         
         setContentPane(backgroundPanel);
+        
     }
     
     public void mainView() {

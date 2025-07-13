@@ -6,6 +6,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mycompany.view.CadastroAlimentoView;
 import com.mycompany.view.CalculoTmbView;
+import com.mycompany.view.EditarAlimentoView;
 import com.mycompany.view.LoginView;
 import com.mycompany.view.MainView;
 import com.mycompany.view.SignUpView;
@@ -27,6 +28,7 @@ public class ProjetoNutricao {
             new MainView().mainView();
             //new CadastroAlimentoView().CadastroAlimentoView();
             //new CalculoTmbView().calculoTmbView();
+            //new EditarAlimentoView().editarAlimentoView();
         });
     }
 }

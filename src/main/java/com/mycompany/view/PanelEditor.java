@@ -1,5 +1,6 @@
 package com.mycompany.view;
 
+import com.mycompany.model.Alimento;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Component;
@@ -15,8 +16,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
-public class PanelEditor extends AbstractCellEditor implements TableCellEditor{
-    
+public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
+
     private JPanel painel;
     private JButton btnEditar;
     private JButton btnExcluir;
@@ -59,10 +60,25 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor{
         painel.add(btnExcluir, posicaoBtnExcluir);
 
         btnEditar.addActionListener(e -> {
-            int row = table.getEditingRow();
-            String nome = table.getValueAt(row, 0).toString();
-            JOptionPane.showMessageDialog(table, "Editar " + nome);
-            fireEditingStopped();
+            JTable tabela = table;
+            int row = tabela.getSelectedRow();
+
+            if (row >= 0) {
+                Alimento alimento = new Alimento();
+                alimento.setId(Integer.parseInt(tabela.getValueAt(row, 0).toString()));
+                alimento.setNomeAlimento(tabela.getValueAt(row, 1).toString());
+                alimento.setQuantidade(tabela.getValueAt(row, 2).toString());
+                alimento.setProteina(tabela.getValueAt(row, 3).toString());
+                alimento.setCarboidrato(tabela.getValueAt(row, 4).toString());
+                alimento.setGordura(tabela.getValueAt(row, 5).toString());
+                alimento.setKcal(tabela.getValueAt(row, 6).toString());
+
+                // Abre o novo JFrame com os dados da linha
+                EditarAlimentoView telaEditar = new EditarAlimentoView();
+                telaEditar.getAlimento(alimento); // ← envia os dados para os campos da tela
+                telaEditar.editarAlimentoView();
+            }
+            fireEditingStopped(); // para encerrar o modo de edição da célula
         });
 
         btnExcluir.addActionListener(e -> {

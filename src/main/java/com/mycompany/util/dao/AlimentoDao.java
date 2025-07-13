@@ -7,9 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class AlimentoDao {
-    
+
     private ConnectionDataBase connection;
     private Connection conn;
 
@@ -40,7 +41,6 @@ public class AlimentoDao {
             return false;
         }
     }
-
     public List<Alimento> carregarAlimentos() {
         List<Alimento> lista = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class AlimentoDao {
         }
         return lista;
     }
-    
+
     public boolean deletarAlimento(int id) {
         try (Connection conn = connection.getConexaoBd()) {
             String sql = "DELETE FROM alimentos WHERE id = ?";
@@ -80,4 +80,26 @@ public class AlimentoDao {
             return false;
         }
     }
+
+    public void atualizarAlimento(Alimento alimento) {
+        String sql = "UPDATE alimentos SET nome = ?, quantidade = ?, proteina = ?, carboidrato = ?, gordura = ?, kcal = ? WHERE id = ?";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+            stmt.setInt(7, alimento.getId());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento atualizado com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar alimento: " + e.getMessage());
+        }
+    }
+
 }

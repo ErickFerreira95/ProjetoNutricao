@@ -1,4 +1,5 @@
 com\mycompany\view\MainView$2.class
+com\mycompany\view\EditarAlimentoView$2.class
 com\mycompany\view\PanelRenderer.class
 com\mycompany\view\LoginView$1.class
 com\mycompany\view\SignUpView$3.class
@@ -6,6 +7,7 @@ com\mycompany\view\CalculoTmbView$4.class
 com\mycompany\view\LoginView$3.class
 com\mycompany\view\CadastroAlimentoView$3.class
 com\mycompany\view\CadastroAlimentoView.class
+com\mycompany\view\EditarAlimentoView.class
 com\mycompany\view\CalculoTmbView$1.class
 com\mycompany\util\dao\AlimentoDao.class
 com\mycompany\model\User.class
@@ -13,6 +15,7 @@ com\mycompany\util\dao\UserDao.class
 com\mycompany\view\LoginView$4.class
 com\mycompany\projetonutricao\ProjetoNutricao.class
 com\mycompany\view\CalculoTmbView$2.class
+com\mycompany\view\EditarAlimentoView$3.class
 com\mycompany\view\SignUpView$2.class
 com\mycompany\view\LoginView.class
 com\mycompany\view\CadastroAlimentoView$1.class
@@ -24,8 +27,10 @@ com\mycompany\view\CalculoTmbView.class
 com\mycompany\view\MainView$3.class
 com\mycompany\view\MainView$1.class
 com\mycompany\view\PanelEditor.class
+com\mycompany\view\EditarAlimentoView$1.class
 com\mycompany\view\SignUpView$1.class
 com\mycompany\connection\ConnectionDataBase.class
+com\mycompany\view\EditarAlimentoView$4.class
 com\mycompany\view\CadastroAlimentoView$2.class
 com\mycompany\view\SignUpView.class
 com\mycompany\model\Alimento.class

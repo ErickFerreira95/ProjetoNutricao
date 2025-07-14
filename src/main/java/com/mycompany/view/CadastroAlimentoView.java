@@ -21,6 +21,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -32,13 +35,33 @@ public class CadastroAlimentoView extends JFrame {
     private JTextField txtCarboidrato = new JTextField(12);
     private JTextField txtGordura = new JTextField(12);
     private JButton botaoCadastrar = new JButton("Cadastrar");
-    private JLabel lblBack = new JLabel("<html><a href=''>Voltar</a></html>");
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menuCadastrarAlimento = new JMenu("Alimento");
+    private JMenu menuCalcularTmb = new JMenu("Calculadora");
+    private JMenu menuRefeicoes = new JMenu("Refeições");
+    private JMenuItem cadastrarAlimento = new JMenuItem("Cadastrar alimento");
+    private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
+    private JMenuItem refeicoes = new JMenuItem("Refeições");
+    private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
+    private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
 
     private void configurarUI() {
         setTitle("Cadastro de alimento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
+        
+        menuCadastrarAlimento.add(tabelaAlimentos);
+        menuCadastrarAlimento.add(cadastrarAlimento);
+        menuBar.add(menuCadastrarAlimento);
+
+        menuCalcularTmb.add(calcularTmb);
+        menuBar.add(menuCalcularTmb);
+        
+        menuRefeicoes.add(refeicoes);
+        menuRefeicoes.add(adicionarRefeicao);
+        menuBar.add(menuRefeicoes);
+        setJMenuBar(menuBar);
 
         // Painel de fundo
         // Painel de fundo
@@ -68,7 +91,7 @@ public class CadastroAlimentoView extends JFrame {
         };
 
         centralPanel.setOpaque(false);
-        centralPanel.setPreferredSize(new Dimension(300, 450));
+        centralPanel.setPreferredSize(new Dimension(300, 400));
         centralPanel.setLayout(new GridBagLayout());
 
         // Posicionamento no topo absoluto
@@ -209,10 +232,11 @@ public class CadastroAlimentoView extends JFrame {
         posicaoTxtGordura.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTxtGordura.anchor = GridBagConstraints.CENTER;
         posicaoTxtGordura.fill = GridBagConstraints.NONE;
-        posicaoTxtGordura.insets = new Insets(0, 0, 10, 0); // margem superior
+        posicaoTxtGordura.insets = new Insets(0, 0, 20, 0); // margem superior
         centralPanel.add(txtGordura, posicaoTxtGordura);
 
         botaoCadastrar.setToolTipText("Cadastrar");
+        botaoCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         GridBagConstraints posicaoBotaoCadastrar = new GridBagConstraints();
         posicaoBotaoCadastrar.gridx = 0;
@@ -221,23 +245,8 @@ public class CadastroAlimentoView extends JFrame {
         posicaoBotaoCadastrar.weighty = 0; // ← isso força ele a ficar no topo
         posicaoBotaoCadastrar.anchor = GridBagConstraints.CENTER;
         posicaoBotaoCadastrar.fill = GridBagConstraints.NONE;
-        posicaoBotaoCadastrar.insets = new Insets(0, 0, 20, 0); // margem superior
+        posicaoBotaoCadastrar.insets = new Insets(0, 0, 0, 0); // margem superior
         centralPanel.add(botaoCadastrar, posicaoBotaoCadastrar);
-
-        lblBack.setFont(new Font("Calibri", Font.BOLD, 18));
-        lblBack.setForeground(Color.WHITE);
-        lblBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblBack.setToolTipText("Click here to create an account");
-
-        GridBagConstraints positionBack = new GridBagConstraints();
-        positionBack.gridx = 0;
-        positionBack.gridy = 11;
-        positionBack.weightx = 0;
-        positionBack.weighty = 0; // ← isso força ele a ficar no topo
-        positionBack.anchor = GridBagConstraints.CENTER;
-        positionBack.fill = GridBagConstraints.NONE;
-        positionBack.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblBack, positionBack);
         
         setContentPane(backgroundPanel);
     }
@@ -246,21 +255,9 @@ public class CadastroAlimentoView extends JFrame {
         configurarUI();
         setVisible(true);
         salvarAlimento();
-        back();
-    }
-    
-    public void back() {
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    dispose();
-                    new MainView().mainView();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        );
+        calculoTmbView();
+        refeicoesView();
+        tabelaAlimentosView();
     }
     
     public void salvarAlimento() {
@@ -280,6 +277,39 @@ public class CadastroAlimentoView extends JFrame {
                 dao.salvarAlimento(alimento);
                 dispose();
                 new CadastroAlimentoView().CadastroAlimentoView();
+            }
+        });
+    }
+
+    public void calculoTmbView() {
+        calcularTmb.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CalculoTmbView().calculoTmbView();
+            }
+        });
+    }
+    
+    public void refeicoesView() {
+        refeicoes.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new RefeicoesView().refeifoes();
+            }
+        });
+    }
+    
+    public void tabelaAlimentosView() {
+        tabelaAlimentos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MainView().mainView();
             }
         });
     }

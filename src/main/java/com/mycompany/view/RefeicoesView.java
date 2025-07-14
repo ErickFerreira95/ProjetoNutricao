@@ -50,21 +50,23 @@ public class RefeicoesView extends JFrame {
     private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
-
+    private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    
     private void configurarUI() {
         setTitle("Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1300, 720);
         setLocationRelativeTo(null);
 
+        menuCadastrarAlimento.add(tabelaAlimentos);
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
 
-        menuRefeicoes.add(adicionarRefeicao);
         menuRefeicoes.add(refeicoes);
+        menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
         setJMenuBar(menuBar);
 
@@ -251,13 +253,16 @@ public class RefeicoesView extends JFrame {
         carregarRefeicao4();
         carregarRefeicao5();
         carregarRefeicao6();
+        tabelaAlimentosView();
+        cadastroAlimentoView();
     }
 
     // Adiciona ações
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
+                new AdicionarAlimentoRefeicao().adicionarRefeicao();
             }
         });
     }
@@ -325,5 +330,25 @@ public class RefeicoesView extends JFrame {
         for (Alimento a : alimentos) {
             modelo6.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
         }
+    }
+    
+    public void tabelaAlimentosView() {
+        tabelaAlimentos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MainView().mainView();
+            }
+        });
+    }
+    
+    public void cadastroAlimentoView() {
+        cadastrarAlimento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CadastroAlimentoView().CadastroAlimentoView();
+            }
+        });
     }
 }

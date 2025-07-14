@@ -21,6 +21,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -32,9 +35,17 @@ public class CalculoTmbView extends JFrame {
     private JTextField txtIdade = new JTextField(12);
     private JTextField txtFatorAtividade = new JTextField(12);
     private JButton botaoCalcular = new JButton("Calcular");
-    private JLabel lblBack = new JLabel("<html><a href=''>Voltar</a></html>");
     private JComboBox<String> comboBox = new JComboBox();
     private JLabel lblResultado = new JLabel("Seu TMB é: ");
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menuCadastrarAlimento = new JMenu("Alimento");
+    private JMenu menuCalcularTmb = new JMenu("Calculadora");
+    private JMenu menuRefeicoes = new JMenu("Refeições");
+    private JMenuItem cadastrarAlimento = new JMenuItem("Cadastrar alimento");
+    private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
+    private JMenuItem refeicoes = new JMenuItem("Refeições");
+    private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
+    private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     User usuario = new User();
 
     private void configurarUI() {
@@ -42,6 +53,18 @@ public class CalculoTmbView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
+        
+        menuCadastrarAlimento.add(tabelaAlimentos);
+        menuCadastrarAlimento.add(cadastrarAlimento);
+        menuBar.add(menuCadastrarAlimento);
+
+        menuCalcularTmb.add(calcularTmb);
+        menuBar.add(menuCalcularTmb);
+        
+        menuRefeicoes.add(refeicoes);
+        menuRefeicoes.add(adicionarRefeicao);
+        menuBar.add(menuRefeicoes);
+        setJMenuBar(menuBar);
 
         // Painel de fundo
         // Painel de fundo
@@ -71,7 +94,7 @@ public class CalculoTmbView extends JFrame {
         };
 
         painelCentral.setOpaque(false);
-        painelCentral.setPreferredSize(new Dimension(300, 500));
+        painelCentral.setPreferredSize(new Dimension(300, 450));
         painelCentral.setLayout(new GridBagLayout());
 
         // Posicionamento no topo absoluto
@@ -306,22 +329,6 @@ public class CalculoTmbView extends JFrame {
         posicaoLblResultado.insets = new Insets(20, 0, 0, 0); // margem superior
         painelCentral.add(lblResultado, posicaoLblResultado);
 
-        lblBack.setFont(new Font("Calibri", Font.BOLD, 18));
-        lblBack.setForeground(Color.WHITE);
-        lblBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblBack.setToolTipText("Voltar para página inicial");
-
-        // Posicionamento no topo absoluto
-        GridBagConstraints posicaoLblVoltar = new GridBagConstraints();
-        posicaoLblVoltar.gridx = 0;
-        posicaoLblVoltar.gridy = 12;
-        posicaoLblVoltar.weightx = 0;
-        posicaoLblVoltar.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblVoltar.anchor = GridBagConstraints.CENTER;
-        posicaoLblVoltar.fill = GridBagConstraints.NONE;
-        posicaoLblVoltar.insets = new Insets(20, 0, 0, 0); // margem superior
-        painelCentral.add(lblBack, posicaoLblVoltar);
-
         setContentPane(backgroundPanel);
     }
 
@@ -329,7 +336,10 @@ public class CalculoTmbView extends JFrame {
         configurarUI();
         setVisible(true);
         calcularTmb();
-        back();
+        CadastroAlimentoView();
+        refeicoesView();
+        tabelaAlimentosView();
+        adicionarRefeicaoView();
     }
 
     public void calcularTmb() {
@@ -359,18 +369,44 @@ public class CalculoTmbView extends JFrame {
             }
         });
     }
-
-    public void back() {
-        lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    dispose();
-                    new MainView().mainView();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    
+    public void CadastroAlimentoView() {
+        cadastrarAlimento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CadastroAlimentoView().CadastroAlimentoView();
             }
-        }
-        );
+        });
+    }
+    
+    public void refeicoesView() {
+        refeicoes.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new RefeicoesView().refeifoes();
+            }
+        });
+    }
+    
+    public void tabelaAlimentosView() {
+        tabelaAlimentos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MainView().mainView();
+            }
+        });
+    }
+    
+    public void adicionarRefeicaoView() {
+        adicionarRefeicao.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+            }
+        });
     }
 }

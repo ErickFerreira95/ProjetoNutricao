@@ -24,6 +24,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -33,19 +36,39 @@ public class AdicionarAlimentoRefeicao extends JFrame {
     private JTextField txtNomeAlimento = new JTextField(12);
     private JTextField txtQuantidade = new JTextField(12);
     private JButton btnAdicionarAlimento = new JButton("Adicionar Alimento");
-    private JLabel lblVoltar = new JLabel("<html><a href=''>Voltar</a></html>");
     private JButton btnBuscar = new JButton("Buscar");
     private JLabel lblResultadoProteina = new JLabel();
     private JLabel lblResultadoCarboidrato = new JLabel();
     private JLabel lblResultadoGordura = new JLabel();
     private JLabel lblResultadoKcal = new JLabel();
     private JComboBox<String> comboBox = new JComboBox();
+    private JMenuBar menuBar = new JMenuBar();
+    private JMenu menuCadastrarAlimento = new JMenu("Alimento");
+    private JMenu menuCalcularTmb = new JMenu("Calculadora");
+    private JMenu menuRefeicoes = new JMenu("Refeições");
+    private JMenuItem cadastrarAlimento = new JMenuItem("Cadastrar alimento");
+    private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
+    private JMenuItem refeicoes = new JMenuItem("Refeições");
+    private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
+    private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
 
     private void configurarUI() {
-        setTitle("Cadastro de alimento");
+        setTitle("Adionar Alimentos nas Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
+        
+        menuCadastrarAlimento.add(tabelaAlimentos);
+        menuCadastrarAlimento.add(cadastrarAlimento);
+        menuBar.add(menuCadastrarAlimento);
+
+        menuCalcularTmb.add(calcularTmb);
+        menuBar.add(menuCalcularTmb);
+        
+        menuRefeicoes.add(refeicoes);
+        menuRefeicoes.add(adicionarRefeicao);
+        menuBar.add(menuRefeicoes);
+        setJMenuBar(menuBar);
 
         // Painel de fundo
         JPanel backgroundPanel = new JPanel() {
@@ -74,7 +97,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         };
 
         centralPanel.setOpaque(false);
-        centralPanel.setPreferredSize(new Dimension(300, 350));
+        centralPanel.setPreferredSize(new Dimension(300, 300));
         centralPanel.setLayout(new GridBagLayout());
 
         // Posicionamento no topo absoluto
@@ -115,34 +138,6 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         positionPainelCentral.fill = GridBagConstraints.NONE;
         positionPainelCentral.insets = new Insets(0, 0, 0, 0); // margem superior
         backgroundPanel.add(centralPanel2, positionPainelCentral2);
-
-        JLabel lblSelecioneRefeicao = new JLabel("Selecione a refeição:");
-        lblSelecioneRefeicao.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblSelecioneRefeicao);
-
-        GridBagConstraints posicaoLblSelcioneRefeicao = new GridBagConstraints();
-        posicaoLblSelcioneRefeicao.gridx = 0;
-        posicaoLblSelcioneRefeicao.gridy = 0;
-        posicaoLblSelcioneRefeicao.weightx = 0;
-        posicaoLblSelcioneRefeicao.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblSelcioneRefeicao.anchor = GridBagConstraints.CENTER;
-        posicaoLblSelcioneRefeicao.fill = GridBagConstraints.NONE;
-        posicaoLblSelcioneRefeicao.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblSelecioneRefeicao, posicaoLblSelcioneRefeicao);
-
-        String[] opcoes = {"Refeição 1", "Refeição 2", "Refeição 3", "Refeição 4", "Refeição 5", "Refeição 6"};
-        comboBox = new JComboBox<>(opcoes);
-        comboBox.setToolTipText("Selecione a refeição");
-
-        GridBagConstraints posicaoComboBox = new GridBagConstraints();
-        posicaoComboBox.gridx = 0;
-        posicaoComboBox.gridy = 1;
-        posicaoComboBox.weightx = 0;
-        posicaoComboBox.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoComboBox.anchor = GridBagConstraints.CENTER;
-        posicaoComboBox.fill = GridBagConstraints.NONE;
-        posicaoComboBox.insets = new Insets(0, 0, 20, 0); // margem superior
-        centralPanel.add(comboBox, posicaoComboBox);
 
         JLabel lblNomeAlimento = new JLabel("Nome alimento:");
         lblNomeAlimento.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -201,6 +196,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         centralPanel.add(txtQuantidade, posicaoTxtQuantidade);
 
         btnBuscar.setToolTipText("Buscar alimento");
+        btnBuscar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         GridBagConstraints posicaoBtnBuscar = new GridBagConstraints();
         posicaoBtnBuscar.gridx = 0;
@@ -211,27 +207,41 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         posicaoBtnBuscar.fill = GridBagConstraints.NONE;
         posicaoBtnBuscar.insets = new Insets(0, 0, 30, 0); // margem superior
         centralPanel.add(btnBuscar, posicaoBtnBuscar);
+        
+        JLabel lblSelecioneRefeicao = new JLabel("Selecione a refeição:");
+        lblSelecioneRefeicao.setFont(new Font("Calibri", Font.BOLD, 20));
 
-        lblVoltar.setFont(new Font("Calibri", Font.BOLD, 18));
-        lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblVoltar.setToolTipText("Voltar");
+        GridBagConstraints posicaoLblSelcioneRefeicao = new GridBagConstraints();
+        posicaoLblSelcioneRefeicao.gridx = 0;
+        posicaoLblSelcioneRefeicao.gridy = 0;
+        posicaoLblSelcioneRefeicao.weightx = 0;
+        posicaoLblSelcioneRefeicao.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblSelcioneRefeicao.anchor = GridBagConstraints.CENTER;
+        posicaoLblSelcioneRefeicao.fill = GridBagConstraints.NONE;
+        posicaoLblSelcioneRefeicao.insets = new Insets(0, 0, 0, 0); // margem superior
+        centralPanel2.add(lblSelecioneRefeicao, posicaoLblSelcioneRefeicao);
 
-        GridBagConstraints posicaoVoltar = new GridBagConstraints();
-        posicaoVoltar.gridx = 0;
-        posicaoVoltar.gridy = 7;
-        posicaoVoltar.weightx = 0;
-        posicaoVoltar.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoVoltar.anchor = GridBagConstraints.CENTER;
-        posicaoVoltar.fill = GridBagConstraints.NONE;
-        posicaoVoltar.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblVoltar, posicaoVoltar);
+        String[] opcoes = {"Refeição 1", "Refeição 2", "Refeição 3", "Refeição 4", "Refeição 5", "Refeição 6"};
+        comboBox = new JComboBox<>(opcoes);
+        comboBox.setToolTipText("Selecione a refeição");
+        comboBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        GridBagConstraints posicaoComboBox = new GridBagConstraints();
+        posicaoComboBox.gridx = 0;
+        posicaoComboBox.gridy = 1;
+        posicaoComboBox.weightx = 0;
+        posicaoComboBox.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoComboBox.anchor = GridBagConstraints.CENTER;
+        posicaoComboBox.fill = GridBagConstraints.NONE;
+        posicaoComboBox.insets = new Insets(0, 0, 20, 0); // margem superior
+        centralPanel2.add(comboBox, posicaoComboBox);
 
         JLabel lblProteina = new JLabel("Proteína(g):");
         lblProteina.setFont(new Font("Calibri", Font.BOLD, 20));
 
         GridBagConstraints posicaoLblProteina = new GridBagConstraints();
         posicaoLblProteina.gridx = 0;
-        posicaoLblProteina.gridy = 0;
+        posicaoLblProteina.gridy = 2;
         posicaoLblProteina.weightx = 0;
         posicaoLblProteina.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblProteina.anchor = GridBagConstraints.CENTER;
@@ -243,7 +253,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoLblResultadoProteina = new GridBagConstraints();
         posicaoLblResultadoProteina.gridx = 1;
-        posicaoLblResultadoProteina.gridy = 0;
+        posicaoLblResultadoProteina.gridy = 2;
         posicaoLblResultadoProteina.weightx = 0;
         posicaoLblResultadoProteina.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblResultadoProteina.anchor = GridBagConstraints.CENTER;
@@ -256,7 +266,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoLblCarboidrato = new GridBagConstraints();
         posicaoLblCarboidrato.gridx = 0;
-        posicaoLblCarboidrato.gridy = 1;
+        posicaoLblCarboidrato.gridy = 3;
         posicaoLblCarboidrato.weightx = 0;
         posicaoLblCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblCarboidrato.anchor = GridBagConstraints.CENTER;
@@ -268,7 +278,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoLblResultadoCarboidrato = new GridBagConstraints();
         posicaoLblResultadoCarboidrato.gridx = 1;
-        posicaoLblResultadoCarboidrato.gridy = 1;
+        posicaoLblResultadoCarboidrato.gridy = 3;
         posicaoLblResultadoCarboidrato.weightx = 0;
         posicaoLblResultadoCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblResultadoCarboidrato.anchor = GridBagConstraints.CENTER;
@@ -281,7 +291,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoLblGordura = new GridBagConstraints();
         posicaoLblGordura.gridx = 0;
-        posicaoLblGordura.gridy = 2;
+        posicaoLblGordura.gridy = 4;
         posicaoLblGordura.weightx = 0;
         posicaoLblGordura.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblGordura.anchor = GridBagConstraints.CENTER;
@@ -293,7 +303,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoLblResultadoGordura = new GridBagConstraints();
         posicaoLblResultadoGordura.gridx = 1;
-        posicaoLblResultadoGordura.gridy = 2;
+        posicaoLblResultadoGordura.gridy = 4;
         posicaoLblResultadoGordura.weightx = 0;
         posicaoLblResultadoGordura.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblResultadoGordura.anchor = GridBagConstraints.CENTER;
@@ -306,31 +316,32 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoLblKcal = new GridBagConstraints();
         posicaoLblKcal.gridx = 0;
-        posicaoLblKcal.gridy = 3;
+        posicaoLblKcal.gridy = 5;
         posicaoLblKcal.weightx = 0;
         posicaoLblKcal.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblKcal.anchor = GridBagConstraints.CENTER;
         posicaoLblKcal.fill = GridBagConstraints.NONE;
-        posicaoLblKcal.insets = new Insets(0, 0, 20, 0); // margem superior
+        posicaoLblKcal.insets = new Insets(0, 0, 10, 0); // margem superior
         centralPanel2.add(lblKcal, posicaoLblKcal);
 
         lblResultadoKcal.setFont(new Font("Calibri", Font.PLAIN, 14));
 
         GridBagConstraints posicaoLblResultadoKcal = new GridBagConstraints();
         posicaoLblResultadoKcal.gridx = 1;
-        posicaoLblResultadoKcal.gridy = 3;
+        posicaoLblResultadoKcal.gridy = 5;
         posicaoLblResultadoKcal.weightx = 0;
         posicaoLblResultadoKcal.weighty = 0; // ← isso força ele a ficar no topo
         posicaoLblResultadoKcal.anchor = GridBagConstraints.CENTER;
         posicaoLblResultadoKcal.fill = GridBagConstraints.NONE;
-        posicaoLblResultadoKcal.insets = new Insets(0, 0, 20, 0); // margem superior
+        posicaoLblResultadoKcal.insets = new Insets(0, 0, 10, 0); // margem superior
         centralPanel2.add(lblResultadoKcal, posicaoLblResultadoKcal);
 
         btnAdicionarAlimento.setToolTipText("Adicionar alimento");
+        btnAdicionarAlimento.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         GridBagConstraints posicaoBtnAdicionarAlimento = new GridBagConstraints();
         posicaoBtnAdicionarAlimento.gridx = 0;
-        posicaoBtnAdicionarAlimento.gridy = 4;
+        posicaoBtnAdicionarAlimento.gridy = 6;
         posicaoBtnAdicionarAlimento.weightx = 0;
         posicaoBtnAdicionarAlimento.weighty = 0; // ← isso força ele a ficar no topo
         posicaoBtnAdicionarAlimento.anchor = GridBagConstraints.CENTER;
@@ -346,6 +357,10 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         setVisible(true);
         carregarAlimento();
         adicionarAlimentoRefeicao();
+        CadastroAlimentoView();
+        calculoTmbView();
+        refeicoesView();
+        tabelaAlimentosView();
     }
 
     public void carregarAlimento() {
@@ -435,6 +450,48 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Alimento não encontrado");
                 }
+            }
+        });
+    }
+    
+    public void CadastroAlimentoView() {
+        cadastrarAlimento.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CadastroAlimentoView().CadastroAlimentoView();
+            }
+        });
+    }
+    
+    public void calculoTmbView() {
+        calcularTmb.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CalculoTmbView().calculoTmbView();
+            }
+        });
+    }
+    
+    public void refeicoesView() {
+        refeicoes.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new RefeicoesView().refeifoes();
+            }
+        });
+    }
+    
+    public void tabelaAlimentosView() {
+        tabelaAlimentos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new MainView().mainView();
             }
         });
     }

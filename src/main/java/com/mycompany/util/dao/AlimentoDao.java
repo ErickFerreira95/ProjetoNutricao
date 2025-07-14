@@ -72,15 +72,15 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao1() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao1";
+        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao1";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
-                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
                 alimento.setCarboidrato(rs.getString("carboidrato"));
                 alimento.setGordura(rs.getString("gordura"));
@@ -98,15 +98,15 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao2() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao2";
+        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao2";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
-                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
                 alimento.setCarboidrato(rs.getString("carboidrato"));
                 alimento.setGordura(rs.getString("gordura"));
@@ -124,15 +124,15 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao3() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao3";
+        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao3";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
-                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
                 alimento.setCarboidrato(rs.getString("carboidrato"));
                 alimento.setGordura(rs.getString("gordura"));
@@ -150,15 +150,15 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao4() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao4";
+        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao4";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
-                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
                 alimento.setCarboidrato(rs.getString("carboidrato"));
                 alimento.setGordura(rs.getString("gordura"));
@@ -176,15 +176,15 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao5() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao5";
+        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao5";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
-                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
                 alimento.setCarboidrato(rs.getString("carboidrato"));
                 alimento.setGordura(rs.getString("gordura"));
@@ -202,15 +202,15 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao6() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao6";
+        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao6";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
-                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
                 alimento.setCarboidrato(rs.getString("carboidrato"));
                 alimento.setGordura(rs.getString("gordura"));
@@ -289,12 +289,12 @@ public class AlimentoDao {
     
     // Salvar usuário com senha criptografada
     public boolean salvarAlimentoRefeicao1(Alimento alimento) {
-        String sql = "INSERT INTO refeicao1 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO refeicao1 (quantidade, alimento, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, alimento.getNomeAlimento());
-            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(1, alimento.getQuantidade());
+            stmt.setString(2, alimento.getNomeAlimento());
             stmt.setString(3, alimento.getProteina());
             stmt.setString(4, alimento.getCarboidrato());
             stmt.setString(5, alimento.getGordura());
@@ -311,12 +311,12 @@ public class AlimentoDao {
     }
     
     public boolean salvarAlimentoRefeicao2(Alimento alimento) {
-        String sql = "INSERT INTO refeicao2 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO refeicao2 (quantidade, alimento, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, alimento.getNomeAlimento());
-            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(1, alimento.getQuantidade());
+            stmt.setString(2, alimento.getNomeAlimento());
             stmt.setString(3, alimento.getProteina());
             stmt.setString(4, alimento.getCarboidrato());
             stmt.setString(5, alimento.getGordura());
@@ -333,12 +333,12 @@ public class AlimentoDao {
     }
     
     public boolean salvarAlimentoRefeicao3(Alimento alimento) {
-        String sql = "INSERT INTO refeicao3 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO refeicao3 (quantidade, alimento, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, alimento.getNomeAlimento());
-            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(1, alimento.getQuantidade());
+            stmt.setString(2, alimento.getNomeAlimento());
             stmt.setString(3, alimento.getProteina());
             stmt.setString(4, alimento.getCarboidrato());
             stmt.setString(5, alimento.getGordura());
@@ -355,12 +355,12 @@ public class AlimentoDao {
     }
     
     public boolean salvarAlimentoRefeicao4(Alimento alimento) {
-        String sql = "INSERT INTO refeicao4 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO refeicao4 (quantidade, alimento, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, alimento.getNomeAlimento());
-            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(1, alimento.getQuantidade());
+            stmt.setString(2, alimento.getNomeAlimento());
             stmt.setString(3, alimento.getProteina());
             stmt.setString(4, alimento.getCarboidrato());
             stmt.setString(5, alimento.getGordura());
@@ -377,12 +377,12 @@ public class AlimentoDao {
     }
     
     public boolean salvarAlimentoRefeicao5(Alimento alimento) {
-        String sql = "INSERT INTO refeicao5 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO refeicao5 (quantidade, alimento, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, alimento.getNomeAlimento());
-            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(1, alimento.getQuantidade());
+            stmt.setString(2, alimento.getNomeAlimento());
             stmt.setString(3, alimento.getProteina());
             stmt.setString(4, alimento.getCarboidrato());
             stmt.setString(5, alimento.getGordura());
@@ -399,12 +399,12 @@ public class AlimentoDao {
     }
     
     public boolean salvarAlimentoRefeicao6(Alimento alimento) {
-        String sql = "INSERT INTO refeicao6 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO refeicao6 (quantidade, alimento, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, alimento.getNomeAlimento());
-            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(1, alimento.getQuantidade());
+            stmt.setString(2, alimento.getNomeAlimento());
             stmt.setString(3, alimento.getProteina());
             stmt.setString(4, alimento.getCarboidrato());
             stmt.setString(5, alimento.getGordura());

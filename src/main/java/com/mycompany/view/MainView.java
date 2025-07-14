@@ -41,6 +41,8 @@ public class MainView extends JFrame {
     private JMenuItem cadastrarAlimento = new JMenuItem("Cadastrar alimento");
     private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
     private JMenuItem refeicoes = new JMenuItem("Refeições");
+    private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
+    private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
 
     private void configurarUI() {
         setTitle("Login");
@@ -48,6 +50,7 @@ public class MainView extends JFrame {
         setSize(1280, 720);
         setLocationRelativeTo(null);
 
+        menuCadastrarAlimento.add(tabelaAlimentos);
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
 
@@ -55,6 +58,7 @@ public class MainView extends JFrame {
         menuBar.add(menuCalcularTmb);
         
         menuRefeicoes.add(refeicoes);
+        menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
         setJMenuBar(menuBar);
 
@@ -124,6 +128,16 @@ public class MainView extends JFrame {
         carregarTabela();
         calculoTmbView();
         refeicoesView();
+        adicionarRefeicaoView();
+    }
+    
+    private void carregarTabela() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentos();
+
+        for (Alimento a : alimentos) {
+            modelo.addRow(new Object[]{a.getId(), a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
     }
 
     // Adiciona ações
@@ -134,15 +148,6 @@ public class MainView extends JFrame {
                 new CadastroAlimentoView().CadastroAlimentoView();
             }
         });
-    }
-
-    private void carregarTabela() {
-        AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentos();
-
-        for (Alimento a : alimentos) {
-            modelo.addRow(new Object[]{a.getId(), a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
-        }
     }
 
     public void calculoTmbView() {
@@ -163,6 +168,15 @@ public class MainView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new RefeicoesView().refeifoes();
+            }
+        });
+    }
+    
+    public void adicionarRefeicaoView() {
+        adicionarRefeicao.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new AdicionarAlimentoRefeicao().adicionarRefeicao();
             }
         });
     }

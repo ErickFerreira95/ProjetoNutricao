@@ -12,6 +12,10 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -33,8 +37,10 @@ public class MainView extends JFrame {
     private JMenuBar menuBar = new JMenuBar();
     private JMenu menuCadastrarAlimento = new JMenu("Alimento");
     private JMenu menuCalcularTmb = new JMenu("Calculadora");
+    private JMenu menuRefeicoes = new JMenu("Refeições");
     private JMenuItem cadastrarAlimento = new JMenuItem("Cadastrar alimento");
     private JMenuItem calcularTmb = new JMenuItem("Calcular TMB");
+    private JMenuItem refeicoes = new JMenuItem("Refeições");
 
     private void configurarUI() {
         setTitle("Login");
@@ -47,6 +53,9 @@ public class MainView extends JFrame {
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
+        
+        menuRefeicoes.add(refeicoes);
+        menuBar.add(menuRefeicoes);
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -91,7 +100,7 @@ public class MainView extends JFrame {
             tabela.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tabela.getColumn("Ações").setCellRenderer(new PanelRenderer());
-            tabela.getColumn("Ações").setCellEditor(new PanelEditor(tabela));
+            tabela.getColumn("Ações").setCellEditor(new PanelEditor(tabela, this));
         }
 
         GridBagConstraints posicaoTable = new GridBagConstraints();
@@ -114,6 +123,7 @@ public class MainView extends JFrame {
         CadastroAlimentoView();
         carregarTabela();
         calculoTmbView();
+        refeicoesView();
     }
 
     // Adiciona ações
@@ -142,6 +152,17 @@ public class MainView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new CalculoTmbView().calculoTmbView();
+            }
+        });
+    }
+    
+    public void refeicoesView() {
+        refeicoes.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new RefeicoesView().refeifoes();
             }
         });
     }

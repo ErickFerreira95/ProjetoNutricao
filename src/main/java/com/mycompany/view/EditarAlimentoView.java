@@ -278,14 +278,7 @@ public class EditarAlimentoView extends JFrame {
                 alimento.setProteina(txtProteina.getText());
                 alimento.setCarboidrato(txtCarboidrato.getText());
                 alimento.setGordura(txtGordura.getText());
-
-                float p = Float.parseFloat(txtProteina.getText().replace(",", "."));
-                float c = Float.parseFloat(txtCarboidrato.getText().replace(",", "."));
-                float g = Float.parseFloat(txtGordura.getText().replace(",", "."));
-                
-                String resultado = String.valueOf((p * 4) + (c * 4) + (g * 9));
-                        
-                alimento.setKcal(resultado);
+                alimento.setKcal(alimento.getKcal());
                 
                 dao.atualizarAlimento(alimento);
                 dispose();

@@ -21,8 +21,13 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
     private JPanel painel;
     private JButton btnEditar;
     private JButton btnExcluir;
+    private MainView view;
+    JTable table;
 
-    public PanelEditor(JTable table) {
+    public PanelEditor(JTable table, MainView view) {
+        
+        this.table = table;
+        this.view = view;
         painel = new JPanel(new GridBagLayout());
         //btnEditar = new JButton(new ImageIcon("src/images/lapis.png"));
         btnEditar = new JButton("Editar");
@@ -60,23 +65,25 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
         painel.add(btnExcluir, posicaoBtnExcluir);
 
         btnEditar.addActionListener(e -> {
-            JTable tabela = table;
-            int row = tabela.getSelectedRow();
+            
+            int row = table.getSelectedRow();
 
             if (row >= 0) {
                 Alimento alimento = new Alimento();
-                alimento.setId(Integer.parseInt(tabela.getValueAt(row, 0).toString()));
-                alimento.setNomeAlimento(tabela.getValueAt(row, 1).toString());
-                alimento.setQuantidade(tabela.getValueAt(row, 2).toString());
-                alimento.setProteina(tabela.getValueAt(row, 3).toString());
-                alimento.setCarboidrato(tabela.getValueAt(row, 4).toString());
-                alimento.setGordura(tabela.getValueAt(row, 5).toString());
-                alimento.setKcal(tabela.getValueAt(row, 6).toString());
+                alimento.setId(Integer.parseInt(table.getValueAt(row, 0).toString()));
+                alimento.setNomeAlimento(table.getValueAt(row, 1).toString());
+                alimento.setQuantidade(table.getValueAt(row, 2).toString());
+                alimento.setProteina(table.getValueAt(row, 3).toString());
+                alimento.setCarboidrato(table.getValueAt(row, 4).toString());
+                alimento.setGordura(table.getValueAt(row, 5).toString());
+                alimento.setKcal(table.getValueAt(row, 6).toString());
 
                 // Abre o novo JFrame com os dados da linha
                 EditarAlimentoView telaEditar = new EditarAlimentoView();
                 telaEditar.getAlimento(alimento); // ← envia os dados para os campos da tela
                 telaEditar.editarAlimentoView();
+                
+                view.dispose();
             }
             fireEditingStopped(); // para encerrar o modo de edição da célula
         });
@@ -109,8 +116,6 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
                         if (modelo.getRowCount() == 0) {
                             tabela.clearSelection();
                         }
-
-                        JOptionPane.showMessageDialog(tabela, "Item deletado com sucesso.");
                     } else {
                         JOptionPane.showMessageDialog(tabela, "Erro ao deletar do banco de dados.");
                     }

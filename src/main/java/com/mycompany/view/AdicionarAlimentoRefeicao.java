@@ -73,7 +73,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         };
 
         centralPanel.setOpaque(false);
-        centralPanel.setPreferredSize(new Dimension(300, 550));
+        centralPanel.setPreferredSize(new Dimension(300, 350));
         centralPanel.setLayout(new GridBagLayout());
 
         // Posicionamento no topo absoluto
@@ -84,8 +84,36 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         positionPainelCentral.weighty = 0; // ← isso força ele a ficar no topo
         positionPainelCentral.anchor = GridBagConstraints.CENTER;
         positionPainelCentral.fill = GridBagConstraints.NONE;
-        positionPainelCentral.insets = new Insets(0, 0, 0, 0); // margem superior
+        positionPainelCentral.insets = new Insets(0, 0, 0, 30); // margem superior
         backgroundPanel.add(centralPanel, positionPainelCentral);
+
+        JPanel centralPanel2 = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Shape forma = new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 30, 30);
+                g2.setColor(new Color(255, 255, 255, 200));
+                g2.fill(forma);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+
+        centralPanel2.setOpaque(false);
+        centralPanel2.setPreferredSize(new Dimension(300, 300));
+        centralPanel2.setLayout(new GridBagLayout());
+
+        // Posicionamento no topo absoluto
+        GridBagConstraints positionPainelCentral2 = new GridBagConstraints();
+        positionPainelCentral.gridx = 1;
+        positionPainelCentral.gridy = 0;
+        positionPainelCentral.weightx = 0;
+        positionPainelCentral.weighty = 0; // ← isso força ele a ficar no topo
+        positionPainelCentral.anchor = GridBagConstraints.CENTER;
+        positionPainelCentral.fill = GridBagConstraints.NONE;
+        positionPainelCentral.insets = new Insets(0, 0, 0, 0); // margem superior
+        backgroundPanel.add(centralPanel2, positionPainelCentral2);
 
         JLabel lblSelecioneRefeicao = new JLabel("Selecione a refeição:");
         lblSelecioneRefeicao.setFont(new Font("Calibri", Font.BOLD, 20));
@@ -180,124 +208,8 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         posicaoBtnBuscar.weighty = 0; // ← isso força ele a ficar no topo
         posicaoBtnBuscar.anchor = GridBagConstraints.CENTER;
         posicaoBtnBuscar.fill = GridBagConstraints.NONE;
-        posicaoBtnBuscar.insets = new Insets(0, 0, 10, 0); // margem superior
+        posicaoBtnBuscar.insets = new Insets(0, 0, 30, 0); // margem superior
         centralPanel.add(btnBuscar, posicaoBtnBuscar);
-
-        JLabel lblProteina = new JLabel("Proteína(g)");
-        lblProteina.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblProteina);
-
-        GridBagConstraints posicaoLblProteina = new GridBagConstraints();
-        posicaoLblProteina.gridx = 0;
-        posicaoLblProteina.gridy = 7;
-        posicaoLblProteina.weightx = 0;
-        posicaoLblProteina.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblProteina.anchor = GridBagConstraints.CENTER;
-        posicaoLblProteina.fill = GridBagConstraints.NONE;
-        posicaoLblProteina.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblProteina, posicaoLblProteina);
-
-        lblResultadoProteina.setFont(new Font("Calibri", Font.PLAIN, 14));
-
-        GridBagConstraints posicaoLblResultadoProteina = new GridBagConstraints();
-        posicaoLblResultadoProteina.gridx = 0;
-        posicaoLblResultadoProteina.gridy = 8;
-        posicaoLblResultadoProteina.weightx = 0;
-        posicaoLblResultadoProteina.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblResultadoProteina.anchor = GridBagConstraints.CENTER;
-        posicaoLblResultadoProteina.fill = GridBagConstraints.NONE;
-        posicaoLblResultadoProteina.insets = new Insets(0, 0, 10, 0); // margem superior
-        centralPanel.add(lblResultadoProteina, posicaoLblResultadoProteina);
-
-        JLabel lblCarboidrato = new JLabel("Carboidrato(g)");
-        lblCarboidrato.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblCarboidrato);
-
-        GridBagConstraints posicaoLblCarboidrato = new GridBagConstraints();
-        posicaoLblCarboidrato.gridx = 0;
-        posicaoLblCarboidrato.gridy = 9;
-        posicaoLblCarboidrato.weightx = 0;
-        posicaoLblCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblCarboidrato.anchor = GridBagConstraints.CENTER;
-        posicaoLblCarboidrato.fill = GridBagConstraints.NONE;
-        posicaoLblCarboidrato.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblCarboidrato, posicaoLblCarboidrato);
-
-        lblResultadoCarboidrato.setFont(new Font("Calibri", Font.PLAIN, 14));
-
-        GridBagConstraints posicaoLblResultadoCarboidrato = new GridBagConstraints();
-        posicaoLblResultadoCarboidrato.gridx = 0;
-        posicaoLblResultadoCarboidrato.gridy = 10;
-        posicaoLblResultadoCarboidrato.weightx = 0;
-        posicaoLblResultadoCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblResultadoCarboidrato.anchor = GridBagConstraints.CENTER;
-        posicaoLblResultadoCarboidrato.fill = GridBagConstraints.NONE;
-        posicaoLblResultadoCarboidrato.insets = new Insets(0, 0, 10, 0); // margem superior
-        centralPanel.add(lblResultadoCarboidrato, posicaoLblResultadoCarboidrato);
-
-        JLabel lblGordura = new JLabel("Gordura(g)");
-        lblGordura.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblGordura);
-
-        GridBagConstraints posicaoLblGordura = new GridBagConstraints();
-        posicaoLblGordura.gridx = 0;
-        posicaoLblGordura.gridy = 11;
-        posicaoLblGordura.weightx = 0;
-        posicaoLblGordura.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblGordura.anchor = GridBagConstraints.CENTER;
-        posicaoLblGordura.fill = GridBagConstraints.NONE;
-        posicaoLblGordura.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblGordura, posicaoLblGordura);
-
-        lblResultadoGordura.setFont(new Font("Calibri", Font.PLAIN, 14));
-
-        GridBagConstraints posicaoLblResultadoGordura = new GridBagConstraints();
-        posicaoLblResultadoGordura.gridx = 0;
-        posicaoLblResultadoGordura.gridy = 12;
-        posicaoLblResultadoGordura.weightx = 0;
-        posicaoLblResultadoGordura.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblResultadoGordura.anchor = GridBagConstraints.CENTER;
-        posicaoLblResultadoGordura.fill = GridBagConstraints.NONE;
-        posicaoLblResultadoGordura.insets = new Insets(0, 0, 10, 0); // margem superior
-        centralPanel.add(lblResultadoGordura, posicaoLblResultadoGordura);
-
-        JLabel lblKcal = new JLabel("Kcal:");
-        lblKcal.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblKcal);
-
-        GridBagConstraints posicaoLblKcal = new GridBagConstraints();
-        posicaoLblKcal.gridx = 0;
-        posicaoLblKcal.gridy = 13;
-        posicaoLblKcal.weightx = 0;
-        posicaoLblKcal.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblKcal.anchor = GridBagConstraints.CENTER;
-        posicaoLblKcal.fill = GridBagConstraints.NONE;
-        posicaoLblKcal.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblKcal, posicaoLblKcal);
-
-        lblResultadoKcal.setFont(new Font("Calibri", Font.PLAIN, 14));
-
-        GridBagConstraints posicaoLblResultadoKcal = new GridBagConstraints();
-        posicaoLblResultadoKcal.gridx = 0;
-        posicaoLblResultadoKcal.gridy = 14;
-        posicaoLblResultadoKcal.weightx = 0;
-        posicaoLblResultadoKcal.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoLblResultadoKcal.anchor = GridBagConstraints.CENTER;
-        posicaoLblResultadoKcal.fill = GridBagConstraints.NONE;
-        posicaoLblResultadoKcal.insets = new Insets(0, 0, 10, 0); // margem superior
-        centralPanel.add(lblResultadoKcal, posicaoLblResultadoKcal);
-
-        btnAdicionarAlimento.setToolTipText("Adicionar alimento");
-
-        GridBagConstraints posicaoBtnAdicionarAlimento = new GridBagConstraints();
-        posicaoBtnAdicionarAlimento.gridx = 0;
-        posicaoBtnAdicionarAlimento.gridy = 15;
-        posicaoBtnAdicionarAlimento.weightx = 0;
-        posicaoBtnAdicionarAlimento.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoBtnAdicionarAlimento.anchor = GridBagConstraints.CENTER;
-        posicaoBtnAdicionarAlimento.fill = GridBagConstraints.NONE;
-        posicaoBtnAdicionarAlimento.insets = new Insets(0, 0, 15, 0); // margem superior
-        centralPanel.add(btnAdicionarAlimento, posicaoBtnAdicionarAlimento);
 
         lblVoltar.setFont(new Font("Calibri", Font.BOLD, 18));
         lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -305,13 +217,125 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         GridBagConstraints posicaoVoltar = new GridBagConstraints();
         posicaoVoltar.gridx = 0;
-        posicaoVoltar.gridy = 16;
+        posicaoVoltar.gridy = 7;
         posicaoVoltar.weightx = 0;
         posicaoVoltar.weighty = 0; // ← isso força ele a ficar no topo
         posicaoVoltar.anchor = GridBagConstraints.CENTER;
         posicaoVoltar.fill = GridBagConstraints.NONE;
         posicaoVoltar.insets = new Insets(0, 0, 0, 0); // margem superior
         centralPanel.add(lblVoltar, posicaoVoltar);
+
+        JLabel lblProteina = new JLabel("Proteína(g):");
+        lblProteina.setFont(new Font("Calibri", Font.BOLD, 20));
+
+        GridBagConstraints posicaoLblProteina = new GridBagConstraints();
+        posicaoLblProteina.gridx = 0;
+        posicaoLblProteina.gridy = 0;
+        posicaoLblProteina.weightx = 0;
+        posicaoLblProteina.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblProteina.anchor = GridBagConstraints.CENTER;
+        posicaoLblProteina.fill = GridBagConstraints.NONE;
+        posicaoLblProteina.insets = new Insets(0, 0, 10, 0); // margem superior
+        centralPanel2.add(lblProteina, posicaoLblProteina);
+
+        lblResultadoProteina.setFont(new Font("Calibri", Font.PLAIN, 14));
+
+        GridBagConstraints posicaoLblResultadoProteina = new GridBagConstraints();
+        posicaoLblResultadoProteina.gridx = 1;
+        posicaoLblResultadoProteina.gridy = 0;
+        posicaoLblResultadoProteina.weightx = 0;
+        posicaoLblResultadoProteina.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblResultadoProteina.anchor = GridBagConstraints.CENTER;
+        posicaoLblResultadoProteina.fill = GridBagConstraints.NONE;
+        posicaoLblResultadoProteina.insets = new Insets(0, 0, 10, 0); // margem superior
+        centralPanel2.add(lblResultadoProteina, posicaoLblResultadoProteina);
+
+        JLabel lblCarboidrato = new JLabel("Carboidrato(g):");
+        lblCarboidrato.setFont(new Font("Calibri", Font.BOLD, 20));
+
+        GridBagConstraints posicaoLblCarboidrato = new GridBagConstraints();
+        posicaoLblCarboidrato.gridx = 0;
+        posicaoLblCarboidrato.gridy = 1;
+        posicaoLblCarboidrato.weightx = 0;
+        posicaoLblCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblCarboidrato.anchor = GridBagConstraints.CENTER;
+        posicaoLblCarboidrato.fill = GridBagConstraints.NONE;
+        posicaoLblCarboidrato.insets = new Insets(0, 0, 10, 0); // margem superior
+        centralPanel2.add(lblCarboidrato, posicaoLblCarboidrato);
+
+        lblResultadoCarboidrato.setFont(new Font("Calibri", Font.PLAIN, 14));
+
+        GridBagConstraints posicaoLblResultadoCarboidrato = new GridBagConstraints();
+        posicaoLblResultadoCarboidrato.gridx = 1;
+        posicaoLblResultadoCarboidrato.gridy = 1;
+        posicaoLblResultadoCarboidrato.weightx = 0;
+        posicaoLblResultadoCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblResultadoCarboidrato.anchor = GridBagConstraints.CENTER;
+        posicaoLblResultadoCarboidrato.fill = GridBagConstraints.NONE;
+        posicaoLblResultadoCarboidrato.insets = new Insets(0, 0, 10, 0); // margem superior
+        centralPanel2.add(lblResultadoCarboidrato, posicaoLblResultadoCarboidrato);
+
+        JLabel lblGordura = new JLabel("Gordura(g):");
+        lblGordura.setFont(new Font("Calibri", Font.BOLD, 20));
+
+        GridBagConstraints posicaoLblGordura = new GridBagConstraints();
+        posicaoLblGordura.gridx = 0;
+        posicaoLblGordura.gridy = 2;
+        posicaoLblGordura.weightx = 0;
+        posicaoLblGordura.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblGordura.anchor = GridBagConstraints.CENTER;
+        posicaoLblGordura.fill = GridBagConstraints.NONE;
+        posicaoLblGordura.insets = new Insets(0, 0, 10, 0); // margem superior
+        centralPanel2.add(lblGordura, posicaoLblGordura);
+
+        lblResultadoGordura.setFont(new Font("Calibri", Font.PLAIN, 14));
+
+        GridBagConstraints posicaoLblResultadoGordura = new GridBagConstraints();
+        posicaoLblResultadoGordura.gridx = 1;
+        posicaoLblResultadoGordura.gridy = 2;
+        posicaoLblResultadoGordura.weightx = 0;
+        posicaoLblResultadoGordura.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblResultadoGordura.anchor = GridBagConstraints.CENTER;
+        posicaoLblResultadoGordura.fill = GridBagConstraints.NONE;
+        posicaoLblResultadoGordura.insets = new Insets(0, 0, 10, 0); // margem superior
+        centralPanel2.add(lblResultadoGordura, posicaoLblResultadoGordura);
+
+        JLabel lblKcal = new JLabel("Kcal:");
+        lblKcal.setFont(new Font("Calibri", Font.BOLD, 20));
+
+        GridBagConstraints posicaoLblKcal = new GridBagConstraints();
+        posicaoLblKcal.gridx = 0;
+        posicaoLblKcal.gridy = 3;
+        posicaoLblKcal.weightx = 0;
+        posicaoLblKcal.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblKcal.anchor = GridBagConstraints.CENTER;
+        posicaoLblKcal.fill = GridBagConstraints.NONE;
+        posicaoLblKcal.insets = new Insets(0, 0, 20, 0); // margem superior
+        centralPanel2.add(lblKcal, posicaoLblKcal);
+
+        lblResultadoKcal.setFont(new Font("Calibri", Font.PLAIN, 14));
+
+        GridBagConstraints posicaoLblResultadoKcal = new GridBagConstraints();
+        posicaoLblResultadoKcal.gridx = 1;
+        posicaoLblResultadoKcal.gridy = 3;
+        posicaoLblResultadoKcal.weightx = 0;
+        posicaoLblResultadoKcal.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblResultadoKcal.anchor = GridBagConstraints.CENTER;
+        posicaoLblResultadoKcal.fill = GridBagConstraints.NONE;
+        posicaoLblResultadoKcal.insets = new Insets(0, 0, 20, 0); // margem superior
+        centralPanel2.add(lblResultadoKcal, posicaoLblResultadoKcal);
+
+        btnAdicionarAlimento.setToolTipText("Adicionar alimento");
+
+        GridBagConstraints posicaoBtnAdicionarAlimento = new GridBagConstraints();
+        posicaoBtnAdicionarAlimento.gridx = 0;
+        posicaoBtnAdicionarAlimento.gridy = 4;
+        posicaoBtnAdicionarAlimento.weightx = 0;
+        posicaoBtnAdicionarAlimento.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoBtnAdicionarAlimento.anchor = GridBagConstraints.CENTER;
+        posicaoBtnAdicionarAlimento.fill = GridBagConstraints.NONE;
+        posicaoBtnAdicionarAlimento.insets = new Insets(0, 0, 0, 0); // margem superior
+        centralPanel2.add(btnAdicionarAlimento, posicaoBtnAdicionarAlimento);
 
         setContentPane(backgroundPanel);
     }
@@ -331,10 +355,18 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
 
                 if (alimento != null) {
-                    lblResultadoProteina.setText(alimento.getProteina());
-                    lblResultadoCarboidrato.setText(alimento.getCarboidrato());
-                    lblResultadoGordura.setText(alimento.getGordura());
-                    lblResultadoKcal.setText(alimento.getKcal());
+                    double quantidade = Double.parseDouble(txtQuantidade.getText());
+                    double proteina, carboidrato, gordura, kcal;
+
+                    proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
+                    carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
+                    gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
+                    kcal = (proteina*4)+(carboidrato*4)+(gordura*9);
+                    
+                    lblResultadoProteina.setText(String.valueOf(proteina));
+                    lblResultadoCarboidrato.setText(String.valueOf(carboidrato));
+                    lblResultadoGordura.setText(String.valueOf(gordura));
+                    lblResultadoKcal.setText(String.valueOf(kcal));
 
                     lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 16));
                     lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 16));
@@ -346,5 +378,4 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             }
         });
     }
-
 }

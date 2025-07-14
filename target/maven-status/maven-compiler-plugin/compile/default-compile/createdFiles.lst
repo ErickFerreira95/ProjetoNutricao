@@ -36,6 +36,7 @@ com\mycompany\view\RefeicoesView.class
 com\mycompany\view\PanelEditor.class
 com\mycompany\view\EditarAlimentoView$1.class
 com\mycompany\view\AdicionarAlimentoRefeicao$3.class
+com\mycompany\view\AdicionarAlimentoRefeicao$4.class
 com\mycompany\view\SignUpView$1.class
 com\mycompany\connection\ConnectionDataBase.class
 com\mycompany\view\EditarAlimentoView$4.class

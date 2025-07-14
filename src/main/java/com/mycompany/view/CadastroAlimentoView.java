@@ -125,7 +125,6 @@ public class CadastroAlimentoView extends JFrame {
 
         JLabel lblQuantidade = new JLabel("Quantidade(g)");
         lblQuantidade.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblQuantidade);
 
         GridBagConstraints posicaoLblQuantidade = new GridBagConstraints();
         posicaoLblQuantidade.gridx = 0;
@@ -153,7 +152,6 @@ public class CadastroAlimentoView extends JFrame {
 
         JLabel lblProteina = new JLabel("Proteína(g)");
         lblProteina.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblProteina);
 
         GridBagConstraints posicaoLblProteina = new GridBagConstraints();
         posicaoLblProteina.gridx = 0;
@@ -181,7 +179,6 @@ public class CadastroAlimentoView extends JFrame {
 
         JLabel lblCarboidrato = new JLabel("Carboidrato(g)");
         lblCarboidrato.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblCarboidrato);
 
         GridBagConstraints posicaoLblCarboidrato = new GridBagConstraints();
         posicaoLblCarboidrato.gridx = 0;
@@ -209,7 +206,6 @@ public class CadastroAlimentoView extends JFrame {
 
         JLabel lblGordura = new JLabel("Gordura(g)");
         lblGordura.setFont(new Font("Calibri", Font.BOLD, 20));
-        centralPanel.add(lblGordura);
 
         GridBagConstraints posicaoLblGordura = new GridBagConstraints();
         posicaoLblGordura.gridx = 0;

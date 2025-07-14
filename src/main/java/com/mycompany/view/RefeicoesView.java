@@ -19,6 +19,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -51,7 +52,7 @@ public class RefeicoesView extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
-    
+
     private void configurarUI() {
         setTitle("Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,40 +84,26 @@ public class RefeicoesView extends JFrame {
         };
         backgroundPanel.setLayout(new GridBagLayout());
 
-        /*JPanel panelTopo = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                Shape forma = new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 30, 30);
-                g2.setColor(new Color(255, 255, 255, 200));
-                g2.fill(forma);
-                g2.dispose();
-                super.paintComponent(g);
-            }
-        };
+        modelo1 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo2 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo3 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo4 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo5 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo6 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
 
-        panelTopo.setOpaque(false);
-        panelTopo.setPreferredSize(new Dimension(400, 185));
-        panelTopo.setLayout(new GridBagLayout());
-        
-        // Posicionamento no topo absoluto
-        GridBagConstraints positionPainelTopo = new GridBagConstraints();
-        positionPainelTopo.gridx = 0;
-        positionPainelTopo.gridy = 0;
-        positionPainelTopo.weightx = 0;
-        positionPainelTopo.weighty = 0; // ← isso força ele a ficar no topo
-        positionPainelTopo.anchor = GridBagConstraints.CENTER;
-        positionPainelTopo.fill = GridBagConstraints.NONE;
-        positionPainelTopo.insets = new Insets(0, 0, 0, 0); // margem superior
-        backgroundPanel.add(panelTopo, positionPainelTopo);*/
-        modelo1 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo2 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo3 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo4 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo5 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo6 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        
+        modelo1.addRow(new Object[]{"", "", "", "", "", ""});
+        modelo1.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+        modelo2.addRow(new Object[]{"", "", "", "", "", ""});
+        modelo2.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+        modelo3.addRow(new Object[]{"", "", "", "", "", ""});
+        modelo3.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+        modelo4.addRow(new Object[]{"", "", "", "", "", ""});
+        modelo4.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+        modelo5.addRow(new Object[]{"", "", "", "", "", ""});
+        modelo5.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+        modelo6.addRow(new Object[]{"", "", "", "", "", ""});
+        modelo6.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+
         tabela1 = new JTable(modelo1);
         tabela1.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela1.setFont(new Font("Calibri", Font.PLAIN, 12));
@@ -277,61 +264,121 @@ public class RefeicoesView extends JFrame {
             }
         });
     }
-    
+
     private void carregarRefeicao1() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentosRefeicao1();
 
         for (Alimento a : alimentos) {
-            modelo1.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+            modelo1.insertRow(modelo1.getRowCount() - 2, new Object[]{
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
         }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo1);
     }
-    
+
     private void carregarRefeicao2() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentosRefeicao2();
 
         for (Alimento a : alimentos) {
-            modelo2.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+            modelo2.insertRow(modelo2.getRowCount() - 2, new Object[]{
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
         }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo2);
     }
-    
+
     private void carregarRefeicao3() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentosRefeicao3();
 
         for (Alimento a : alimentos) {
-            modelo3.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+            modelo3.insertRow(modelo3.getRowCount() - 2, new Object[]{
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
         }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo3);
     }
-    
+
     private void carregarRefeicao4() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentosRefeicao4();
 
         for (Alimento a : alimentos) {
-            modelo4.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+            modelo4.insertRow(modelo4.getRowCount() - 2, new Object[]{
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
         }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo4);
     }
-    
+
     private void carregarRefeicao5() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentosRefeicao5();
 
         for (Alimento a : alimentos) {
-            modelo5.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+            modelo5.insertRow(modelo5.getRowCount() - 2, new Object[]{
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
         }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo5);
     }
-    
+
     private void carregarRefeicao6() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentosRefeicao6();
 
         for (Alimento a : alimentos) {
-            modelo6.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+            modelo6.insertRow(modelo6.getRowCount() - 2, new Object[]{
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
         }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo6);
     }
-    
+
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -342,7 +389,7 @@ public class RefeicoesView extends JFrame {
             }
         });
     }
-    
+
     public void cadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -351,4 +398,38 @@ public class RefeicoesView extends JFrame {
             }
         });
     }
+
+    private void atualizarTotais(DefaultTableModel modelo) {
+        double proteina = 0.0;
+        double carboidrato = 0.0;
+        double gordura = 0.0;
+        double kcal = 0.0;
+
+        for (int i = 0; i < modelo.getRowCount() - 1; i++) {
+            proteina += parseDouble(modelo.getValueAt(i, 2));
+            carboidrato += parseDouble(modelo.getValueAt(i, 3));
+            gordura += parseDouble(modelo.getValueAt(i, 4));
+            kcal += parseDouble(modelo.getValueAt(i, 5));
+        }
+
+        int totalRow = modelo.getRowCount() - 1;
+        modelo.setValueAt("TOTAL", totalRow, 0);
+        modelo.setValueAt("", totalRow, 1);
+        modelo.setValueAt(String.format("%.2f", proteina), totalRow, 2);
+        modelo.setValueAt(String.format("%.2f", carboidrato), totalRow, 3);
+        modelo.setValueAt(String.format("%.2f", gordura), totalRow, 4);
+        modelo.setValueAt(String.format("%.2f", kcal), totalRow, 5);
+    }
+
+    private double parseDouble(Object valor) {
+        if (valor == null) {
+            return 0.0;
+        }
+        try {
+            return Double.parseDouble(valor.toString().replace(",", "."));
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+
 }

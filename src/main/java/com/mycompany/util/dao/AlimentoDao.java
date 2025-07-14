@@ -153,4 +153,114 @@ public class AlimentoDao {
             return false;
         }
     }
+    
+    public boolean salvarAlimentoRefeicao2(Alimento alimento) {
+        String sql = "INSERT INTO refeicao2 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar Alimento: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean salvarAlimentoRefeicao3(Alimento alimento) {
+        String sql = "INSERT INTO refeicao3 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar Alimento: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean salvarAlimentoRefeicao4(Alimento alimento) {
+        String sql = "INSERT INTO refeicao4 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar Alimento: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean salvarAlimentoRefeicao5(Alimento alimento) {
+        String sql = "INSERT INTO refeicao5 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar Alimento: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean salvarAlimentoRefeicao6(Alimento alimento) {
+        String sql = "INSERT INTO refeicao6 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar Alimento: " + e.getMessage());
+            return false;
+        }
+    }
 }

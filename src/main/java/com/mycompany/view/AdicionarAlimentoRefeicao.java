@@ -381,15 +381,13 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                     lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 16));
                     lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 16));
 
-                    
-
                 } else {
                     JOptionPane.showMessageDialog(null, "Alimento não encontrado");
                 }
             }
         });
     }
-    
+
     public void adicionarAlimentoRefeicao() {
         btnAdicionarAlimento.addActionListener(new ActionListener() {
 
@@ -420,8 +418,20 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                     alimento.setCarboidrato(resultadoCarboidrato);
                     alimento.setGordura(resultadoGordura);
                     alimento.setKcal(resultadoKcal);
-
-                    dao.salvarAlimentoRefeicao1(alimento);
+                    
+                    if (comboBox.getSelectedIndex() == 0) {
+                        dao.salvarAlimentoRefeicao1(alimento);
+                    } else if (comboBox.getSelectedIndex() == 1) {
+                        dao.salvarAlimentoRefeicao2(alimento);
+                    } else if (comboBox.getSelectedIndex() == 2) {
+                        dao.salvarAlimentoRefeicao3(alimento);
+                    } else if (comboBox.getSelectedIndex() == 3) {
+                        dao.salvarAlimentoRefeicao4(alimento);
+                    } else if (comboBox.getSelectedIndex() == 4) {
+                        dao.salvarAlimentoRefeicao5(alimento);
+                    } else {
+                        dao.salvarAlimentoRefeicao6(alimento);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Alimento não encontrado");
                 }

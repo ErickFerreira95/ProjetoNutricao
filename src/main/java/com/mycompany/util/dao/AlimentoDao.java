@@ -130,4 +130,27 @@ public class AlimentoDao {
 
         return alimento;
     }
+    
+    // Salvar usuário com senha criptografada
+    public boolean salvarAlimentoRefeicao1(Alimento alimento) {
+        String sql = "INSERT INTO refeicao1 (alimento, quantidade, proteina, carboidrato, gordura, kcal) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, alimento.getNomeAlimento());
+            stmt.setString(2, alimento.getQuantidade());
+            stmt.setString(3, alimento.getProteina());
+            stmt.setString(4, alimento.getCarboidrato());
+            stmt.setString(5, alimento.getGordura());
+            stmt.setString(6, alimento.getKcal());
+
+            stmt.executeUpdate();
+            System.out.println("Alimento salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar Alimento: " + e.getMessage());
+            return false;
+        }
+    }
 }

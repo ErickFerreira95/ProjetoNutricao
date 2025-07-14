@@ -18,6 +18,7 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -344,6 +345,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         configurarUI();
         setVisible(true);
         carregarAlimento();
+        adicionarAlimentoRefeicao();
     }
 
     public void carregarAlimento() {
@@ -355,23 +357,71 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
 
                 if (alimento != null) {
-                    double quantidade = Double.parseDouble(txtQuantidade.getText());
+                    double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
                     double proteina, carboidrato, gordura, kcal;
 
                     proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
                     carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
                     gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
-                    kcal = (proteina*4)+(carboidrato*4)+(gordura*9);
-                    
-                    lblResultadoProteina.setText(String.valueOf(proteina));
-                    lblResultadoCarboidrato.setText(String.valueOf(carboidrato));
-                    lblResultadoGordura.setText(String.valueOf(gordura));
-                    lblResultadoKcal.setText(String.valueOf(kcal));
+                    kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
+
+                    DecimalFormat formato = new DecimalFormat("#0.0");
+                    String resultadoProteina = formato.format(proteina);
+                    String resultadoCarboidrato = formato.format(carboidrato);
+                    String resultadoGordura = formato.format(gordura);
+                    String resultadoKcal = formato.format(kcal);
+
+                    lblResultadoProteina.setText(resultadoProteina);
+                    lblResultadoCarboidrato.setText(resultadoCarboidrato);
+                    lblResultadoGordura.setText(resultadoGordura);
+                    lblResultadoKcal.setText(resultadoKcal);
 
                     lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 16));
                     lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 16));
                     lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 16));
                     lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 16));
+
+                    
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+                }
+            }
+        });
+    }
+    
+    public void adicionarAlimentoRefeicao() {
+        btnAdicionarAlimento.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AlimentoDao dao = new AlimentoDao();
+                Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
+
+                if (alimento != null) {
+                    double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
+                    double proteina, carboidrato, gordura, kcal;
+
+                    proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
+                    carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
+                    gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
+                    kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
+
+                    DecimalFormat formato = new DecimalFormat("#0.0");
+                    String quantidadeFormatada = formato.format(quantidade);
+                    String resultadoProteina = formato.format(proteina);
+                    String resultadoCarboidrato = formato.format(carboidrato);
+                    String resultadoGordura = formato.format(gordura);
+                    String resultadoKcal = formato.format(kcal);
+
+                    alimento.setNomeAlimento(alimento.getNomeAlimento());
+                    alimento.setQuantidade(quantidadeFormatada);
+                    alimento.setProteina(resultadoProteina);
+                    alimento.setCarboidrato(resultadoCarboidrato);
+                    alimento.setGordura(resultadoGordura);
+                    alimento.setKcal(resultadoKcal);
+
+                    dao.salvarAlimentoRefeicao1(alimento);
                 } else {
                     JOptionPane.showMessageDialog(null, "Alimento não encontrado");
                 }

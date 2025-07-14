@@ -1,5 +1,7 @@
 package com.mycompany.view;
 
+import com.mycompany.model.Alimento;
+import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,6 +16,7 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -33,7 +36,12 @@ public class RefeicoesView extends JFrame {
     private JTable tabela4;
     private JTable tabela5;
     private JTable tabela6;
-    private DefaultTableModel modelo;
+    private DefaultTableModel modelo1;
+    private DefaultTableModel modelo2;
+    private DefaultTableModel modelo3;
+    private DefaultTableModel modelo4;
+    private DefaultTableModel modelo5;
+    private DefaultTableModel modelo6;
     private JMenuBar menuBar = new JMenuBar();
     private JMenu menuCadastrarAlimento = new JMenu("Alimento");
     private JMenu menuCalcularTmb = new JMenu("Calculadora");
@@ -100,33 +108,39 @@ public class RefeicoesView extends JFrame {
         positionPainelTopo.fill = GridBagConstraints.NONE;
         positionPainelTopo.insets = new Insets(0, 0, 0, 0); // margem superior
         backgroundPanel.add(panelTopo, positionPainelTopo);*/
-        modelo = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        tabela1 = new JTable(modelo);
+        modelo1 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo2 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo3 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo4 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo5 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        modelo6 = new DefaultTableModel(new String[]{"Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
+        
+        tabela1 = new JTable(modelo1);
         tabela1.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela1.setFont(new Font("Calibri", Font.PLAIN, 12));
         tabela1.setPreferredScrollableViewportSize(new Dimension(400, 200));
 
-        tabela2 = new JTable(modelo);
+        tabela2 = new JTable(modelo2);
         tabela2.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela2.setFont(new Font("Calibri", Font.PLAIN, 12));
         tabela2.setPreferredScrollableViewportSize(new Dimension(400, 200));
 
-        tabela3 = new JTable(modelo);
+        tabela3 = new JTable(modelo3);
         tabela3.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela3.setFont(new Font("Calibri", Font.PLAIN, 12));
         tabela3.setPreferredScrollableViewportSize(new Dimension(400, 200));
 
-        tabela4 = new JTable(modelo);
+        tabela4 = new JTable(modelo4);
         tabela4.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela4.setFont(new Font("Calibri", Font.PLAIN, 12));
         tabela4.setPreferredScrollableViewportSize(new Dimension(400, 200));
 
-        tabela5 = new JTable(modelo);
+        tabela5 = new JTable(modelo5);
         tabela5.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela5.setFont(new Font("Calibri", Font.PLAIN, 12));
         tabela5.setPreferredScrollableViewportSize(new Dimension(400, 200));
 
-        tabela6 = new JTable(modelo);
+        tabela6 = new JTable(modelo6);
         tabela6.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela6.setFont(new Font("Calibri", Font.PLAIN, 12));
         tabela6.setPreferredScrollableViewportSize(new Dimension(400, 200));
@@ -231,6 +245,12 @@ public class RefeicoesView extends JFrame {
         configurarUI();
         calculoTmbView();
         adicionarRefeicaoView();
+        carregarRefeicao1();
+        carregarRefeicao2();
+        carregarRefeicao3();
+        carregarRefeicao4();
+        carregarRefeicao5();
+        carregarRefeicao6();
     }
 
     // Adiciona ações
@@ -251,5 +271,59 @@ public class RefeicoesView extends JFrame {
                 new CalculoTmbView().calculoTmbView();
             }
         });
+    }
+    
+    private void carregarRefeicao1() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao1();
+
+        for (Alimento a : alimentos) {
+            modelo1.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }
+    
+    private void carregarRefeicao2() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao2();
+
+        for (Alimento a : alimentos) {
+            modelo2.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }
+    
+    private void carregarRefeicao3() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao3();
+
+        for (Alimento a : alimentos) {
+            modelo3.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }
+    
+    private void carregarRefeicao4() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao4();
+
+        for (Alimento a : alimentos) {
+            modelo4.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }
+    
+    private void carregarRefeicao5() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao5();
+
+        for (Alimento a : alimentos) {
+            modelo5.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }
+    
+    private void carregarRefeicao6() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao6();
+
+        for (Alimento a : alimentos) {
+            modelo6.addRow(new Object[]{a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
     }
 }

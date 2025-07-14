@@ -68,6 +68,162 @@ public class AlimentoDao {
         }
         return lista;
     }
+    
+    public List<Alimento> carregarAlimentosRefeicao1() {
+        List<Alimento> lista = new ArrayList<>();
+
+        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao1";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Alimento alimento = new Alimento();
+
+                alimento.setNomeAlimento(rs.getString("alimento"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+
+                lista.add(alimento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // ou log
+        }
+        return lista;
+    }
+    
+    public List<Alimento> carregarAlimentosRefeicao2() {
+        List<Alimento> lista = new ArrayList<>();
+
+        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao2";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Alimento alimento = new Alimento();
+
+                alimento.setNomeAlimento(rs.getString("alimento"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+
+                lista.add(alimento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // ou log
+        }
+        return lista;
+    }
+    
+    public List<Alimento> carregarAlimentosRefeicao3() {
+        List<Alimento> lista = new ArrayList<>();
+
+        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao3";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Alimento alimento = new Alimento();
+
+                alimento.setNomeAlimento(rs.getString("alimento"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+
+                lista.add(alimento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // ou log
+        }
+        return lista;
+    }
+    
+    public List<Alimento> carregarAlimentosRefeicao4() {
+        List<Alimento> lista = new ArrayList<>();
+
+        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao4";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Alimento alimento = new Alimento();
+
+                alimento.setNomeAlimento(rs.getString("alimento"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+
+                lista.add(alimento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // ou log
+        }
+        return lista;
+    }
+    
+    public List<Alimento> carregarAlimentosRefeicao5() {
+        List<Alimento> lista = new ArrayList<>();
+
+        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao5";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Alimento alimento = new Alimento();
+
+                alimento.setNomeAlimento(rs.getString("alimento"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+
+                lista.add(alimento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // ou log
+        }
+        return lista;
+    }
+    
+    public List<Alimento> carregarAlimentosRefeicao6() {
+        List<Alimento> lista = new ArrayList<>();
+
+        String sql = "SELECT alimento, quantidade, proteina, carboidrato, gordura, kcal FROM refeicao6";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Alimento alimento = new Alimento();
+
+                alimento.setNomeAlimento(rs.getString("alimento"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+
+                lista.add(alimento);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // ou log
+        }
+        return lista;
+    }
 
     public boolean deletarAlimento(int id) {
         try (Connection conn = connection.getConexaoBd()) {

@@ -31,8 +31,8 @@ public class ProjetoNutricao {
             //new CadastroAlimentoView().CadastroAlimentoView();
             //new CalculoTmbView().calculoTmbView();
             //new EditarAlimentoView().editarAlimentoView();
-            //new RefeicoesView().refeifoes();
-            new AdicionarAlimentoRefeicao().adicionarRefeicao();
+            new RefeicoesView().refeifoes();
+            //new AdicionarAlimentoRefeicao().adicionarRefeicao();
         });
     }
 }

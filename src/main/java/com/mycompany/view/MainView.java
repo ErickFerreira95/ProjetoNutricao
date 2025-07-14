@@ -56,7 +56,7 @@ public class MainView extends JFrame {
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
-        
+
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
@@ -75,7 +75,14 @@ public class MainView extends JFrame {
 
         backgroundPanel.setLayout(new GridBagLayout());
 
-        modelo = new DefaultTableModel(new String[]{"ID", "Nome Alimento", "Quantidade(g)", "Proteína(g)", "Carboidrato(g)", "Gordura(g)", "Kcal", "Ações"}, 0);
+        modelo = new DefaultTableModel(new String[]{"ID", "Nome Alimento", "Quantidade(g)", "Proteína(g)", "Carboidrato(g)", "Gordura(g)", "Kcal", "Ações"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Permite edição apenas nas colunas 0 (Alimento) e 1 (Quantidade),
+                // e somente se não for a última linha (TOTAL)
+                return (column == 7);
+            }
+        };
         tabela = new JTable(modelo);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(300);
@@ -130,7 +137,7 @@ public class MainView extends JFrame {
         refeicoesView();
         adicionarRefeicaoView();
     }
-    
+
     private void carregarTabela() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentos();
@@ -160,7 +167,7 @@ public class MainView extends JFrame {
             }
         });
     }
-    
+
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -171,7 +178,7 @@ public class MainView extends JFrame {
             }
         });
     }
-    
+
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

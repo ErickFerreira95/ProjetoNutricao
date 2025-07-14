@@ -84,13 +84,48 @@ public class RefeicoesView extends JFrame {
         };
         backgroundPanel.setLayout(new GridBagLayout());
 
-        modelo1 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo2 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo3 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo4 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo5 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-        modelo6 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0);
-
+        modelo1 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Nenhuma célula será editável
+            }
+        };
+        
+        modelo2 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Nenhuma célula será editável
+            }
+        };
+        
+        modelo3 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Nenhuma célula será editável
+            }
+        };
+        
+        modelo4 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Nenhuma célula será editável
+            }
+        };
+        
+        modelo5 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Nenhuma célula será editável
+            }
+        };
+        
+        modelo6 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Nenhuma célula será editável
+            }
+        };
+        
         modelo1.addRow(new Object[]{"", "", "", "", "", ""});
         modelo1.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
         modelo2.addRow(new Object[]{"", "", "", "", "", ""});

@@ -41,6 +41,7 @@ public class AlimentoDao {
             return false;
         }
     }
+
     public List<Alimento> carregarAlimentos() {
         List<Alimento> lista = new ArrayList<>();
 
@@ -102,4 +103,31 @@ public class AlimentoDao {
         }
     }
 
+    public Alimento buscarPorNome(String nome) {
+        Alimento alimento = null;
+
+        String sql = "SELECT * FROM alimentos WHERE nome = ?";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                alimento = new Alimento();
+                alimento.setId(rs.getInt("id"));
+                alimento.setNomeAlimento(rs.getString("nome"));
+                alimento.setQuantidade(rs.getString("quantidade"));
+                alimento.setProteina(rs.getString("proteina"));
+                alimento.setCarboidrato(rs.getString("carboidrato"));
+                alimento.setGordura(rs.getString("gordura"));
+                alimento.setKcal(rs.getString("kcal"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return alimento;
+    }
 }

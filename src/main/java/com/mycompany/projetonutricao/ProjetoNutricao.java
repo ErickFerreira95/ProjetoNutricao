@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.mycompany.view.AdicionarAlimentoRefeicao;
 import com.mycompany.view.CadastroAlimentoView;
 import com.mycompany.view.CalculoTmbView;
 import com.mycompany.view.EditarAlimentoView;
@@ -30,7 +31,8 @@ public class ProjetoNutricao {
             //new CadastroAlimentoView().CadastroAlimentoView();
             //new CalculoTmbView().calculoTmbView();
             //new EditarAlimentoView().editarAlimentoView();
-            new RefeicoesView().refeifoes();
+            //new RefeicoesView().refeifoes();
+            new AdicionarAlimentoRefeicao().adicionarRefeicao();
         });
     }
 }

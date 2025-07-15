@@ -1,14 +1,13 @@
 package com.mycompany.view;
 
-import com.mycompany.model.Alimento;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.AbstractCellEditor;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -16,27 +15,19 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
-public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
+public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCellEditor {
 
     private JPanel painel;
-    private JButton btnEditar;
     private JButton btnExcluir;
-    private MainView view;
-    JTable table;
+    private RefeicoesView view;
+    JTable table1;
 
-    public PanelEditor(JTable table, MainView view) {
-        
-        this.table = table;
+    public PanelEditorRefeicoes(JTable table1, RefeicoesView view) {
+
+        this.table1 = table1;
         this.view = view;
-        
+
         painel = new JPanel(new GridBagLayout());
-        //btnEditar = new JButton(new ImageIcon("src/images/lapis.png"));
-        btnEditar = new JButton("Editar");
-        btnEditar.setToolTipText("Editar");
-        btnEditar.setBackground(new Color(0, 191, 255));
-        btnEditar.setOpaque(true);
-        btnEditar.setBorderPainted(false);
-        btnEditar.setForeground(Color.WHITE);
         //btnExcluir = new JButton(new ImageIcon("src/images/lixeira.png"));
         btnExcluir = new JButton("Excluir");
         btnExcluir.setBackground(new Color(255, 99, 71));
@@ -44,16 +35,7 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
         btnExcluir.setBorderPainted(false);
         btnExcluir.setToolTipText("Excluir");
         btnExcluir.setForeground(Color.WHITE);
-
-        GridBagConstraints posicaoBtnEditar = new GridBagConstraints();
-        posicaoBtnEditar.gridx = 0;
-        posicaoBtnEditar.gridy = 0;
-        posicaoBtnEditar.weightx = 0;
-        posicaoBtnEditar.weighty = 0; // ← isso força ele a ficar no topo
-        posicaoBtnEditar.anchor = GridBagConstraints.CENTER;
-        posicaoBtnEditar.fill = GridBagConstraints.NONE;
-        posicaoBtnEditar.insets = new Insets(0, 0, 0, 5); // margem superior
-        painel.add(btnEditar, posicaoBtnEditar);
+        btnExcluir.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         GridBagConstraints posicaoBtnExcluir = new GridBagConstraints();
         posicaoBtnExcluir.gridx = 1;
@@ -65,42 +47,18 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
         posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0); // margem superior
         painel.add(btnExcluir, posicaoBtnExcluir);
 
-        btnEditar.addActionListener(e -> {
-            
-            int row = table.getSelectedRow();
-
-            if (row >= 0) {
-                Alimento alimento = new Alimento();
-                alimento.setId(Integer.parseInt(table.getValueAt(row, 0).toString()));
-                alimento.setNomeAlimento(table.getValueAt(row, 1).toString());
-                alimento.setQuantidade(table.getValueAt(row, 2).toString());
-                alimento.setProteina(table.getValueAt(row, 3).toString());
-                alimento.setCarboidrato(table.getValueAt(row, 4).toString());
-                alimento.setGordura(table.getValueAt(row, 5).toString());
-                alimento.setKcal(table.getValueAt(row, 6).toString());
-
-                // Abre o novo JFrame com os dados da linha
-                EditarAlimentoView telaEditar = new EditarAlimentoView();
-                telaEditar.getAlimento(alimento); // ← envia os dados para os campos da tela
-                telaEditar.editarAlimentoView();
-                
-                view.dispose();
-            }
-            fireEditingStopped(); // para encerrar o modo de edição da célula
-        });
-
         btnExcluir.addActionListener(e -> {
-            JTable tabela = table;
+            JTable tabela = table1;
             AlimentoDao dao = new AlimentoDao();
             int row = tabela.getEditingRow();
 
             if (row != -1) {
-                int id = (int) tabela.getValueAt(row, 0);
-                
+
+                String alimento = (String) tabela.getValueAt(row, 0);
 
                 int confirmar = JOptionPane.showConfirmDialog(
                         tabela,
-                        "Deseja excluir o item " + id + "?",
+                        "Deseja excluir o item " + alimento + "?",
                         "Confirmação",
                         JOptionPane.YES_NO_OPTION
                 );
@@ -109,7 +67,7 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
                     // Pare a edição ANTES de remover a linha
                     fireEditingStopped();
 
-                    boolean deletado = dao.deletarAlimento(id);
+                    boolean deletado = dao.deletarAlimentoRefeicao1(alimento);
                     if (deletado) {
                         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
                         modelo.removeRow(row);
@@ -129,9 +87,11 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
     }
 
     @Override
-    public Component getTableCellEditorComponent(JTable table, Object value,
-            boolean isSelected, int row, int column
-    ) {
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        // Se for uma das duas últimas linhas, retorna painel vazio
+        if (row >= table.getRowCount() - 2) {
+            return new JPanel();
+        }
         return painel;
     }
 

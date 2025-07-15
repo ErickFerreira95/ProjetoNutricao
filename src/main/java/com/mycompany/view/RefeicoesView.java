@@ -26,6 +26,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -56,7 +57,7 @@ public class RefeicoesView extends JFrame {
     private void configurarUI() {
         setTitle("Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1300, 720);
+        setSize(1920, 1080);
         setLocationRelativeTo(null);
 
         menuCadastrarAlimento.add(tabelaAlimentos);
@@ -83,11 +84,13 @@ public class RefeicoesView extends JFrame {
             }
         };
         backgroundPanel.setLayout(new GridBagLayout());
+        
+        
 
-        modelo1 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal"}, 0) {
+        modelo1 = new DefaultTableModel(new String[]{"Alimento", "Quantidade(g)", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // Nenhuma célula será editável
+                return row < getRowCount() - 2 && (column == 6);
             }
         };
         
@@ -126,8 +129,8 @@ public class RefeicoesView extends JFrame {
             }
         };
         
-        modelo1.addRow(new Object[]{"", "", "", "", "", ""});
-        modelo1.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
+        modelo1.addRow(new Object[]{"", "", "", "", "", "", ""});
+        modelo1.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00", ""});
         modelo2.addRow(new Object[]{"", "", "", "", "", ""});
         modelo2.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
         modelo3.addRow(new Object[]{"", "", "", "", "", ""});
@@ -142,34 +145,42 @@ public class RefeicoesView extends JFrame {
         tabela1 = new JTable(modelo1);
         tabela1.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela1.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela1.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        tabela1.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tabela1.setToolTipText("REFEIÇÃO 1");
+        tabela1.setRowHeight(30);
 
         tabela2 = new JTable(modelo2);
         tabela2.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela2.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela2.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        tabela2.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tabela2.setToolTipText("REFEIÇÃO 2");
 
         tabela3 = new JTable(modelo3);
         tabela3.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela3.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela3.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        tabela3.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tabela3.setToolTipText("REFEIÇÃO 3");
 
         tabela4 = new JTable(modelo4);
         tabela4.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela4.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela4.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        tabela4.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tabela4.setToolTipText("REFEIÇÃO 4");
 
         tabela5 = new JTable(modelo5);
         tabela5.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela5.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela5.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        tabela5.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tabela5.setToolTipText("REFEIÇÃO 5");
 
         tabela6 = new JTable(modelo6);
         tabela6.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
         tabela6.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela6.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        tabela6.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tabela6.setToolTipText("REFEIÇÃO 6");
 
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
         // Aplica o alinhamento a todas as colunas
         for (int i = 0; i < tabela1.getColumnCount(); i++) {
             tabela1.getColumnModel().getColumn(i).setCellRenderer(centralizado);
@@ -184,6 +195,8 @@ public class RefeicoesView extends JFrame {
         for (int i = 0; i < tabela3.getColumnCount(); i++) {
             tabela3.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
+            tabela1.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
+            tabela1.getColumn("").setCellEditor(new PanelEditorRefeicoes(tabela1, this));
         }
 
         for (int i = 0; i < tabela4.getColumnCount(); i++) {

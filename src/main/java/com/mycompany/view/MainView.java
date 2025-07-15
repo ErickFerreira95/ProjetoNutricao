@@ -83,6 +83,7 @@ public class MainView extends JFrame {
                 return (column == 7);
             }
         };
+        
         tabela = new JTable(modelo);
         tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
         tabela.getColumnModel().getColumn(1).setPreferredWidth(300);

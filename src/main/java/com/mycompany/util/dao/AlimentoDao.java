@@ -237,6 +237,19 @@ public class AlimentoDao {
             return false;
         }
     }
+    
+    public boolean deletarAlimentoRefeicao1(String alimento) {
+        try (Connection conn = connection.getConexaoBd()) {
+            String sql = "DELETE FROM refeicao1 WHERE alimento = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, alimento);
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public void atualizarAlimento(Alimento alimento) {
         String sql = "UPDATE alimentos SET nome = ?, quantidade = ?, proteina = ?, carboidrato = ?, gordura = ?, kcal = ? WHERE id = ?";

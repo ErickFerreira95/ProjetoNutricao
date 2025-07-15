@@ -31,9 +31,9 @@ import javax.swing.JTextField;
 public class LoginView extends JFrame {
 
     private JTextField txtEmail = new JTextField(12);
-    private JPasswordField txtPassword = new JPasswordField(12);
+    private JPasswordField txtSenha = new JPasswordField(12);
     private JButton btnLogin = new JButton("Login");
-    private JLabel lblClickHere = new JLabel("<html><a href=''>Sign up</a></html>");
+    private JLabel lblCadastrar = new JLabel("<html><a href=''>Cadastre-se</a></html>");
 
     private void configurarUI() {
         setTitle("Login");
@@ -124,9 +124,9 @@ public class LoginView extends JFrame {
         positionLblPassword.insets = new Insets(0, 0, 0, 0); // margem superior
         centralPanel.add(lblPassword, positionLblPassword);
 
-        txtPassword.setFont(new Font("Calibri", Font.PLAIN, 14));
-        txtPassword.setToolTipText("Insert your password");
-        txtPassword.setMargin(new Insets(3, 1, 1, 1));
+        txtSenha.setFont(new Font("Calibri", Font.PLAIN, 14));
+        txtSenha.setToolTipText("Insert your password");
+        txtSenha.setMargin(new Insets(3, 1, 1, 1));
 
         // Posicionamento no topo absoluto
         GridBagConstraints positionTxtPassword = new GridBagConstraints();
@@ -137,7 +137,7 @@ public class LoginView extends JFrame {
         positionTxtPassword.anchor = GridBagConstraints.CENTER;
         positionTxtPassword.fill = GridBagConstraints.NONE;
         positionTxtPassword.insets = new Insets(0, 0, 5, 0); // margem superior
-        centralPanel.add(txtPassword, positionTxtPassword);
+        centralPanel.add(txtSenha, positionTxtPassword);
 
         btnLogin.setToolTipText("Login");
         btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -167,10 +167,10 @@ public class LoginView extends JFrame {
         positionDontHaveAccount.insets = new Insets(10, 0, 0, 0); // margem superior
         centralPanel.add(lblDontHaveAccount, positionDontHaveAccount);
 
-        lblClickHere.setFont(new Font("Calibri", Font.BOLD, 18));
-        lblClickHere.setForeground(Color.WHITE);
-        lblClickHere.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblClickHere.setToolTipText("Click here to create an account");
+        lblCadastrar.setFont(new Font("Calibri", Font.BOLD, 18));
+        lblCadastrar.setForeground(Color.WHITE);
+        lblCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        lblCadastrar.setToolTipText("Click here to create an account");
 
         GridBagConstraints positionSignUp = new GridBagConstraints();
         positionSignUp.gridx = 0;
@@ -180,7 +180,7 @@ public class LoginView extends JFrame {
         positionSignUp.anchor = GridBagConstraints.CENTER;
         positionSignUp.fill = GridBagConstraints.NONE;
         positionSignUp.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(lblClickHere, positionSignUp);
+        centralPanel.add(lblCadastrar, positionSignUp);
 
         add(backgroundPanel);
     }
@@ -200,7 +200,7 @@ public class LoginView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!emptyFields()) {
-                    if (dao.autenticarUsuario(txtEmail.getText(), txtPassword.getText())) {
+                    if (dao.autenticarUsuario(txtEmail.getText(), txtSenha.getText())) {
                         dispose();
                         new MainView().mainView();
                     } else {
@@ -213,7 +213,7 @@ public class LoginView extends JFrame {
 
     // Ação ao clicar signUp
     public void SignUpView() {
-        lblClickHere.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
                     dispose();
@@ -230,7 +230,7 @@ public class LoginView extends JFrame {
 
         boolean empty = true;
 
-        if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
+        if (txtEmail.getText().trim().isEmpty() || txtSenha.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
         } else {
             empty = false;

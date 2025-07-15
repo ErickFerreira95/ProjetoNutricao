@@ -34,7 +34,7 @@ public class CalculoTmbView extends JFrame {
     private JTextField txtPeso = new JTextField(12);
     private JTextField txtIdade = new JTextField(12);
     private JTextField txtFatorAtividade = new JTextField(12);
-    private JButton botaoCalcular = new JButton("Calcular");
+    private JButton btnCalcular = new JButton("Calcular");
     private JComboBox<String> comboBox = new JComboBox();
     private JLabel lblResultado = new JLabel("Seu TMB é: ");
     private JMenuBar menuBar = new JMenuBar();
@@ -309,8 +309,8 @@ public class CalculoTmbView extends JFrame {
         posicaoTxtFatorAtividade.insets = new Insets(0, 0, 5, 0); // margem superior
         painelCentral.add(txtFatorAtividade, posicaoTxtFatorAtividade);
 
-        botaoCalcular.setToolTipText("Calcular");
-        botaoCalcular.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCalcular.setToolTipText("Calcular");
+        btnCalcular.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // Posicionamento no topo absoluto
         GridBagConstraints posicaoBotaoCalcular = new GridBagConstraints();
@@ -321,7 +321,7 @@ public class CalculoTmbView extends JFrame {
         posicaoBotaoCalcular.anchor = GridBagConstraints.CENTER;
         posicaoBotaoCalcular.fill = GridBagConstraints.NONE;
         posicaoBotaoCalcular.insets = new Insets(5, 0, 0, 0); // margem superior
-        painelCentral.add(botaoCalcular, posicaoBotaoCalcular);
+        painelCentral.add(btnCalcular, posicaoBotaoCalcular);
 
         lblResultado.setFont(new Font("Calibri", Font.BOLD, 20));
 
@@ -350,7 +350,7 @@ public class CalculoTmbView extends JFrame {
     }
 
     public void calcularTmb() {
-        botaoCalcular.addActionListener(new ActionListener() {
+        btnCalcular.addActionListener(new ActionListener() {
             double tmb = 0;
 
             @Override

@@ -22,11 +22,11 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
     private JButton btnEditar;
     private JButton btnExcluir;
     private MainView view;
-    JTable table;
+    JTable tblTabela;
 
-    public PanelEditor(JTable table, MainView view) {
+    public PanelEditor(JTable tblTabela, MainView view) {
         
-        this.table = table;
+        this.tblTabela = tblTabela;
         this.view = view;
         
         painel = new JPanel(new GridBagLayout());
@@ -67,17 +67,17 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
 
         btnEditar.addActionListener(e -> {
             
-            int row = table.getSelectedRow();
+            int row = tblTabela.getSelectedRow();
 
             if (row >= 0) {
                 Alimento alimento = new Alimento();
-                alimento.setId(Integer.parseInt(table.getValueAt(row, 0).toString()));
-                alimento.setNomeAlimento(table.getValueAt(row, 1).toString());
-                alimento.setQuantidade(table.getValueAt(row, 2).toString());
-                alimento.setProteina(table.getValueAt(row, 3).toString());
-                alimento.setCarboidrato(table.getValueAt(row, 4).toString());
-                alimento.setGordura(table.getValueAt(row, 5).toString());
-                alimento.setKcal(table.getValueAt(row, 6).toString());
+                alimento.setId(Integer.parseInt(tblTabela.getValueAt(row, 0).toString()));
+                alimento.setNomeAlimento(tblTabela.getValueAt(row, 1).toString());
+                alimento.setQuantidade(tblTabela.getValueAt(row, 2).toString());
+                alimento.setProteina(tblTabela.getValueAt(row, 3).toString());
+                alimento.setCarboidrato(tblTabela.getValueAt(row, 4).toString());
+                alimento.setGordura(tblTabela.getValueAt(row, 5).toString());
+                alimento.setKcal(tblTabela.getValueAt(row, 6).toString());
 
                 // Abre o novo JFrame com os dados da linha
                 EditarAlimentoView telaEditar = new EditarAlimentoView();
@@ -90,7 +90,7 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
         });
 
         btnExcluir.addActionListener(e -> {
-            JTable tabela = table;
+            JTable tabela = tblTabela;
             AlimentoDao dao = new AlimentoDao();
             int row = tabela.getEditingRow();
 

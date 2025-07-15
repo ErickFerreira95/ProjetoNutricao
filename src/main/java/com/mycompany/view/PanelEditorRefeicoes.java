@@ -20,11 +20,11 @@ public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCel
     private JPanel painel;
     private JButton btnExcluir;
     private RefeicoesView view;
-    JTable table1;
+    JTable tblTabela;
 
-    public PanelEditorRefeicoes(JTable table1, RefeicoesView view) {
+    public PanelEditorRefeicoes(JTable tblTabela, RefeicoesView view) {
 
-        this.table1 = table1;
+        this.tblTabela = tblTabela;
         this.view = view;
 
         painel = new JPanel(new GridBagLayout());
@@ -48,7 +48,7 @@ public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCel
         painel.add(btnExcluir, posicaoBtnExcluir);
 
         btnExcluir.addActionListener(e -> {
-            JTable tabela = table1;
+            JTable tabela = tblTabela;
             AlimentoDao dao = new AlimentoDao();
             int row = tabela.getEditingRow();
 

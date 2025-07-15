@@ -36,8 +36,8 @@ public class ConnectionDataBase {
     public Connection desconectar() {
         try {
             conn.close();
-        } catch (SQLException ex) {
-   
+        } catch (Exception ex) {
+            System.out.println("Conexão finalizada!");
         }
         return conn;
     }

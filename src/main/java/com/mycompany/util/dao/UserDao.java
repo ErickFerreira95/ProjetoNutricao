@@ -20,7 +20,7 @@ public class UserDao {
     }
 
     public List<User> getUsuario() {
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM usuario";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -33,9 +33,9 @@ public class UserDao {
                 User user = new User();
 
                 user.setId(rs.getInt("id"));
-                user.setName(rs.getString("name"));
+                user.setNome(rs.getString("nome"));
                 user.setEmail(rs.getString("email"));
-                user.setPassword(rs.getString("password"));
+                user.setSenha(rs.getString("senha"));
 
                 listaUsuarios.add(user);
             }
@@ -64,17 +64,17 @@ public class UserDao {
         }
     }*/
     // Salvar usuário com senha criptografada
-    public boolean salvarUsuario(String name, String email, String password) {
-        String sql = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
+    public boolean salvarUsuario(String nome, String email, String senha) {
+        String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
 
         // Criptografa a senha
-        String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+        String senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, name);
+            stmt.setString(1, nome);
             stmt.setString(2, email);
-            stmt.setString(3, passwordHash);
+            stmt.setString(3, senhaHash);
 
             stmt.executeUpdate();
             System.out.println("Usuário salvo com sucesso.");
@@ -82,14 +82,14 @@ public class UserDao {
 
         } catch (Exception e) {
             System.out.println("Erro ao salvar usuário: " + e.getMessage());
-            System.out.println(passwordHash);
+            System.out.println(senhaHash);
             return false;
         }
     }
 
     // Autenticar usuário
-    public boolean autenticarUsuario(String email, String typedpassword) {
-        String sql = "SELECT password FROM user WHERE email = ?";
+    public boolean autenticarUsuario(String email, String senhaDigitada) {
+        String sql = "SELECT senha FROM usuario WHERE email = ?";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -97,8 +97,8 @@ public class UserDao {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String passwordHash = rs.getString("password");
-                return BCrypt.checkpw(typedpassword, passwordHash);
+                String senhaHash = rs.getString("senha");
+                return BCrypt.checkpw(senhaDigitada, senhaHash);
             }
 
         } catch (Exception e) {

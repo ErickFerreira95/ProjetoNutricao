@@ -32,12 +32,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class RefeicoesView extends JFrame {
 
-    private JTable tabela1;
-    private JTable tabela2;
-    private JTable tabela3;
-    private JTable tabela4;
-    private JTable tabela5;
-    private JTable tabela6;
+    private JTable tblRefeicao1;
+    private JTable tblRefeicao2;
+    private JTable tblRefeicao3;
+    private JTable tblRefeicao4;
+    private JTable tblRefeicao5;
+    private JTable tblRefeicao6;
     private DefaultTableModel modelo1;
     private DefaultTableModel modelo2;
     private DefaultTableModel modelo3;
@@ -148,75 +148,75 @@ public class RefeicoesView extends JFrame {
         modelo6.addRow(new Object[]{"", "", "", "", "", ""});
         modelo6.addRow(new Object[]{"TOTAL", "", "0,00", "0,00", "0,00", "0,00"});
 
-        tabela1 = new JTable(modelo1);
-        tabela1.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
-        tabela1.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela1.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        tabela1.setToolTipText("REFEIÇÃO 1");
-        tabela1.setRowHeight(30);
+        tblRefeicao1 = new JTable(modelo1);
+        tblRefeicao1.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
+        tblRefeicao1.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tblRefeicao1.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tblRefeicao1.setToolTipText("REFEIÇÃO 1");
+        tblRefeicao1.setRowHeight(30);
 
-        tabela2 = new JTable(modelo2);
-        tabela2.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
-        tabela2.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela2.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        tabela2.setToolTipText("REFEIÇÃO 2");
+        tblRefeicao2 = new JTable(modelo2);
+        tblRefeicao2.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
+        tblRefeicao2.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tblRefeicao2.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tblRefeicao2.setToolTipText("REFEIÇÃO 2");
 
-        tabela3 = new JTable(modelo3);
-        tabela3.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
-        tabela3.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela3.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        tabela3.setToolTipText("REFEIÇÃO 3");
+        tblRefeicao3 = new JTable(modelo3);
+        tblRefeicao3.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
+        tblRefeicao3.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tblRefeicao3.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tblRefeicao3.setToolTipText("REFEIÇÃO 3");
 
-        tabela4 = new JTable(modelo4);
-        tabela4.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
-        tabela4.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela4.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        tabela4.setToolTipText("REFEIÇÃO 4");
+        tblRefeicao4 = new JTable(modelo4);
+        tblRefeicao4.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
+        tblRefeicao4.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tblRefeicao4.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tblRefeicao4.setToolTipText("REFEIÇÃO 4");
 
-        tabela5 = new JTable(modelo5);
-        tabela5.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
-        tabela5.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela5.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        tabela5.setToolTipText("REFEIÇÃO 5");
+        tblRefeicao5 = new JTable(modelo5);
+        tblRefeicao5.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
+        tblRefeicao5.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tblRefeicao5.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tblRefeicao5.setToolTipText("REFEIÇÃO 5");
 
-        tabela6 = new JTable(modelo6);
-        tabela6.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
-        tabela6.setFont(new Font("Calibri", Font.PLAIN, 12));
-        tabela6.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        tabela6.setToolTipText("REFEIÇÃO 6");
+        tblRefeicao6 = new JTable(modelo6);
+        tblRefeicao6.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
+        tblRefeicao6.setFont(new Font("Calibri", Font.PLAIN, 12));
+        tblRefeicao6.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        tblRefeicao6.setToolTipText("REFEIÇÃO 6");
 
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
         // Aplica o alinhamento a todas as colunas
-        for (int i = 0; i < tabela1.getColumnCount(); i++) {
-            tabela1.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        for (int i = 0; i < tblRefeicao1.getColumnCount(); i++) {
+            tblRefeicao1.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
         }
 
-        for (int i = 0; i < tabela2.getColumnCount(); i++) {
-            tabela2.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        for (int i = 0; i < tblRefeicao2.getColumnCount(); i++) {
+            tblRefeicao2.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
         }
 
-        for (int i = 0; i < tabela3.getColumnCount(); i++) {
-            tabela3.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        for (int i = 0; i < tblRefeicao3.getColumnCount(); i++) {
+            tblRefeicao3.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
-            tabela1.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tabela1.getColumn("").setCellEditor(new PanelEditorRefeicoes(tabela1, this));
+            tblRefeicao1.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
+            tblRefeicao1.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao1, this));
         }
 
-        for (int i = 0; i < tabela4.getColumnCount(); i++) {
-            tabela4.getColumnModel().getColumn(i).setCellRenderer(centralizado);
-            // Renderizador e editor para os dois botões
-        }
-
-        for (int i = 0; i < tabela5.getColumnCount(); i++) {
-            tabela5.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        for (int i = 0; i < tblRefeicao4.getColumnCount(); i++) {
+            tblRefeicao4.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
         }
 
-        for (int i = 0; i < tabela6.getColumnCount(); i++) {
-            tabela6.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        for (int i = 0; i < tblRefeicao5.getColumnCount(); i++) {
+            tblRefeicao5.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+            // Renderizador e editor para os dois botões
+        }
+
+        for (int i = 0; i < tblRefeicao6.getColumnCount(); i++) {
+            tblRefeicao6.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
         }
 
@@ -228,7 +228,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable1.anchor = GridBagConstraints.CENTER;
         posicaoTable1.fill = GridBagConstraints.NONE;
         posicaoTable1.insets = new Insets(0, 0, 30, 15); // margem superior
-        backgroundPanel.add(new JScrollPane(tabela1), posicaoTable1);
+        backgroundPanel.add(new JScrollPane(tblRefeicao1), posicaoTable1);
 
         GridBagConstraints posicaoTable2 = new GridBagConstraints();
         posicaoTable2.gridx = 1;
@@ -238,7 +238,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable2.anchor = GridBagConstraints.CENTER;
         posicaoTable2.fill = GridBagConstraints.NONE;
         posicaoTable2.insets = new Insets(0, 0, 30, 15); // margem superior
-        backgroundPanel.add(new JScrollPane(tabela2), posicaoTable2);
+        backgroundPanel.add(new JScrollPane(tblRefeicao2), posicaoTable2);
 
         GridBagConstraints posicaoTable3 = new GridBagConstraints();
         posicaoTable3.gridx = 2;
@@ -248,7 +248,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable3.anchor = GridBagConstraints.CENTER;
         posicaoTable3.fill = GridBagConstraints.NONE;
         posicaoTable3.insets = new Insets(0, 0, 30, 0); // margem superior
-        backgroundPanel.add(new JScrollPane(tabela3), posicaoTable3);
+        backgroundPanel.add(new JScrollPane(tblRefeicao3), posicaoTable3);
 
         GridBagConstraints posicaoTable4 = new GridBagConstraints();
         posicaoTable4.gridx = 0;
@@ -258,7 +258,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable4.anchor = GridBagConstraints.CENTER;
         posicaoTable4.fill = GridBagConstraints.NONE;
         posicaoTable4.insets = new Insets(0, 0, 0, 15); // margem superior
-        backgroundPanel.add(new JScrollPane(tabela4), posicaoTable4);
+        backgroundPanel.add(new JScrollPane(tblRefeicao4), posicaoTable4);
 
         GridBagConstraints posicaoTable5 = new GridBagConstraints();
         posicaoTable5.gridx = 1;
@@ -268,7 +268,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable5.anchor = GridBagConstraints.CENTER;
         posicaoTable5.fill = GridBagConstraints.NONE;
         posicaoTable5.insets = new Insets(0, 0, 0, 15); // margem superior
-        backgroundPanel.add(new JScrollPane(tabela5), posicaoTable5);
+        backgroundPanel.add(new JScrollPane(tblRefeicao5), posicaoTable5);
 
         GridBagConstraints posicaoTable6 = new GridBagConstraints();
         posicaoTable6.gridx = 2;
@@ -278,7 +278,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable6.anchor = GridBagConstraints.CENTER;
         posicaoTable6.fill = GridBagConstraints.NONE;
         posicaoTable6.insets = new Insets(0, 0, 0, 0); // margem superior
-        backgroundPanel.add(new JScrollPane(tabela6), posicaoTable6);
+        backgroundPanel.add(new JScrollPane(tblRefeicao6), posicaoTable6);
 
         setContentPane(backgroundPanel);
     }

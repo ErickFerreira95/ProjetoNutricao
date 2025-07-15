@@ -35,8 +35,7 @@ public class EditarAlimentoView extends JFrame {
     private JTextField txtProteina = new JTextField(12);
     private JTextField txtCarboidrato = new JTextField(12);
     private JTextField txtGordura = new JTextField(12);
-    private JButton botaoSalvar = new JButton("Salvar");
-    private int id;
+    private JButton btnSalvar = new JButton("Salvar");
     private JMenuBar menuBar = new JMenuBar();
     private JMenu menuCadastrarAlimento = new JMenu("Alimento");
     private JMenu menuCalcularTmb = new JMenu("Calculadora");
@@ -245,8 +244,8 @@ public class EditarAlimentoView extends JFrame {
         posicaoTxtGordura.insets = new Insets(0, 0, 20, 0); // margem superior
         centralPanel.add(txtGordura, posicaoTxtGordura);
 
-        botaoSalvar.setToolTipText("Cadastrar");
-        botaoSalvar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnSalvar.setToolTipText("Cadastrar");
+        btnSalvar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         GridBagConstraints posicaoBotaoCadastrar = new GridBagConstraints();
         posicaoBotaoCadastrar.gridx = 0;
@@ -256,7 +255,7 @@ public class EditarAlimentoView extends JFrame {
         posicaoBotaoCadastrar.anchor = GridBagConstraints.CENTER;
         posicaoBotaoCadastrar.fill = GridBagConstraints.NONE;
         posicaoBotaoCadastrar.insets = new Insets(0, 0, 0, 0); // margem superior
-        centralPanel.add(botaoSalvar, posicaoBotaoCadastrar);
+        centralPanel.add(btnSalvar, posicaoBotaoCadastrar);
 
         setContentPane(backgroundPanel);
     }
@@ -274,7 +273,7 @@ public class EditarAlimentoView extends JFrame {
     }
 
     public void editarAlimento() {
-        botaoSalvar.addActionListener(new ActionListener() {
+        btnSalvar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
 
             @Override

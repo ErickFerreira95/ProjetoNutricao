@@ -3,7 +3,8 @@ package com.mycompany.model;
 public class User {
 
     private int id;
-    private String name, email, password;
+    private String nome, email, senha;
+    private double imc, tmb;
 
     public int getId() {
         return id;
@@ -13,12 +14,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -29,12 +30,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public double getImc() {
@@ -52,5 +53,4 @@ public class User {
     public void setTmb(double tmb) {
         this.tmb = tmb;
     }
-    private double imc, tmb;
 }

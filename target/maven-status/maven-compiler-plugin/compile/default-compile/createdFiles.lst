@@ -1,5 +1,4 @@
 com\mycompany\view\AdicionarAlimentoRefeicao$7.class
-com\mycompany\view\RefeicoesView$8.class
 com\mycompany\view\MainView$2.class
 com\mycompany\view\EditarAlimentoView$2.class
 com\mycompany\view\CalculoTmbView$6.class
@@ -23,7 +22,6 @@ com\mycompany\view\CalculoTmbView$2.class
 com\mycompany\view\CadastroAlimentoView$6.class
 com\mycompany\view\AdicionarAlimentoRefeicao.class
 com\mycompany\view\LoginView.class
-com\mycompany\view\RefeicoesView$11.class
 com\mycompany\view\CalculoTmbView$5.class
 com\mycompany\view\LoginView$2.class
 com\mycompany\view\MainView$1.class
@@ -31,7 +29,6 @@ com\mycompany\view\RefeicoesView.class
 com\mycompany\view\PanelEditor.class
 com\mycompany\view\EditarAlimentoView$1.class
 com\mycompany\view\AdicionarAlimentoRefeicao$3.class
-com\mycompany\view\RefeicoesView$9.class
 com\mycompany\view\CadastroAlimentoView$8.class
 com\mycompany\view\AdicionarAlimentoRefeicao$10.class
 com\mycompany\view\CalculoTmbView$8.class
@@ -40,7 +37,6 @@ com\mycompany\view\EditarAlimentoView$4.class
 com\mycompany\view\AdicionarAlimentoRefeicao$9.class
 com\mycompany\view\CadastroAlimentoView$2.class
 com\mycompany\view\RefeicoesView$6.class
-com\mycompany\view\RefeicoesView$12.class
 com\mycompany\view\SignUpView.class
 com\mycompany\model\Alimento.class
 com\mycompany\view\AdicionarAlimentoRefeicao$6.class
@@ -77,5 +73,4 @@ com\mycompany\view\AdicionarAlimentoRefeicao$4.class
 com\mycompany\view\SignUpView$1.class
 com\mycompany\connection\ConnectionDataBase.class
 com\mycompany\view\CadastroAlimentoView$7.class
-com\mycompany\view\RefeicoesView$10.class
 com\mycompany\view\CalculoTmbView$3.class

@@ -72,13 +72,14 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao1() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao1";
+        String sql = "SELECT id, quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao1";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
+                alimento.setId(rs.getInt("id"));
                 alimento.setQuantidade(rs.getString("quantidade"));
                 alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
@@ -238,9 +239,74 @@ public class AlimentoDao {
         }
     }
     
-    public boolean deletarAlimentoRefeicao1(String alimento) {
+    public boolean deletarAlimentoRefeicao1(int id) {
         try (Connection conn = connection.getConexaoBd()) {
-            String sql = "DELETE FROM refeicao1 WHERE alimento = ?";
+            String sql = "DELETE FROM refeicao1 WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deletarAlimentoRefeicao2(String alimento) {
+        try (Connection conn = connection.getConexaoBd()) {
+            String sql = "DELETE FROM refeicao2 WHERE alimento = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, alimento);
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deletarAlimentoRefeicao3(String alimento) {
+        try (Connection conn = connection.getConexaoBd()) {
+            String sql = "DELETE FROM refeicao3 WHERE alimento = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, alimento);
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deletarAlimentoRefeicao4(String alimento) {
+        try (Connection conn = connection.getConexaoBd()) {
+            String sql = "DELETE FROM refeicao4 WHERE alimento = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, alimento);
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deletarAlimentoRefeicao5(String alimento) {
+        try (Connection conn = connection.getConexaoBd()) {
+            String sql = "DELETE FROM refeicao5 WHERE alimento = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, alimento);
+            int linhasAfetadas = stmt.executeUpdate();
+            return linhasAfetadas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean deletarAlimentoRefeicao6(String alimento) {
+        try (Connection conn = connection.getConexaoBd()) {
+            String sql = "DELETE FROM refeicao6 WHERE alimento = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, alimento);
             int linhasAfetadas = stmt.executeUpdate();

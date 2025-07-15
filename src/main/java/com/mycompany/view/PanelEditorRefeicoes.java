@@ -50,27 +50,32 @@ public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCel
         btnExcluir.addActionListener(e -> {
             JTable tabela = tblTabela;
             AlimentoDao dao = new AlimentoDao();
+            RefeicoesView refeicoes = new RefeicoesView();
             int row = tabela.getEditingRow();
 
             if (row != -1) {
+                int id = (int) tabela.getValueAt(row, 0);
 
-                String alimento = (String) tabela.getValueAt(row, 0);
+                String alimento1 = (String) tabela.getValueAt(row, 2);
+                
 
                 int confirmar = JOptionPane.showConfirmDialog(
                         tabela,
-                        "Deseja excluir o item " + alimento + "?",
+                        "Deseja excluir o item " + alimento1 + "?",
                         "Confirmação",
                         JOptionPane.YES_NO_OPTION
                 );
 
                 if (confirmar == JOptionPane.YES_OPTION) {
                     // Pare a edição ANTES de remover a linha
+                    
                     fireEditingStopped();
-
-                    boolean deletado = dao.deletarAlimentoRefeicao1(alimento);
-                    if (deletado) {
+                    boolean deletado1 = dao.deletarAlimentoRefeicao1(id);
+                    
+                    if (deletado1) {
                         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
                         modelo.removeRow(row);
+                        refeicoes.atualizarTotais(modelo);
 
                         // Evita renderização indevida após a remoção da última linha
                         if (modelo.getRowCount() == 0) {

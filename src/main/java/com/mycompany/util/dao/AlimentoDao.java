@@ -99,13 +99,14 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao2() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao2";
+        String sql = "SELECT id, quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao2";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
+                alimento.setId(rs.getInt("id"));
                 alimento.setQuantidade(rs.getString("quantidade"));
                 alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
@@ -125,13 +126,14 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao3() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao3";
+        String sql = "SELECT id, quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao3";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
+                alimento.setId(rs.getInt("id"));
                 alimento.setQuantidade(rs.getString("quantidade"));
                 alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
@@ -151,13 +153,14 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao4() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao4";
+        String sql = "SELECT id, quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao4";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
+                alimento.setId(rs.getInt("id"));
                 alimento.setQuantidade(rs.getString("quantidade"));
                 alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
@@ -177,13 +180,14 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao5() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao5";
+        String sql = "SELECT id, quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao5";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
+                alimento.setId(rs.getInt("id"));
                 alimento.setQuantidade(rs.getString("quantidade"));
                 alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
@@ -203,13 +207,14 @@ public class AlimentoDao {
     public List<Alimento> carregarAlimentosRefeicao6() {
         List<Alimento> lista = new ArrayList<>();
 
-        String sql = "SELECT quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao6";
+        String sql = "SELECT id, quantidade, alimento, proteina, carboidrato, gordura, kcal FROM refeicao6";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 Alimento alimento = new Alimento();
 
+                alimento.setId(rs.getInt("id"));
                 alimento.setQuantidade(rs.getString("quantidade"));
                 alimento.setNomeAlimento(rs.getString("alimento"));
                 alimento.setProteina(rs.getString("proteina"));
@@ -252,11 +257,11 @@ public class AlimentoDao {
         }
     }
     
-    public boolean deletarAlimentoRefeicao2(String alimento) {
+    public boolean deletarAlimentoRefeicao2(int id) {
         try (Connection conn = connection.getConexaoBd()) {
-            String sql = "DELETE FROM refeicao2 WHERE alimento = ?";
+            String sql = "DELETE FROM refeicao2 WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, alimento);
+            stmt.setInt(1, id);
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
         } catch (Exception e) {
@@ -265,11 +270,11 @@ public class AlimentoDao {
         }
     }
     
-    public boolean deletarAlimentoRefeicao3(String alimento) {
+    public boolean deletarAlimentoRefeicao3(int id) {
         try (Connection conn = connection.getConexaoBd()) {
-            String sql = "DELETE FROM refeicao3 WHERE alimento = ?";
+            String sql = "DELETE FROM refeicao3 WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, alimento);
+            stmt.setInt(1, id);
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
         } catch (Exception e) {
@@ -278,11 +283,11 @@ public class AlimentoDao {
         }
     }
     
-    public boolean deletarAlimentoRefeicao4(String alimento) {
+    public boolean deletarAlimentoRefeicao4(int id) {
         try (Connection conn = connection.getConexaoBd()) {
-            String sql = "DELETE FROM refeicao4 WHERE alimento = ?";
+            String sql = "DELETE FROM refeicao4 WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, alimento);
+            stmt.setInt(1, id);
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
         } catch (Exception e) {
@@ -291,11 +296,11 @@ public class AlimentoDao {
         }
     }
     
-    public boolean deletarAlimentoRefeicao5(String alimento) {
+    public boolean deletarAlimentoRefeicao5(int id) {
         try (Connection conn = connection.getConexaoBd()) {
-            String sql = "DELETE FROM refeicao5 WHERE alimento = ?";
+            String sql = "DELETE FROM refeicao5 WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, alimento);
+            stmt.setInt(1, id);
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
         } catch (Exception e) {
@@ -304,11 +309,11 @@ public class AlimentoDao {
         }
     }
     
-    public boolean deletarAlimentoRefeicao6(String alimento) {
+    public boolean deletarAlimentoRefeicao6(int id) {
         try (Connection conn = connection.getConexaoBd()) {
-            String sql = "DELETE FROM refeicao6 WHERE alimento = ?";
+            String sql = "DELETE FROM refeicao6 WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, alimento);
+            stmt.setInt(1, id);
             int linhasAfetadas = stmt.executeUpdate();
             return linhasAfetadas > 0;
         } catch (Exception e) {

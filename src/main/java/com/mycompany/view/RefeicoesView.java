@@ -100,8 +100,58 @@ public class RefeicoesView extends JFrame {
             }
         };
         
+        modelo2 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return row < getRowCount() - 2 && (column == 7);
+            }
+        };
+        
+        modelo3 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return row < getRowCount() - 2 && (column == 7);
+            }
+        };
+        
+        modelo4 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return row < getRowCount() - 2 && (column == 7);
+            }
+        };
+        
+        modelo5 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return row < getRowCount() - 2 && (column == 7);
+            }
+        };
+        
+        modelo6 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return row < getRowCount() - 2 && (column == 7);
+            }
+        };
+        
         modelo1.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo1.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
+        
+        modelo2.addRow(new Object[]{"", "", "", "", "", "", "", ""});
+        modelo2.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
+        
+        modelo3.addRow(new Object[]{"", "", "", "", "", "", "", ""});
+        modelo3.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
+        
+        modelo4.addRow(new Object[]{"", "", "", "", "", "", "", ""});
+        modelo4.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
+        
+        modelo5.addRow(new Object[]{"", "", "", "", "", "", "", ""});
+        modelo5.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
+        
+        modelo6.addRow(new Object[]{"", "", "", "", "", "", "", ""});
+        modelo6.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
 
         tblRefeicao1 = new JTable(modelo1);
         tblRefeicao1.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
@@ -109,6 +159,9 @@ public class RefeicoesView extends JFrame {
         tblRefeicao1.setPreferredScrollableViewportSize(new Dimension(600, 200));
         tblRefeicao1.setToolTipText("REFEIÇÃO 1");
         tblRefeicao1.setRowHeight(30);
+        tblRefeicao1.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblRefeicao1.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblRefeicao1.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         tblRefeicao2 = new JTable(modelo2);
         tblRefeicao2.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
@@ -116,6 +169,9 @@ public class RefeicoesView extends JFrame {
         tblRefeicao2.setPreferredScrollableViewportSize(new Dimension(600, 200));
         tblRefeicao2.setToolTipText("REFEIÇÃO 2");
         tblRefeicao2.setRowHeight(30);
+        tblRefeicao2.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblRefeicao2.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblRefeicao2.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         tblRefeicao3 = new JTable(modelo3);
         tblRefeicao3.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
@@ -123,6 +179,9 @@ public class RefeicoesView extends JFrame {
         tblRefeicao3.setPreferredScrollableViewportSize(new Dimension(600, 200));
         tblRefeicao3.setToolTipText("REFEIÇÃO 3");
         tblRefeicao3.setRowHeight(30);
+        tblRefeicao3.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblRefeicao3.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblRefeicao3.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         tblRefeicao4 = new JTable(modelo4);
         tblRefeicao4.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
@@ -130,6 +189,9 @@ public class RefeicoesView extends JFrame {
         tblRefeicao4.setPreferredScrollableViewportSize(new Dimension(600, 200));
         tblRefeicao4.setToolTipText("REFEIÇÃO 4");
         tblRefeicao4.setRowHeight(30);
+        tblRefeicao4.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblRefeicao4.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblRefeicao4.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         tblRefeicao5 = new JTable(modelo5);
         tblRefeicao5.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
@@ -137,6 +199,9 @@ public class RefeicoesView extends JFrame {
         tblRefeicao5.setPreferredScrollableViewportSize(new Dimension(600, 200));
         tblRefeicao5.setToolTipText("REFEIÇÃO 5");
         tblRefeicao5.setRowHeight(30);
+        tblRefeicao5.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblRefeicao5.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblRefeicao5.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         tblRefeicao6 = new JTable(modelo6);
         tblRefeicao6.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 12));
@@ -144,6 +209,9 @@ public class RefeicoesView extends JFrame {
         tblRefeicao6.setPreferredScrollableViewportSize(new Dimension(600, 200));
         tblRefeicao6.setToolTipText("REFEIÇÃO 6");
         tblRefeicao6.setRowHeight(30);
+        tblRefeicao6.getColumnModel().getColumn(0).setPreferredWidth(50);
+        tblRefeicao6.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblRefeicao6.getColumnModel().getColumn(7).setPreferredWidth(100);
 
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
@@ -158,36 +226,36 @@ public class RefeicoesView extends JFrame {
         for (int i = 0; i < tblRefeicao2.getColumnCount(); i++) {
             tblRefeicao2.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
-            tblRefeicao2.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tblRefeicao2.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao2, this));
+            tblRefeicao2.getColumn("").setCellRenderer(new PanelRendererRefeicao2());
+            tblRefeicao2.getColumn("").setCellEditor(new PanelEditorRefeicao2(tblRefeicao2, this));
         }
 
         for (int i = 0; i < tblRefeicao3.getColumnCount(); i++) {
             tblRefeicao3.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
-            tblRefeicao3.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tblRefeicao3.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao3, this));
+            tblRefeicao3.getColumn("").setCellRenderer(new PanelRendererRefeicao3());
+            tblRefeicao3.getColumn("").setCellEditor(new PanelEditorRefeicao3(tblRefeicao3, this));
         }
 
         for (int i = 0; i < tblRefeicao4.getColumnCount(); i++) {
             tblRefeicao4.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
-            tblRefeicao4.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tblRefeicao4.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao4, this));
+            tblRefeicao4.getColumn("").setCellRenderer(new PanelRendererRefeicao4());
+            tblRefeicao4.getColumn("").setCellEditor(new PanelEditorRefeicao4(tblRefeicao4, this));
         }
 
         for (int i = 0; i < tblRefeicao5.getColumnCount(); i++) {
             tblRefeicao5.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
-            tblRefeicao5.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tblRefeicao5.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao5, this));
+            tblRefeicao5.getColumn("").setCellRenderer(new PanelRendererRefeicao5());
+            tblRefeicao5.getColumn("").setCellEditor(new PanelEditorRefeicao5(tblRefeicao5, this));
         }
 
         for (int i = 0; i < tblRefeicao6.getColumnCount(); i++) {
             tblRefeicao6.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
-            tblRefeicao6.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tblRefeicao6.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao6, this));
+            tblRefeicao6.getColumn("").setCellRenderer(new PanelRendererRefeicao6());
+            tblRefeicao6.getColumn("").setCellEditor(new PanelEditorRefeicao6(tblRefeicao6, this));
         }
 
         GridBagConstraints posicaoTable1 = new GridBagConstraints();
@@ -259,6 +327,11 @@ public class RefeicoesView extends JFrame {
         calculoTmbView();
         adicionarRefeicaoView();
         carregarRefeicao1();
+        carregarRefeicao2();
+        carregarRefeicao3();
+        carregarRefeicao4();
+        carregarRefeicao5();
+        carregarRefeicao6();
         tabelaAlimentosView();
         cadastroAlimentoView();
         sair();
@@ -305,7 +378,105 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo1);
     }
 
+    private void carregarRefeicao2() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao2();
+
+        for (Alimento a : alimentos) {
+            modelo2.insertRow(modelo2.getRowCount() - 2, new Object[]{
+                a.getId(),
+                a.getQuantidade(),
+                a.getNomeAlimento(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
+        }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo2);
+    }
     
+    private void carregarRefeicao3() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao3();
+
+        for (Alimento a : alimentos) {
+            modelo3.insertRow(modelo3.getRowCount() - 2, new Object[]{
+                a.getId(),
+                a.getQuantidade(),
+                a.getNomeAlimento(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
+        }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo3);
+    }
+    
+    private void carregarRefeicao4() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao4();
+
+        for (Alimento a : alimentos) {
+            modelo4.insertRow(modelo4.getRowCount() - 2, new Object[]{
+                a.getId(),
+                a.getQuantidade(),
+                a.getNomeAlimento(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
+        }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo4);
+    }
+    
+    private void carregarRefeicao5() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao5();
+
+        for (Alimento a : alimentos) {
+            modelo5.insertRow(modelo5.getRowCount() - 2, new Object[]{
+                a.getId(),
+                a.getQuantidade(),
+                a.getNomeAlimento(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
+        }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo5);
+    }
+    
+    private void carregarRefeicao6() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.carregarAlimentosRefeicao6();
+
+        for (Alimento a : alimentos) {
+            modelo6.insertRow(modelo6.getRowCount() - 2, new Object[]{
+                a.getId(),
+                a.getQuantidade(),
+                a.getNomeAlimento(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()
+            });
+        }
+
+        // Atualiza os totais após carregar todos os alimentos
+        atualizarTotais(modelo6);
+    }
 
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {

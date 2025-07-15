@@ -15,15 +15,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
-public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCellEditor {
-
+public class PanelEditorRefeicao4 extends AbstractCellEditor implements TableCellEditor {
+    
     private JPanel painel;
     private JButton btnExcluir;
     private JButton btnExcluir2;
     private RefeicoesView view;
     JTable tblTabela;
 
-    public PanelEditorRefeicoes(JTable tblTabela, RefeicoesView view) {
+    public PanelEditorRefeicao4(JTable tblTabela, RefeicoesView view) {
 
         this.tblTabela = tblTabela;
         this.view = view;
@@ -70,7 +70,7 @@ public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCel
                     // Pare a edição ANTES de remover a linha
 
                     fireEditingStopped();
-                    boolean deletado = dao.deletarAlimentoRefeicao1(id);
+                    boolean deletado = dao.deletarAlimentoRefeicao4(id);
 
                     if (deletado) {
                         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();

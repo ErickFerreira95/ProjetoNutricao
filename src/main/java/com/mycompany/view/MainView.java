@@ -43,6 +43,8 @@ public class MainView extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    private JMenu menuSair = new JMenu("Sair");
+    private JMenuItem sair = new JMenuItem("Sair");
 
     private void configurarUI() {
         setTitle("Login");
@@ -60,6 +62,10 @@ public class MainView extends JFrame {
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
+        
+        menuSair.add(sair);
+        menuBar.add(menuSair);
+        
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -137,6 +143,7 @@ public class MainView extends JFrame {
         calculoTmbView();
         refeicoesView();
         adicionarRefeicaoView();
+        sair();
     }
 
     private void carregarTabela() {
@@ -185,6 +192,15 @@ public class MainView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new AdicionarAlimentoRefeicao().adicionarRefeicao();
+            }
+        });
+    }
+    
+    public void sair() {
+        sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginView().login();
             }
         });
     }

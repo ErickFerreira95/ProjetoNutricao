@@ -53,6 +53,8 @@ public class RefeicoesView extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    private JMenu menuSair = new JMenu("Sair");
+    private JMenuItem sair = new JMenuItem("Sair");
 
     private void configurarUI() {
         setTitle("Refeições");
@@ -70,6 +72,10 @@ public class RefeicoesView extends JFrame {
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
+        
+        menuSair.add(sair);
+        menuBar.add(menuSair);
+        
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -221,7 +227,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable1.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable1.anchor = GridBagConstraints.CENTER;
         posicaoTable1.fill = GridBagConstraints.NONE;
-        posicaoTable1.insets = new Insets(0, 0, 15, 15); // margem superior
+        posicaoTable1.insets = new Insets(0, 0, 30, 15); // margem superior
         backgroundPanel.add(new JScrollPane(tabela1), posicaoTable1);
 
         GridBagConstraints posicaoTable2 = new GridBagConstraints();
@@ -231,7 +237,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable2.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable2.anchor = GridBagConstraints.CENTER;
         posicaoTable2.fill = GridBagConstraints.NONE;
-        posicaoTable2.insets = new Insets(0, 0, 15, 15); // margem superior
+        posicaoTable2.insets = new Insets(0, 0, 30, 15); // margem superior
         backgroundPanel.add(new JScrollPane(tabela2), posicaoTable2);
 
         GridBagConstraints posicaoTable3 = new GridBagConstraints();
@@ -241,7 +247,7 @@ public class RefeicoesView extends JFrame {
         posicaoTable3.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable3.anchor = GridBagConstraints.CENTER;
         posicaoTable3.fill = GridBagConstraints.NONE;
-        posicaoTable3.insets = new Insets(0, 0, 15, 0); // margem superior
+        posicaoTable3.insets = new Insets(0, 0, 30, 0); // margem superior
         backgroundPanel.add(new JScrollPane(tabela3), posicaoTable3);
 
         GridBagConstraints posicaoTable4 = new GridBagConstraints();
@@ -290,6 +296,7 @@ public class RefeicoesView extends JFrame {
         carregarRefeicao6();
         tabelaAlimentosView();
         cadastroAlimentoView();
+        sair();
     }
 
     // Adiciona ações
@@ -479,5 +486,13 @@ public class RefeicoesView extends JFrame {
             return 0.0;
         }
     }
-
+    
+    public void sair() {
+        sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginView().login();
+            }
+        });
+    }
 }

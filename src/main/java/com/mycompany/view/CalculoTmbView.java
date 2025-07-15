@@ -46,6 +46,8 @@ public class CalculoTmbView extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    private JMenu menuSair = new JMenu("Sair");
+    private JMenuItem sair = new JMenuItem("Sair");
     User usuario = new User();
 
     private void configurarUI() {
@@ -53,17 +55,21 @@ public class CalculoTmbView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
-        
+
         menuCadastrarAlimento.add(tabelaAlimentos);
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
-        
+
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
+
+        menuSair.add(sair);
+        menuBar.add(menuSair);
+
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -340,6 +346,7 @@ public class CalculoTmbView extends JFrame {
         refeicoesView();
         tabelaAlimentosView();
         adicionarRefeicaoView();
+        sair();
     }
 
     public void calcularTmb() {
@@ -348,28 +355,30 @@ public class CalculoTmbView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (comboBox.getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "Selecione um gênero!");
-                } else if (comboBox.getSelectedIndex() == 1) {
-                    double fatorAtividade = Double.parseDouble(txtFatorAtividade.getText().replace(",", "."));
-                    tmb = fatorAtividade * (88.362 + (13.397 * Double.parseDouble(txtPeso.getText()))
-                            + (4.799 * Double.parseDouble(txtAltura.getText())) - (5.677 * Double.parseDouble(txtIdade.getText())));
+                if (!emptyFields()) {
+                    if (comboBox.getSelectedIndex() == 0) {
+                        JOptionPane.showMessageDialog(null, "Selecione um gênero!");
+                    } else if (comboBox.getSelectedIndex() == 1) {
+                        double fatorAtividade = Double.parseDouble(txtFatorAtividade.getText().replace(",", "."));
+                        tmb = fatorAtividade * (88.362 + (13.397 * Double.parseDouble(txtPeso.getText()))
+                                + (4.799 * Double.parseDouble(txtAltura.getText())) - (5.677 * Double.parseDouble(txtIdade.getText())));
 
-                    double resultado = Math.round(tmb);
-                    lblResultado.setText("Seu TMB é: " + resultado);
+                        double resultado = Math.round(tmb);
+                        lblResultado.setText("Seu TMB é: " + resultado);
 
-                } else {
-                    double fatorAtividade = Double.parseDouble(txtFatorAtividade.getText().replace(",", "."));
-                    tmb = fatorAtividade * (447.593 + (9.247 * Double.parseDouble(txtPeso.getText()))
-                            + (3.098 * Double.parseDouble(txtAltura.getText())) - (4.330 * Double.parseDouble(txtIdade.getText())));
+                    } else {
+                        double fatorAtividade = Double.parseDouble(txtFatorAtividade.getText().replace(",", "."));
+                        tmb = fatorAtividade * (447.593 + (9.247 * Double.parseDouble(txtPeso.getText()))
+                                + (3.098 * Double.parseDouble(txtAltura.getText())) - (4.330 * Double.parseDouble(txtIdade.getText())));
 
-                    double resultado = Math.round(tmb);
-                    lblResultado.setText("Seu TMB é: " + resultado);
+                        double resultado = Math.round(tmb);
+                        lblResultado.setText("Seu TMB é: " + resultado);
+                    }
                 }
             }
         });
     }
-    
+
     public void CadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -378,7 +387,7 @@ public class CalculoTmbView extends JFrame {
             }
         });
     }
-    
+
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -389,7 +398,7 @@ public class CalculoTmbView extends JFrame {
             }
         });
     }
-    
+
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -400,7 +409,7 @@ public class CalculoTmbView extends JFrame {
             }
         });
     }
-    
+
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -408,5 +417,27 @@ public class CalculoTmbView extends JFrame {
                 new AdicionarAlimentoRefeicao().adicionarRefeicao();
             }
         });
+    }
+
+    public void sair() {
+        sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginView().login();
+            }
+        });
+    }
+    
+    public boolean emptyFields() {
+
+        boolean empty = true;
+
+        if (txtIdade.getText().trim().isEmpty() || txtAltura.getText().trim().isEmpty() || txtPeso.getText().trim().isEmpty()
+                || txtFatorAtividade.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
+        } else {
+            empty = false;
+        }
+        return empty;
     }
 }

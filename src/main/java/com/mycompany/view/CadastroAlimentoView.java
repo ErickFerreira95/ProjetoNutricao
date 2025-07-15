@@ -24,11 +24,12 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class CadastroAlimentoView extends JFrame {
-    
+
     private JTextField txtNomeAlimento = new JTextField(12);
     private JTextField txtQuantidade = new JTextField(12);
     private JTextField txtProteina = new JTextField(12);
@@ -44,23 +45,28 @@ public class CadastroAlimentoView extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    private JMenu menuSair = new JMenu("Sair");
+    private JMenuItem sair = new JMenuItem("Sair");
 
     private void configurarUI() {
         setTitle("Cadastro de alimento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
-        
+
         menuCadastrarAlimento.add(tabelaAlimentos);
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
-        
+
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
+        menuSair.add(sair);
+        menuBar.add(menuSair);
+
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -104,7 +110,7 @@ public class CadastroAlimentoView extends JFrame {
         positionPainelCentral.fill = GridBagConstraints.NONE;
         positionPainelCentral.insets = new Insets(0, 0, 0, 0); // margem superior
         backgroundPanel.add(centralPanel, positionPainelCentral);
-        
+
         JLabel lblNomeAlimento = new JLabel("Nome alimento:");
         lblNomeAlimento.setFont(new Font("Calibri", Font.BOLD, 20));
         centralPanel.add(lblNomeAlimento);
@@ -243,10 +249,10 @@ public class CadastroAlimentoView extends JFrame {
         posicaoBotaoCadastrar.fill = GridBagConstraints.NONE;
         posicaoBotaoCadastrar.insets = new Insets(0, 0, 0, 0); // margem superior
         centralPanel.add(botaoCadastrar, posicaoBotaoCadastrar);
-        
+
         setContentPane(backgroundPanel);
     }
-    
+
     public void CadastroAlimentoView() {
         configurarUI();
         setVisible(true);
@@ -254,8 +260,10 @@ public class CadastroAlimentoView extends JFrame {
         calculoTmbView();
         refeicoesView();
         tabelaAlimentosView();
+        adicionarRefeicaoView();
+        sair();
     }
-    
+
     public void salvarAlimento() {
         botaoCadastrar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
@@ -263,16 +271,18 @@ public class CadastroAlimentoView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!emptyFields()) {
 
-                alimento.setNomeAlimento(txtNomeAlimento.getText());
-                alimento.setQuantidade(txtQuantidade.getText());
-                alimento.setProteina(txtProteina.getText());
-                alimento.setCarboidrato(txtCarboidrato.getText());
-                alimento.setGordura(txtGordura.getText());
+                    alimento.setNomeAlimento(txtNomeAlimento.getText());
+                    alimento.setQuantidade(txtQuantidade.getText());
+                    alimento.setProteina(txtProteina.getText());
+                    alimento.setCarboidrato(txtCarboidrato.getText());
+                    alimento.setGordura(txtGordura.getText());
 
-                dao.salvarAlimento(alimento);
-                dispose();
-                new CadastroAlimentoView().CadastroAlimentoView();
+                    dao.salvarAlimento(alimento);
+                    dispose();
+                    new CadastroAlimentoView().CadastroAlimentoView();
+                }
             }
         });
     }
@@ -287,7 +297,7 @@ public class CadastroAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -298,7 +308,7 @@ public class CadastroAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -308,5 +318,37 @@ public class CadastroAlimentoView extends JFrame {
                 new MainView().mainView();
             }
         });
+    }
+
+    // Adiciona ações
+    public void adicionarRefeicaoView() {
+        adicionarRefeicao.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+            }
+        });
+    }
+
+    public void sair() {
+        sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginView().login();
+            }
+        });
+    }
+
+    public boolean emptyFields() {
+
+        boolean empty = true;
+
+        if (txtNomeAlimento.getText().trim().isEmpty() || txtQuantidade.getText().trim().isEmpty() || txtProteina.getText().trim().isEmpty()
+                || txtCarboidrato.getText().trim().isEmpty() || txtGordura.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
+        } else {
+            empty = false;
+        }
+        return empty;
     }
 }

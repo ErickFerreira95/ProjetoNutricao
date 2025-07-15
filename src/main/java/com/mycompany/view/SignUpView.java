@@ -20,12 +20,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class SignUpView extends JFrame {
-    
+
     private JTextField txtName = new JTextField(12);
     private JTextField txtEmail = new JTextField(12);
     private JPasswordField txtPassword = new JPasswordField(12);
@@ -40,7 +41,7 @@ public class SignUpView extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        
+
         // Painel de fundo com imagem
         JPanel backgroundPanel = new JPanel() {
             private final Image imagemFundo = new ImageIcon("/C:/Users/Erick/OneDrive/Documentos/NetBeansProjects/1-Projetos/AppNutricao/build/classes/images/background.jpg").getImage();
@@ -94,7 +95,7 @@ public class SignUpView extends JFrame {
         positionLblName.fill = GridBagConstraints.NONE;
         positionLblName.insets = new Insets(0, 0, 0, 0); // margem superior
         centralPanel.add(lblName, positionLblName);
-        
+
         txtName.setFont(new Font("Calibri", Font.PLAIN, 14));
         txtName.setToolTipText("Insert your name");
         txtName.setMargin(new Insets(3, 1, 1, 1));
@@ -109,7 +110,7 @@ public class SignUpView extends JFrame {
         positionTxtname.fill = GridBagConstraints.NONE;
         positionTxtname.insets = new Insets(0, 0, 10, 0); // margem superior
         centralPanel.add(txtName, positionTxtname);
-        
+
         JLabel lblEmail = new JLabel("Email");
         lblEmail.setFont(new Font("Calibri", Font.BOLD, 20));
 
@@ -198,14 +199,14 @@ public class SignUpView extends JFrame {
 
         add(backgroundPanel);
     }
-    
+
     public void signUpView() {
         configurarUI();
         setVisible(true);
         saveUser();
         back();
     }
-    
+
     public void saveUser() {
 
         btnSignUp.addActionListener(new ActionListener() {
@@ -213,13 +214,15 @@ public class SignUpView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                dao.salvarUsuario(txtName.getText(), txtEmail.getText(), txtPassword.getText());
-                dispose();
-                new LoginView().login();
+                if (!emptyFields()) {
+                    dao.salvarUsuario(txtName.getText(), txtEmail.getText(), txtPassword.getText());
+                    dispose();
+                    new LoginView().login();
+                }
             }
         });
     }
-    
+
     public void back() {
         lblBack.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -232,5 +235,17 @@ public class SignUpView extends JFrame {
             }
         }
         );
+    }
+
+    public boolean emptyFields() {
+
+        boolean empty = true;
+
+        if (txtName.getText().trim().isEmpty() || txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
+        } else {
+            empty = false;
+        }
+        return empty;
     }
 }

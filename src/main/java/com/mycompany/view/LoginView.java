@@ -35,8 +35,6 @@ public class LoginView extends JFrame {
     private JButton btnLogin = new JButton("Login");
     private JLabel lblClickHere = new JLabel("<html><a href=''>Sign up</a></html>");
 
-    
-
     private void configurarUI() {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -186,7 +184,7 @@ public class LoginView extends JFrame {
 
         add(backgroundPanel);
     }
-    
+
     public void login() {
         configurarUI();
         setVisible(true);
@@ -194,23 +192,25 @@ public class LoginView extends JFrame {
         fazerLogin();
     }
 
-   public void fazerLogin() {
+    public void fazerLogin() {
         btnLogin.addActionListener(new ActionListener() {
             UserDao dao = new UserDao();
             SignUpView signUpView = new SignUpView();
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (dao.autenticarUsuario(txtEmail.getText(), txtPassword.getText())) {
-                    dispose();
-                    new MainView().mainView();
-                } else {
-                    System.out.println("Email ou senha inválidos.");
+                if (!emptyFields()) {
+                    if (dao.autenticarUsuario(txtEmail.getText(), txtPassword.getText())) {
+                        dispose();
+                        new MainView().mainView();
+                    } else {
+                        System.out.println("Email ou senha inválidos.");
+                    }
                 }
             }
         });
     }
-   
+
     // Ação ao clicar signUp
     public void SignUpView() {
         lblClickHere.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,5 +224,17 @@ public class LoginView extends JFrame {
             }
         }
         );
+    }
+
+    public boolean emptyFields() {
+
+        boolean empty = true;
+
+        if (txtEmail.getText().trim().isEmpty() || txtPassword.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
+        } else {
+            empty = false;
+        }
+        return empty;
     }
 }

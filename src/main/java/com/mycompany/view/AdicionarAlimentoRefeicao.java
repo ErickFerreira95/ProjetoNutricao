@@ -51,23 +51,29 @@ public class AdicionarAlimentoRefeicao extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    private JMenu menuSair = new JMenu("Sair");
+    private JMenuItem sair = new JMenuItem("Sair");
 
     private void configurarUI() {
         setTitle("Adionar Alimentos nas Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
-        
+
         menuCadastrarAlimento.add(tabelaAlimentos);
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
-        
+
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
+
+        menuSair.add(sair);
+        menuBar.add(menuSair);
+
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -207,7 +213,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         posicaoBtnBuscar.fill = GridBagConstraints.NONE;
         posicaoBtnBuscar.insets = new Insets(0, 0, 30, 0); // margem superior
         centralPanel.add(btnBuscar, posicaoBtnBuscar);
-        
+
         JLabel lblSelecioneRefeicao = new JLabel("Selecione a refeição:");
         lblSelecioneRefeicao.setFont(new Font("Calibri", Font.BOLD, 20));
 
@@ -361,6 +367,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         calculoTmbView();
         refeicoesView();
         tabelaAlimentosView();
+        sair();
     }
 
     public void carregarAlimento() {
@@ -371,33 +378,35 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 AlimentoDao dao = new AlimentoDao();
                 Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
 
-                if (alimento != null) {
-                    double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
-                    double proteina, carboidrato, gordura, kcal;
+                if (!emptyFields()) {
+                    if (alimento != null) {
+                        double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
+                        double proteina, carboidrato, gordura, kcal;
 
-                    proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
-                    carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
-                    gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
-                    kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
+                        proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
+                        carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
+                        gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
+                        kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
 
-                    DecimalFormat formato = new DecimalFormat("#0.0");
-                    String resultadoProteina = formato.format(proteina);
-                    String resultadoCarboidrato = formato.format(carboidrato);
-                    String resultadoGordura = formato.format(gordura);
-                    String resultadoKcal = formato.format(kcal);
+                        DecimalFormat formato = new DecimalFormat("#0.0");
+                        String resultadoProteina = formato.format(proteina);
+                        String resultadoCarboidrato = formato.format(carboidrato);
+                        String resultadoGordura = formato.format(gordura);
+                        String resultadoKcal = formato.format(kcal);
 
-                    lblResultadoProteina.setText(resultadoProteina);
-                    lblResultadoCarboidrato.setText(resultadoCarboidrato);
-                    lblResultadoGordura.setText(resultadoGordura);
-                    lblResultadoKcal.setText(resultadoKcal);
+                        lblResultadoProteina.setText(resultadoProteina);
+                        lblResultadoCarboidrato.setText(resultadoCarboidrato);
+                        lblResultadoGordura.setText(resultadoGordura);
+                        lblResultadoKcal.setText(resultadoKcal);
 
-                    lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 16));
-                    lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 16));
-                    lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 16));
-                    lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 16));
+                        lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 16));
+                        lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 16));
+                        lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 16));
+                        lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 16));
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+                    }
                 }
             }
         });
@@ -411,49 +420,51 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 AlimentoDao dao = new AlimentoDao();
                 Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
 
-                if (alimento != null) {
-                    double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
-                    double proteina, carboidrato, gordura, kcal;
+                if (!emptyFields()) {
+                    if (alimento != null) {
+                        double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
+                        double proteina, carboidrato, gordura, kcal;
 
-                    proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
-                    carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
-                    gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
-                    kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
+                        proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
+                        carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
+                        gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
+                        kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
 
-                    DecimalFormat formato = new DecimalFormat("#0.0");
-                    String quantidadeFormatada = formato.format(quantidade);
-                    String resultadoProteina = formato.format(proteina);
-                    String resultadoCarboidrato = formato.format(carboidrato);
-                    String resultadoGordura = formato.format(gordura);
-                    String resultadoKcal = formato.format(kcal);
+                        DecimalFormat formato = new DecimalFormat("#0.0");
+                        String quantidadeFormatada = formato.format(quantidade);
+                        String resultadoProteina = formato.format(proteina);
+                        String resultadoCarboidrato = formato.format(carboidrato);
+                        String resultadoGordura = formato.format(gordura);
+                        String resultadoKcal = formato.format(kcal);
 
-                    alimento.setNomeAlimento(alimento.getNomeAlimento());
-                    alimento.setQuantidade(quantidadeFormatada);
-                    alimento.setProteina(resultadoProteina);
-                    alimento.setCarboidrato(resultadoCarboidrato);
-                    alimento.setGordura(resultadoGordura);
-                    alimento.setKcal(resultadoKcal);
-                    
-                    if (comboBox.getSelectedIndex() == 0) {
-                        dao.salvarAlimentoRefeicao1(alimento);
-                    } else if (comboBox.getSelectedIndex() == 1) {
-                        dao.salvarAlimentoRefeicao2(alimento);
-                    } else if (comboBox.getSelectedIndex() == 2) {
-                        dao.salvarAlimentoRefeicao3(alimento);
-                    } else if (comboBox.getSelectedIndex() == 3) {
-                        dao.salvarAlimentoRefeicao4(alimento);
-                    } else if (comboBox.getSelectedIndex() == 4) {
-                        dao.salvarAlimentoRefeicao5(alimento);
+                        alimento.setNomeAlimento(alimento.getNomeAlimento());
+                        alimento.setQuantidade(quantidadeFormatada);
+                        alimento.setProteina(resultadoProteina);
+                        alimento.setCarboidrato(resultadoCarboidrato);
+                        alimento.setGordura(resultadoGordura);
+                        alimento.setKcal(resultadoKcal);
+
+                        if (comboBox.getSelectedIndex() == 0) {
+                            dao.salvarAlimentoRefeicao1(alimento);
+                        } else if (comboBox.getSelectedIndex() == 1) {
+                            dao.salvarAlimentoRefeicao2(alimento);
+                        } else if (comboBox.getSelectedIndex() == 2) {
+                            dao.salvarAlimentoRefeicao3(alimento);
+                        } else if (comboBox.getSelectedIndex() == 3) {
+                            dao.salvarAlimentoRefeicao4(alimento);
+                        } else if (comboBox.getSelectedIndex() == 4) {
+                            dao.salvarAlimentoRefeicao5(alimento);
+                        } else {
+                            dao.salvarAlimentoRefeicao6(alimento);
+                        }
                     } else {
-                        dao.salvarAlimentoRefeicao6(alimento);
+                        JOptionPane.showMessageDialog(null, "Alimento não encontrado");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Alimento não encontrado");
                 }
             }
         });
     }
-    
+
     public void CadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -462,7 +473,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             }
         });
     }
-    
+
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -473,7 +484,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             }
         });
     }
-    
+
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -484,7 +495,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             }
         });
     }
-    
+
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -494,5 +505,26 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 new MainView().mainView();
             }
         });
+    }
+
+    public void sair() {
+        sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginView().login();
+            }
+        });
+    }
+
+    public boolean emptyFields() {
+
+        boolean empty = true;
+
+        if (txtNomeAlimento.getText().trim().isEmpty() || txtQuantidade.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
+        } else {
+            empty = false;
+        }
+        return empty;
     }
 }

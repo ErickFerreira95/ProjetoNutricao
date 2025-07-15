@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -45,6 +46,8 @@ public class EditarAlimentoView extends JFrame {
     private JMenuItem refeicoes = new JMenuItem("Refeições");
     private JMenuItem adicionarRefeicao = new JMenuItem("Adicionar Refeição");
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
+    private JMenu menuSair = new JMenu("Sair");
+    private JMenuItem sair = new JMenuItem("Sair");
 
     Alimento alimento = new Alimento();
 
@@ -53,17 +56,21 @@ public class EditarAlimentoView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
-        
+
         menuCadastrarAlimento.add(tabelaAlimentos);
         menuCadastrarAlimento.add(cadastrarAlimento);
         menuBar.add(menuCadastrarAlimento);
 
         menuCalcularTmb.add(calcularTmb);
         menuBar.add(menuCalcularTmb);
-        
+
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
+
+        menuSair.add(sair);
+        menuBar.add(menuSair);
+
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -263,6 +270,7 @@ public class EditarAlimentoView extends JFrame {
         calculoTmbView();
         refeicoesView();
         adicionarRefeicaoView();
+        sair();
     }
 
     public void editarAlimento() {
@@ -271,17 +279,19 @@ public class EditarAlimentoView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (!emptyFields()) {
 
-                alimento.setNomeAlimento(txtNomeAlimento.getText());
-                alimento.setQuantidade(txtQuantidade.getText());
-                alimento.setProteina(txtProteina.getText());
-                alimento.setCarboidrato(txtCarboidrato.getText());
-                alimento.setGordura(txtGordura.getText());
-                alimento.setKcal(alimento.getKcal());
-                
-                dao.atualizarAlimento(alimento);
-                dispose();
-                new MainView().mainView();
+                    alimento.setNomeAlimento(txtNomeAlimento.getText());
+                    alimento.setQuantidade(txtQuantidade.getText());
+                    alimento.setProteina(txtProteina.getText());
+                    alimento.setCarboidrato(txtCarboidrato.getText());
+                    alimento.setGordura(txtGordura.getText());
+                    alimento.setKcal(alimento.getKcal());
+
+                    dao.atualizarAlimento(alimento);
+                    dispose();
+                    new MainView().mainView();
+                }
             }
         });
     }
@@ -295,7 +305,7 @@ public class EditarAlimentoView extends JFrame {
         this.alimento = alimento;
         return alimento;
     }
-    
+
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -306,7 +316,7 @@ public class EditarAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -317,7 +327,7 @@ public class EditarAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -328,7 +338,7 @@ public class EditarAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public void cadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -337,7 +347,7 @@ public class EditarAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -345,5 +355,27 @@ public class EditarAlimentoView extends JFrame {
                 new AdicionarAlimentoRefeicao().adicionarRefeicao();
             }
         });
+    }
+
+    public void sair() {
+        sair.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new LoginView().login();
+            }
+        });
+    }
+    
+    public boolean emptyFields() {
+
+        boolean empty = true;
+
+        if (txtNomeAlimento.getText().trim().isEmpty() || txtQuantidade.getText().trim().isEmpty() || txtProteina.getText().trim().isEmpty()
+                || txtCarboidrato.getText().trim().isEmpty() || txtGordura.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos os campos precisam ser preenchidos");
+        } else {
+            empty = false;
+        }
+        return empty;
     }
 }

@@ -28,8 +28,8 @@ public class ProjetoNutricao {
             //new LoginView().login();
             //new SignUpView().signUpView();
             //new MainView().mainView();
-            new CadastroAlimentoView().CadastroAlimentoView();
-            //new CalculoTmbView().calculoTmbView();
+            //new CadastroAlimentoView().CadastroAlimentoView();
+            new CalculoTmbView().calculoTmbView();
             //new EditarAlimentoView().editarAlimentoView();
             //new RefeicoesView().refeifoes();
             //new AdicionarAlimentoRefeicao().adicionarRefeicao();

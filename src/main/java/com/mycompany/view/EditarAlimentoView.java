@@ -17,6 +17,8 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -275,21 +277,37 @@ public class EditarAlimentoView extends JFrame {
     public void editarAlimento() {
         btnSalvar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
+            SignUpView view = new SignUpView();
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!emptyFields()) {
+                    if (view.validarNome(txtNomeAlimento.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Nome deve conter apenas letras!");
+                    } else if (validarEntradaNumerica(txtQuantidade.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Quantidade no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else if (validarEntradaNumerica(txtProteina.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Proteína no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else if (validarEntradaNumerica(txtCarboidrato.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Carboidrato no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else if (validarEntradaNumerica(txtGordura.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Gordura no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else {
+                        alimento.setNomeAlimento(txtNomeAlimento.getText());
+                        alimento.setQuantidade(txtQuantidade.getText());
+                        alimento.setProteina(txtProteina.getText());
+                        alimento.setCarboidrato(txtCarboidrato.getText());
+                        alimento.setGordura(txtGordura.getText());
+                        alimento.setKcal(alimento.getKcal());
 
-                    alimento.setNomeAlimento(txtNomeAlimento.getText());
-                    alimento.setQuantidade(txtQuantidade.getText());
-                    alimento.setProteina(txtProteina.getText());
-                    alimento.setCarboidrato(txtCarboidrato.getText());
-                    alimento.setGordura(txtGordura.getText());
-                    alimento.setKcal(alimento.getKcal());
-
-                    dao.atualizarAlimento(alimento);
-                    dispose();
-                    new MainView().mainView();
+                        dao.atualizarAlimento(alimento);
+                        dispose();
+                        new MainView().mainView();
+                    }
                 }
             }
         });
@@ -364,7 +382,7 @@ public class EditarAlimentoView extends JFrame {
             }
         });
     }
-    
+
     public boolean emptyFields() {
 
         boolean empty = true;
@@ -376,5 +394,12 @@ public class EditarAlimentoView extends JFrame {
             empty = false;
         }
         return empty;
+    }
+
+    public boolean validarEntradaNumerica(String numero) {
+        String regex = "^\\d+(,\\d+)?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(numero);
+        return matcher.matches();
     }
 }

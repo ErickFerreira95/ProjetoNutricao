@@ -268,20 +268,38 @@ public class CadastroAlimentoView extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
             Alimento alimento = new Alimento();
+            EditarAlimentoView editarView = new EditarAlimentoView();
+            SignUpView viewSignup = new SignUpView();
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!emptyFields()) {
+                    if (viewSignup.validarNome(txtNomeAlimento.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Nome deve conter apenas letras!");
+                    } else if (editarView.validarEntradaNumerica(txtQuantidade.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Quantidade no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else if (editarView.validarEntradaNumerica(txtProteina.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Proteína no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else if (editarView.validarEntradaNumerica(txtCarboidrato.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Carboidrato no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else if (editarView.validarEntradaNumerica(txtGordura.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Gordura no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
+                    } else {
 
-                    alimento.setNomeAlimento(txtNomeAlimento.getText());
-                    alimento.setQuantidade(txtQuantidade.getText());
-                    alimento.setProteina(txtProteina.getText());
-                    alimento.setCarboidrato(txtCarboidrato.getText());
-                    alimento.setGordura(txtGordura.getText());
+                        alimento.setNomeAlimento(txtNomeAlimento.getText());
+                        alimento.setQuantidade(txtQuantidade.getText());
+                        alimento.setProteina(txtProteina.getText());
+                        alimento.setCarboidrato(txtCarboidrato.getText());
+                        alimento.setGordura(txtGordura.getText());
 
-                    dao.salvarAlimento(alimento);
-                    dispose();
-                    new CadastroAlimentoView().CadastroAlimentoView();
+                        dao.salvarAlimento(alimento);
+                        dispose();
+                        new CadastroAlimentoView().CadastroAlimentoView();
+                    }
                 }
             }
         });

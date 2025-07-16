@@ -18,6 +18,8 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -96,7 +98,7 @@ public class LoginView extends JFrame {
         centralPanel.add(lblEmail, positionLblEmail);
 
         txtEmail.setFont(new Font("Calibri", Font.PLAIN, 14));
-        txtEmail.setToolTipText("Insert your email");
+        txtEmail.setToolTipText("Digite seu email");
         txtEmail.setMargin(new Insets(3, 1, 1, 1));
 
         // Posicionamento no topo absoluto
@@ -110,7 +112,7 @@ public class LoginView extends JFrame {
         positionTxtEmail.insets = new Insets(0, 0, 10, 0); // margem superior
         centralPanel.add(txtEmail, positionTxtEmail);
 
-        JLabel lblPassword = new JLabel("Password:");
+        JLabel lblPassword = new JLabel("Senha:");
         lblPassword.setFont(new Font("Calibri", Font.BOLD, 20));
 
         // Posicionamento no topo absoluto
@@ -125,7 +127,7 @@ public class LoginView extends JFrame {
         centralPanel.add(lblPassword, positionLblPassword);
 
         txtSenha.setFont(new Font("Calibri", Font.PLAIN, 14));
-        txtSenha.setToolTipText("Insert your password");
+        txtSenha.setToolTipText("Digite sua senha");
         txtSenha.setMargin(new Insets(3, 1, 1, 1));
 
         // Posicionamento no topo absoluto
@@ -153,7 +155,7 @@ public class LoginView extends JFrame {
         positionBtnLogin.insets = new Insets(10, 0, 15, 0); // margem superior
         centralPanel.add(btnLogin, positionBtnLogin);
 
-        JLabel lblDontHaveAccount = new JLabel("Don't have an account?");
+        JLabel lblDontHaveAccount = new JLabel("Não tem uma conta?");
         lblDontHaveAccount.setFont(new Font("Calibri", Font.BOLD, 14));
 
         // Posicionamento no topo absoluto
@@ -170,7 +172,7 @@ public class LoginView extends JFrame {
         lblCadastrar.setFont(new Font("Calibri", Font.BOLD, 18));
         lblCadastrar.setForeground(Color.WHITE);
         lblCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblCadastrar.setToolTipText("Click here to create an account");
+        lblCadastrar.setToolTipText("Clique aqui para se cadastrar");
 
         GridBagConstraints positionSignUp = new GridBagConstraints();
         positionSignUp.gridx = 0;
@@ -200,14 +202,22 @@ public class LoginView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!emptyFields()) {
-                    if (dao.autenticarUsuario(txtEmail.getText(), txtSenha.getText())) {
-                        dispose();
-                        new MainView().mainView();
+                    if (validarEmail(txtEmail.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Formato email incorreto! \n"
+                                + "Ex: nome@email.com");
+                    } else if (validarSenha(txtSenha.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "A senha deve conter no mínimo 6 caracteres e no máximo 40");
                     } else {
-                        System.out.println("Email ou senha inválidos.");
+                        if (dao.autenticarUsuario(txtEmail.getText(), txtSenha.getText())) {
+                            dispose();
+                            new MainView().mainView();
+                        } else {
+                            System.out.println("Email ou senha inválidos.");
+                        }
                     }
                 }
             }
+
         });
     }
 
@@ -236,5 +246,19 @@ public class LoginView extends JFrame {
             empty = false;
         }
         return empty;
+    }
+
+    public boolean validarEmail(String email) {
+        String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public boolean validarSenha(String senha) {
+        String regex = "^.{6,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(senha);
+        return matcher.matches();
     }
 }

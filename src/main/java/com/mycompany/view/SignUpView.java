@@ -16,6 +16,8 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,7 +36,7 @@ public class SignUpView extends JFrame {
     private JLabel lblVoltar = new JLabel("<html><a href=''>Voltar</a></html>");
 
     private void configurarUI() {
-        setTitle("Sign up");
+        setTitle("Cadastre-se");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLocationRelativeTo(null);
@@ -83,7 +85,7 @@ public class SignUpView extends JFrame {
         positionPainelCentral.insets = new Insets(0, 0, 0, 0); // margem superior
         backgroundPanel.add(centralPanel, positionPainelCentral);
 
-        JLabel lblName = new JLabel("Name");
+        JLabel lblName = new JLabel("Nome");
         lblName.setFont(new Font("Calibri", Font.BOLD, 20));
 
         GridBagConstraints positionLblName = new GridBagConstraints();
@@ -97,7 +99,7 @@ public class SignUpView extends JFrame {
         centralPanel.add(lblName, positionLblName);
 
         txtNome.setFont(new Font("Calibri", Font.PLAIN, 14));
-        txtNome.setToolTipText("Insert your name");
+        txtNome.setToolTipText("Digite seu nome");
         txtNome.setMargin(new Insets(3, 1, 1, 1));
 
         // Posicionamento no topo absoluto
@@ -125,7 +127,7 @@ public class SignUpView extends JFrame {
         centralPanel.add(lblEmail, positionLblEmail);
 
         txtEmail.setFont(new Font("Calibri", Font.PLAIN, 14));
-        txtEmail.setToolTipText("Insert your email");
+        txtEmail.setToolTipText("Digite seu email");
         txtEmail.setMargin(new Insets(3, 1, 1, 1));
 
         // Posicionamento no topo absoluto
@@ -139,7 +141,7 @@ public class SignUpView extends JFrame {
         positionTxtEmail.insets = new Insets(0, 0, 10, 0); // margem superior
         centralPanel.add(txtEmail, positionTxtEmail);
 
-        JLabel lblPassword = new JLabel("Password:");
+        JLabel lblPassword = new JLabel("Senha:");
         lblPassword.setFont(new Font("Calibri", Font.BOLD, 20));
 
         // Posicionamento no topo absoluto
@@ -154,7 +156,7 @@ public class SignUpView extends JFrame {
         centralPanel.add(lblPassword, positionLblPassword);
 
         txtSenha.setFont(new Font("Calibri", Font.PLAIN, 14));
-        txtSenha.setToolTipText("Insert your password");
+        txtSenha.setToolTipText("Digite sua senha");
         txtSenha.setMargin(new Insets(3, 1, 1, 1));
 
         // Posicionamento no topo absoluto
@@ -168,7 +170,7 @@ public class SignUpView extends JFrame {
         positionTxtPassword.insets = new Insets(0, 0, 0, 0); // margem superior
         centralPanel.add(txtSenha, positionTxtPassword);
 
-        btnCadastrar.setToolTipText("Click to sign up");
+        btnCadastrar.setToolTipText("Clique para se cadastrar");
         btnCadastrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // Posicionamento no topo absoluto
@@ -185,7 +187,7 @@ public class SignUpView extends JFrame {
         lblVoltar.setFont(new Font("Calibri", Font.BOLD, 18));
         lblVoltar.setForeground(Color.WHITE);
         lblVoltar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        lblVoltar.setToolTipText("Click here to create an account");
+        lblVoltar.setToolTipText("Voltar");
 
         GridBagConstraints positionBack = new GridBagConstraints();
         positionBack.gridx = 0;

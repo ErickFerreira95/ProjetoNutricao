@@ -213,13 +213,23 @@ public class SignUpView extends JFrame {
 
         btnCadastrar.addActionListener(new ActionListener() {
             UserDao dao = new UserDao();
+            LoginView view = new LoginView();
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!emptyFields()) {
-                    dao.salvarUsuario(txtNome.getText(), txtEmail.getText(), txtSenha.getText());
-                    dispose();
-                    new LoginView().login();
+                    if (validarNome(txtNome.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Nome deve conter apenas letras!");
+                    } else if (view.validarEmail(txtEmail.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Formato email incorreto! \n"
+                                + "Ex: nome@email.com");
+                    } else if (view.validarSenha(txtSenha.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "A senha deve conter no mínimo 6 caracteres e no máximo 40");
+                    } else {
+                        dao.salvarUsuario(txtNome.getText(), txtEmail.getText(), txtSenha.getText());
+                        dispose();
+                        new LoginView().login();
+                    }
                 }
             }
         });
@@ -249,5 +259,12 @@ public class SignUpView extends JFrame {
             empty = false;
         }
         return empty;
+    }
+
+    public boolean validarNome(String nome) {
+        String regex = "^[a-zA-Z]{1,50}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nome);
+        return matcher.matches();
     }
 }

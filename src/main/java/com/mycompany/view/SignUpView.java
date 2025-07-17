@@ -262,7 +262,7 @@ public class SignUpView extends JFrame {
     }
 
     public boolean validarNome(String nome) {
-        String regex = "^[a-zA-Z]{1,50}$";
+        String regex = "^[a-z A-Z]{1,50}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(nome);
         return matcher.matches();

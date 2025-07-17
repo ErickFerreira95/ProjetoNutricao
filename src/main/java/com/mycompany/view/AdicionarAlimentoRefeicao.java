@@ -377,35 +377,44 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 AlimentoDao dao = new AlimentoDao();
                 Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
+                SignUpView viewSignup = new SignUpView();
+                EditarAlimentoView editarView = new EditarAlimentoView();
 
                 if (!emptyFields()) {
-                    if (alimento != null) {
-                        double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
-                        double proteina, carboidrato, gordura, kcal;
-
-                        proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
-                        carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
-                        gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
-                        kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
-
-                        DecimalFormat formato = new DecimalFormat("#0.0");
-                        String resultadoProteina = formato.format(proteina);
-                        String resultadoCarboidrato = formato.format(carboidrato);
-                        String resultadoGordura = formato.format(gordura);
-                        String resultadoKcal = formato.format(kcal);
-
-                        lblResultadoProteina.setText(resultadoProteina);
-                        lblResultadoCarboidrato.setText(resultadoCarboidrato);
-                        lblResultadoGordura.setText(resultadoGordura);
-                        lblResultadoKcal.setText(resultadoKcal);
-
-                        lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 16));
-                        lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 16));
-                        lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 16));
-                        lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 16));
-
+                    if (viewSignup.validarNome(txtNomeAlimento.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Nome deve conter apenas letras!");
+                    } else if (editarView.validarEntradaNumerica(txtQuantidade.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Quantidade no formato incorreto! \n"
+                                + "Ex: 000 ou 000,0 ou 000,00");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+                        if (alimento != null) {
+                            double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
+                            double proteina, carboidrato, gordura, kcal;
+
+                            proteina = (quantidade * Double.parseDouble(alimento.getProteina().replace(",", "."))) / 100;
+                            carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato().replace(",", "."))) / 100;
+                            gordura = (quantidade * Double.parseDouble(alimento.getGordura().replace(",", "."))) / 100;
+                            kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
+
+                            DecimalFormat formato = new DecimalFormat("#0.0");
+                            String resultadoProteina = formato.format(proteina);
+                            String resultadoCarboidrato = formato.format(carboidrato);
+                            String resultadoGordura = formato.format(gordura);
+                            String resultadoKcal = formato.format(kcal);
+
+                            lblResultadoProteina.setText(resultadoProteina);
+                            lblResultadoCarboidrato.setText(resultadoCarboidrato);
+                            lblResultadoGordura.setText(resultadoGordura);
+                            lblResultadoKcal.setText(resultadoKcal);
+
+                            lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 16));
+                            lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 16));
+                            lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 16));
+                            lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 16));
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Alimento não encontrado");
+                        }
                     }
                 }
             }
@@ -425,9 +434,9 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                         double quantidade = Double.parseDouble(txtQuantidade.getText().replace(",", "."));
                         double proteina, carboidrato, gordura, kcal;
 
-                        proteina = (quantidade * Double.parseDouble(alimento.getProteina())) / 100;
-                        carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato())) / 100;
-                        gordura = (quantidade * Double.parseDouble(alimento.getGordura())) / 100;
+                        proteina = (quantidade * Double.parseDouble(alimento.getProteina().replace(",", "."))) / 100;
+                            carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato().replace(",", "."))) / 100;
+                            gordura = (quantidade * Double.parseDouble(alimento.getGordura().replace(",", "."))) / 100;
                         kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
 
                         DecimalFormat formato = new DecimalFormat("#0.0");

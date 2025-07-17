@@ -50,7 +50,11 @@ public class CalculoTmbView extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
-    User usuario = new User();
+    User usuarioLogado;
+    
+    public CalculoTmbView(User usuario) {
+        this.usuarioLogado = usuario;
+    }
     
     private void configurarUI() {
         setTitle("Cálculo Taxa Metabólica Basal");
@@ -404,7 +408,7 @@ public class CalculoTmbView extends JFrame {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CadastroAlimentoView().CadastroAlimentoView();
+                new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
             }
         });
     }
@@ -415,7 +419,7 @@ public class CalculoTmbView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new RefeicoesView().refeifoes();
+                new RefeicoesView(usuarioLogado).refeifoes();
             }
         });
     }
@@ -426,7 +430,7 @@ public class CalculoTmbView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new MainView().mainView();
+                new MainView(usuarioLogado).mainView();
             }
         });
     }
@@ -435,7 +439,7 @@ public class CalculoTmbView extends JFrame {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+                new AdicionarAlimentoRefeicao(usuarioLogado).adicionarRefeicao();
             }
         });
     }

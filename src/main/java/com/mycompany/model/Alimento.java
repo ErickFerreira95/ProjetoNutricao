@@ -5,6 +5,15 @@ import java.text.DecimalFormat;
 public class Alimento {
 
     private int id;
+    private int idUsuario;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
     private String nomeAlimento;
     private String quantidade;
     private String proteina;

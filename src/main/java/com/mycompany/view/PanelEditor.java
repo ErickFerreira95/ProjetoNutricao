@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Component;
@@ -23,11 +24,13 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
     private JButton btnExcluir;
     private MainView view;
     JTable tblTabela;
+    private User usuarioLogado;
 
-    public PanelEditor(JTable tblTabela, MainView view) {
+    public PanelEditor(JTable tblTabela, MainView view, User usuario) {
         
         this.tblTabela = tblTabela;
         this.view = view;
+        this.usuarioLogado = usuario;
         
         painel = new JPanel(new GridBagLayout());
         //btnEditar = new JButton(new ImageIcon("src/images/lapis.png"));
@@ -80,7 +83,7 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
                 alimento.setKcal(tblTabela.getValueAt(row, 6).toString());
 
                 // Abre o novo JFrame com os dados da linha
-                EditarAlimentoView telaEditar = new EditarAlimentoView();
+                EditarAlimentoView telaEditar = new EditarAlimentoView(usuarioLogado);
                 telaEditar.getAlimento(alimento); // ← envia os dados para os campos da tela
                 telaEditar.editarAlimentoView();
                 

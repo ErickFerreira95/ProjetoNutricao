@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.mycompany.model.User;
 import com.mycompany.view.AdicionarAlimentoRefeicao;
 import com.mycompany.view.CadastroAlimentoView;
 import com.mycompany.view.CalculoTmbView;
@@ -25,10 +26,10 @@ public class ProjetoNutricao {
         }
 
         SwingUtilities.invokeLater(() -> {
-            //new LoginView().login();
-            new SignUpView().signUpView();
+            new LoginView().login();
+            //new SignUpView().signUpView();
             //new MainView().mainView();
-            //new CadastroAlimentoView().CadastroAlimentoView();
+            //new CadastroAlimentoView().cadastroAlimentoView();
             //new CalculoTmbView().calculoTmbView();
             //new EditarAlimentoView().editarAlimentoView();
             //new RefeicoesView().refeifoes();

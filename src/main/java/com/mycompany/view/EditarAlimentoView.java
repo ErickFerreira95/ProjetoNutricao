@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -49,6 +50,11 @@ public class EditarAlimentoView extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
+    private User usuarioLogado;
+    
+    public EditarAlimentoView(User usuario) {
+        this.usuarioLogado = usuario;
+    }
 
     Alimento alimento = new Alimento();
 
@@ -306,7 +312,7 @@ public class EditarAlimentoView extends JFrame {
 
                         dao.atualizarAlimento(alimento);
                         dispose();
-                        new MainView().mainView();
+                        new MainView(usuarioLogado).mainView();
                     }
                 }
             }
@@ -329,7 +335,7 @@ public class EditarAlimentoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CalculoTmbView().calculoTmbView();
+                new CalculoTmbView(usuarioLogado).calculoTmbView();
             }
         });
     }
@@ -340,7 +346,7 @@ public class EditarAlimentoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new RefeicoesView().refeifoes();
+                new RefeicoesView(usuarioLogado).refeifoes();
             }
         });
     }
@@ -351,7 +357,7 @@ public class EditarAlimentoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new MainView().mainView();
+                new MainView(usuarioLogado).mainView();
             }
         });
     }
@@ -360,7 +366,7 @@ public class EditarAlimentoView extends JFrame {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CadastroAlimentoView().CadastroAlimentoView();
+                new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
             }
         });
     }
@@ -369,7 +375,7 @@ public class EditarAlimentoView extends JFrame {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+                new AdicionarAlimentoRefeicao(usuarioLogado).adicionarRefeicao();
             }
         });
     }

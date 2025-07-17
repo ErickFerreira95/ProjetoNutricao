@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -55,6 +56,11 @@ public class RefeicoesView extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
+    private User usuarioLogado;
+    
+    public RefeicoesView(User usuario) {
+        this.usuarioLogado = usuario;
+    }
 
     private void configurarUI() {
         setTitle("Refeições");
@@ -220,42 +226,42 @@ public class RefeicoesView extends JFrame {
             tblRefeicao1.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblRefeicao1.getColumn("").setCellRenderer(new PanelRendererRefeicoes());
-            tblRefeicao1.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao1, this));
+            tblRefeicao1.getColumn("").setCellEditor(new PanelEditorRefeicoes(tblRefeicao1, this, usuarioLogado));
         }
 
         for (int i = 0; i < tblRefeicao2.getColumnCount(); i++) {
             tblRefeicao2.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblRefeicao2.getColumn("").setCellRenderer(new PanelRendererRefeicao2());
-            tblRefeicao2.getColumn("").setCellEditor(new PanelEditorRefeicao2(tblRefeicao2, this));
+            tblRefeicao2.getColumn("").setCellEditor(new PanelEditorRefeicao2(tblRefeicao2, this, usuarioLogado));
         }
 
         for (int i = 0; i < tblRefeicao3.getColumnCount(); i++) {
             tblRefeicao3.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblRefeicao3.getColumn("").setCellRenderer(new PanelRendererRefeicao3());
-            tblRefeicao3.getColumn("").setCellEditor(new PanelEditorRefeicao3(tblRefeicao3, this));
+            tblRefeicao3.getColumn("").setCellEditor(new PanelEditorRefeicao3(tblRefeicao3, this, usuarioLogado));
         }
 
         for (int i = 0; i < tblRefeicao4.getColumnCount(); i++) {
             tblRefeicao4.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblRefeicao4.getColumn("").setCellRenderer(new PanelRendererRefeicao4());
-            tblRefeicao4.getColumn("").setCellEditor(new PanelEditorRefeicao4(tblRefeicao4, this));
+            tblRefeicao4.getColumn("").setCellEditor(new PanelEditorRefeicao4(tblRefeicao4, this, usuarioLogado));
         }
 
         for (int i = 0; i < tblRefeicao5.getColumnCount(); i++) {
             tblRefeicao5.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblRefeicao5.getColumn("").setCellRenderer(new PanelRendererRefeicao5());
-            tblRefeicao5.getColumn("").setCellEditor(new PanelEditorRefeicao5(tblRefeicao5, this));
+            tblRefeicao5.getColumn("").setCellEditor(new PanelEditorRefeicao5(tblRefeicao5, this, usuarioLogado));
         }
 
         for (int i = 0; i < tblRefeicao6.getColumnCount(); i++) {
             tblRefeicao6.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblRefeicao6.getColumn("").setCellRenderer(new PanelRendererRefeicao6());
-            tblRefeicao6.getColumn("").setCellEditor(new PanelEditorRefeicao6(tblRefeicao6, this));
+            tblRefeicao6.getColumn("").setCellEditor(new PanelEditorRefeicao6(tblRefeicao6, this, usuarioLogado));
         }
 
         GridBagConstraints posicaoTable1 = new GridBagConstraints();
@@ -342,7 +348,7 @@ public class RefeicoesView extends JFrame {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+                new AdicionarAlimentoRefeicao(usuarioLogado).adicionarRefeicao();
             }
         });
     }
@@ -353,14 +359,14 @@ public class RefeicoesView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CalculoTmbView().calculoTmbView();
+                new CalculoTmbView(usuarioLogado).calculoTmbView();
             }
         });
     }
 
     private void carregarRefeicao1() {
         AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentosRefeicao1();
+        List<Alimento> alimentos = dao.listarPorusuarioRefeicao1(usuarioLogado.getId());
 
         for (Alimento a : alimentos) {
             modelo1.insertRow(modelo1.getRowCount() - 2, new Object[]{
@@ -380,7 +386,7 @@ public class RefeicoesView extends JFrame {
 
     private void carregarRefeicao2() {
         AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentosRefeicao2();
+        List<Alimento> alimentos = dao.listarPorusuarioRefeicao2(usuarioLogado.getId());
 
         for (Alimento a : alimentos) {
             modelo2.insertRow(modelo2.getRowCount() - 2, new Object[]{
@@ -400,7 +406,7 @@ public class RefeicoesView extends JFrame {
     
     private void carregarRefeicao3() {
         AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentosRefeicao3();
+        List<Alimento> alimentos = dao.listarPorusuarioRefeicao3(usuarioLogado.getId());
 
         for (Alimento a : alimentos) {
             modelo3.insertRow(modelo3.getRowCount() - 2, new Object[]{
@@ -420,7 +426,7 @@ public class RefeicoesView extends JFrame {
     
     private void carregarRefeicao4() {
         AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentosRefeicao4();
+        List<Alimento> alimentos = dao.listarPorusuarioRefeicao4(usuarioLogado.getId());
 
         for (Alimento a : alimentos) {
             modelo4.insertRow(modelo4.getRowCount() - 2, new Object[]{
@@ -440,7 +446,7 @@ public class RefeicoesView extends JFrame {
     
     private void carregarRefeicao5() {
         AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentosRefeicao5();
+        List<Alimento> alimentos = dao.listarPorusuarioRefeicao5(usuarioLogado.getId());
 
         for (Alimento a : alimentos) {
             modelo5.insertRow(modelo5.getRowCount() - 2, new Object[]{
@@ -460,7 +466,7 @@ public class RefeicoesView extends JFrame {
     
     private void carregarRefeicao6() {
         AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentosRefeicao6();
+        List<Alimento> alimentos = dao.listarPorusuarioRefeicao6(usuarioLogado.getId());
 
         for (Alimento a : alimentos) {
             modelo6.insertRow(modelo6.getRowCount() - 2, new Object[]{
@@ -484,7 +490,7 @@ public class RefeicoesView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new MainView().mainView();
+                new MainView(usuarioLogado).mainView();
             }
         });
     }
@@ -493,7 +499,7 @@ public class RefeicoesView extends JFrame {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CadastroAlimentoView().CadastroAlimentoView();
+                new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
             }
         });
     }

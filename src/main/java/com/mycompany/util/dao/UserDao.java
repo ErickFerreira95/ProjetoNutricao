@@ -10,7 +10,7 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UserDao {
-    
+
     private ConnectionDataBase connection;
     private Connection conn;
 
@@ -20,7 +20,7 @@ public class UserDao {
     }
 
     public List<User> getUsuario() {
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuarios";
 
         try {
             PreparedStatement stmt = this.conn.prepareStatement(sql);
@@ -44,10 +44,10 @@ public class UserDao {
             return null;
         }
     }
-    
+
     // Salvar usuário com senha criptografada
     public boolean salvarUsuario(String nome, String email, String senha) {
-        String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
 
         // Criptografa a senha
         String senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
@@ -70,7 +70,7 @@ public class UserDao {
     }
 
     // Autenticar usuário
-    public boolean autenticarUsuario(String email, String senhaDigitada) {
+    /*public boolean autenticarUsuario(String email, String senhaDigitada) {
         String sql = "SELECT senha FROM usuario WHERE email = ?";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -87,12 +87,37 @@ public class UserDao {
             System.out.println("Erro ao autenticar usuário: " + e.getMessage());
         }
         return false;
+    }*/
+    public User autenticarUsuario(String email, String senhaDigitada) {
+        String sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ?";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String senhaHash = rs.getString("senha");
+                if (BCrypt.checkpw(senhaDigitada, senhaHash)) {
+                    User usuario = new User();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setEmail(rs.getString("email"));
+                    // qualquer outro campo necessário
+                    return usuario;
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao autenticar usuário: " + e.getMessage());
+        }
+        return null;
     }
-    
+
     public boolean emailExiste(String email) {
         User user = null;
         boolean existe = false;
-        String sql = "SELECT * FROM usuario WHERE email = ?";
+        String sql = "SELECT * FROM usuarios WHERE email = ?";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 

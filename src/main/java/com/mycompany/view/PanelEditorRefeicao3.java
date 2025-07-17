@@ -1,5 +1,6 @@
 package com.mycompany.view;
 
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,12 +23,14 @@ public class PanelEditorRefeicao3 extends AbstractCellEditor implements TableCel
     private JButton btnExcluir2;
     private RefeicoesView view;
     JTable tblTabela;
+    private User usuarioLogado;
 
-    public PanelEditorRefeicao3(JTable tblTabela, RefeicoesView view) {
+    public PanelEditorRefeicao3(JTable tblTabela, RefeicoesView view, User usuario) {
 
         this.tblTabela = tblTabela;
         this.view = view;
-
+        this.usuarioLogado = usuario;
+        
         painel = new JPanel(new GridBagLayout());
         //btnExcluir = new JButton(new ImageIcon("src/images/lixeira.png"));
         btnExcluir = new JButton("Excluir");
@@ -51,7 +54,7 @@ public class PanelEditorRefeicao3 extends AbstractCellEditor implements TableCel
         btnExcluir.addActionListener(e -> {
             JTable tabela = tblTabela;
             AlimentoDao dao = new AlimentoDao();
-            RefeicoesView refeicoes = new RefeicoesView();
+            RefeicoesView refeicoes = new RefeicoesView(usuarioLogado);
             int row = tabela.getEditingRow();
 
             if (row != -1) {

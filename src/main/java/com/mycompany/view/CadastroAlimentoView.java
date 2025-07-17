@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -47,8 +48,14 @@ public class CadastroAlimentoView extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
+    private User usuarioLogado;
+    
+    public CadastroAlimentoView(User usuario) {
+        this.usuarioLogado = usuario;
+    }
 
     private void configurarUI() {
+        
         setTitle("Cadastro de alimento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1280, 720);
@@ -253,7 +260,7 @@ public class CadastroAlimentoView extends JFrame {
         setContentPane(backgroundPanel);
     }
 
-    public void CadastroAlimentoView() {
+    public void cadastroAlimentoView() {
         configurarUI();
         setVisible(true);
         salvarAlimento();
@@ -268,7 +275,7 @@ public class CadastroAlimentoView extends JFrame {
         botaoCadastrar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
             Alimento alimento = new Alimento();
-            EditarAlimentoView editarView = new EditarAlimentoView();
+            EditarAlimentoView editarView = new EditarAlimentoView(usuarioLogado);
             SignUpView viewSignup = new SignUpView();
 
             @Override
@@ -290,6 +297,7 @@ public class CadastroAlimentoView extends JFrame {
                                 + "Ex: 000 ou 000,0 ou 000,00");
                     } else {
 
+                        alimento.setIdUsuario(usuarioLogado.getId());
                         alimento.setNomeAlimento(txtNomeAlimento.getText());
                         alimento.setQuantidade(txtQuantidade.getText());
                         alimento.setProteina(txtProteina.getText());
@@ -298,7 +306,7 @@ public class CadastroAlimentoView extends JFrame {
 
                         dao.salvarAlimento(alimento);
                         dispose();
-                        new CadastroAlimentoView().CadastroAlimentoView();
+                        new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
                     }
                 }
             }
@@ -311,7 +319,7 @@ public class CadastroAlimentoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CalculoTmbView().calculoTmbView();
+                new CalculoTmbView(usuarioLogado).calculoTmbView();
             }
         });
     }
@@ -322,7 +330,7 @@ public class CadastroAlimentoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new RefeicoesView().refeifoes();
+                new RefeicoesView(usuarioLogado).refeifoes();
             }
         });
     }
@@ -333,7 +341,7 @@ public class CadastroAlimentoView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new MainView().mainView();
+                new MainView(usuarioLogado).mainView();
             }
         });
     }
@@ -343,7 +351,7 @@ public class CadastroAlimentoView extends JFrame {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+                new AdicionarAlimentoRefeicao(usuarioLogado).adicionarRefeicao();
             }
         });
     }

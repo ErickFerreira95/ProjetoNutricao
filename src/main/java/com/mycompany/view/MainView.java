@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,6 +46,7 @@ public class MainView extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
+    private User usuarioLogado;
 
     private void configurarUI() {
         setTitle("Login");
@@ -62,10 +64,10 @@ public class MainView extends JFrame {
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
-        
+
         menuSair.add(sair);
         menuBar.add(menuSair);
-        
+
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -89,7 +91,7 @@ public class MainView extends JFrame {
                 return (column == 7);
             }
         };
-        
+
         tblAlimentos = new JTable(modelo);
         tblAlimentos.getColumnModel().getColumn(0).setPreferredWidth(70);
         tblAlimentos.getColumnModel().getColumn(1).setPreferredWidth(300);
@@ -118,7 +120,7 @@ public class MainView extends JFrame {
             tblAlimentos.getColumnModel().getColumn(i).setCellRenderer(centralizado);
             // Renderizador e editor para os dois botões
             tblAlimentos.getColumn("Ações").setCellRenderer(new PanelRenderer());
-            tblAlimentos.getColumn("Ações").setCellEditor(new PanelEditor(tblAlimentos, this));
+            tblAlimentos.getColumn("Ações").setCellEditor(new PanelEditor(tblAlimentos, this, usuarioLogado));
         }
 
         GridBagConstraints posicaoTable = new GridBagConstraints();
@@ -146,12 +148,30 @@ public class MainView extends JFrame {
         sair();
     }
 
-    private void carregarTabela() {
+    public MainView(User usuario) {
+        this.usuarioLogado = usuario;
+    }
+
+    /*private void carregarTabela() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.carregarAlimentos();
 
         for (Alimento a : alimentos) {
             modelo.addRow(new Object[]{a.getId(), a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
+        }
+    }*/
+    private void carregarTabela() {
+        AlimentoDao dao = new AlimentoDao();
+        List<Alimento> alimentos = dao.listarPorUsuario(usuarioLogado.getId());
+
+        for (Alimento a : alimentos) {
+            modelo.addRow(new Object[]{a.getId(),
+                a.getNomeAlimento(),
+                a.getQuantidade(),
+                a.getProteina(),
+                a.getCarboidrato(),
+                a.getGordura(),
+                a.getKcal()});
         }
     }
 
@@ -160,7 +180,7 @@ public class MainView extends JFrame {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CadastroAlimentoView().CadastroAlimentoView();
+                new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
             }
         });
     }
@@ -171,7 +191,7 @@ public class MainView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CalculoTmbView().calculoTmbView();
+                new CalculoTmbView(usuarioLogado).calculoTmbView();
             }
         });
     }
@@ -182,7 +202,7 @@ public class MainView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new RefeicoesView().refeifoes();
+                new RefeicoesView(usuarioLogado).refeifoes();
             }
         });
     }
@@ -191,11 +211,11 @@ public class MainView extends JFrame {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new AdicionarAlimentoRefeicao().adicionarRefeicao();
+                new AdicionarAlimentoRefeicao(usuarioLogado).adicionarRefeicao();
             }
         });
     }
-    
+
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

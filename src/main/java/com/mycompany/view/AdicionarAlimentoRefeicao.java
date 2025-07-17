@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -53,6 +54,11 @@ public class AdicionarAlimentoRefeicao extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
+    private User usuarioLogado;
+    
+    public AdicionarAlimentoRefeicao(User usuario) {
+        this.usuarioLogado = usuario;
+    }
 
     private void configurarUI() {
         setTitle("Adionar Alimentos nas Refeições");
@@ -378,7 +384,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                 AlimentoDao dao = new AlimentoDao();
                 Alimento alimento = dao.buscarPorNome(txtNomeAlimento.getText());
                 SignUpView viewSignup = new SignUpView();
-                EditarAlimentoView editarView = new EditarAlimentoView();
+                EditarAlimentoView editarView = new EditarAlimentoView(usuarioLogado);
 
                 if (!emptyFields()) {
                     if (viewSignup.validarNome(txtNomeAlimento.getText()) == false) {
@@ -446,6 +452,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                         String resultadoGordura = formato.format(gordura);
                         String resultadoKcal = formato.format(kcal);
 
+                        alimento.setIdUsuario(usuarioLogado.getId());
                         alimento.setNomeAlimento(alimento.getNomeAlimento());
                         alimento.setQuantidade(quantidadeFormatada);
                         alimento.setProteina(resultadoProteina);
@@ -478,7 +485,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CadastroAlimentoView().CadastroAlimentoView();
+                new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
             }
         });
     }
@@ -489,7 +496,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CalculoTmbView().calculoTmbView();
+                new CalculoTmbView(usuarioLogado).calculoTmbView();
             }
         });
     }
@@ -500,7 +507,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new RefeicoesView().refeifoes();
+                new RefeicoesView(usuarioLogado).refeifoes();
             }
         });
     }
@@ -511,7 +518,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new MainView().mainView();
+                new MainView(usuarioLogado).mainView();
             }
         });
     }

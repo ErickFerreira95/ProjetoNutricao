@@ -2,6 +2,7 @@ package com.mycompany.view;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.mycompany.model.User;
 import com.mycompany.util.dao.UserDao;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -194,7 +195,7 @@ public class LoginView extends JFrame {
         fazerLogin();
     }
 
-    public void fazerLogin() {
+    /*public void fazerLogin() {
         btnLogin.addActionListener(new ActionListener() {
             UserDao dao = new UserDao();
             SignUpView signUpView = new SignUpView();
@@ -213,6 +214,33 @@ public class LoginView extends JFrame {
                             new MainView().mainView();
                         } else {
                             System.out.println("Email ou senha inválidos.");
+                        }
+                    }
+                }
+            }
+
+        });
+    }*/
+    public void fazerLogin() {
+        btnLogin.addActionListener(new ActionListener() {
+            UserDao dao = new UserDao();
+            SignUpView signUpView = new SignUpView();
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!emptyFields()) {
+                    if (validarEmail(txtEmail.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "Formato email incorreto! \n"
+                                + "Ex: nome@email.com");
+                    } else if (validarSenha(txtSenha.getText()) == false) {
+                        JOptionPane.showMessageDialog(null, "A senha deve conter no mínimo 6 caracteres e no máximo 40");
+                    } else {
+                        User usuario = dao.autenticarUsuario(txtEmail.getText(), txtSenha.getText());
+                        if (usuario != null) {
+                            dispose();
+                            new MainView(usuario).mainView(); // <-- passe o usuário
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Email ou senha inválidos.");
                         }
                     }
                 }

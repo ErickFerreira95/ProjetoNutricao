@@ -435,8 +435,8 @@ public class AdicionarAlimentoRefeicao extends JFrame {
                         double proteina, carboidrato, gordura, kcal;
 
                         proteina = (quantidade * Double.parseDouble(alimento.getProteina().replace(",", "."))) / 100;
-                            carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato().replace(",", "."))) / 100;
-                            gordura = (quantidade * Double.parseDouble(alimento.getGordura().replace(",", "."))) / 100;
+                        carboidrato = (quantidade * Double.parseDouble(alimento.getCarboidrato().replace(",", "."))) / 100;
+                        gordura = (quantidade * Double.parseDouble(alimento.getGordura().replace(",", "."))) / 100;
                         kcal = (proteina * 4) + (carboidrato * 4) + (gordura * 9);
 
                         DecimalFormat formato = new DecimalFormat("#0.0");

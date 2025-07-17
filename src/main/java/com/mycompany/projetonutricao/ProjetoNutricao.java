@@ -26,13 +26,13 @@ public class ProjetoNutricao {
 
         SwingUtilities.invokeLater(() -> {
             //new LoginView().login();
-            //new SignUpView().signUpView();
+            new SignUpView().signUpView();
             //new MainView().mainView();
             //new CadastroAlimentoView().CadastroAlimentoView();
             //new CalculoTmbView().calculoTmbView();
             //new EditarAlimentoView().editarAlimentoView();
             //new RefeicoesView().refeifoes();
-            new AdicionarAlimentoRefeicao().adicionarRefeicao();
+            //new AdicionarAlimentoRefeicao().adicionarRefeicao();
         });
     }
 }

@@ -44,25 +44,7 @@ public class UserDao {
             return null;
         }
     }
-
-    /*public boolean verificarLogin(String email, String senha) {
-        String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
-        
-        try (Connection conn = conexaoBd.getConexaoBd();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, email);
-            stmt.setString(2, senha);
-
-            ResultSet rs = stmt.executeQuery();
-
-            return rs.next(); // Se encontrou algum resultado, o login está correto
-
-        } catch (Exception e) {
-            System.out.println("Erro ao verificar login: " + e.getMessage());
-            return false;
-        }
-    }*/
+    
     // Salvar usuário com senha criptografada
     public boolean salvarUsuario(String nome, String email, String senha) {
         String sql = "INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)";
@@ -105,5 +87,25 @@ public class UserDao {
             System.out.println("Erro ao autenticar usuário: " + e.getMessage());
         }
         return false;
+    }
+    
+    public boolean emailExiste(String email) {
+        User user = null;
+        boolean existe = false;
+        String sql = "SELECT * FROM usuario WHERE email = ?";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                existe = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return existe;
     }
 }

@@ -1,5 +1,6 @@
 package com.mycompany.view;
 
+import com.mycompany.model.User;
 import com.mycompany.util.dao.UserDao;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -226,9 +227,13 @@ public class SignUpView extends JFrame {
                     } else if (view.validarSenha(txtSenha.getText()) == false) {
                         JOptionPane.showMessageDialog(null, "A senha deve conter no mínimo 6 caracteres e no máximo 40");
                     } else {
-                        dao.salvarUsuario(txtNome.getText(), txtEmail.getText(), txtSenha.getText());
-                        dispose();
-                        new LoginView().login();
+                        if (dao.emailExiste(txtEmail.getText())) {
+                            JOptionPane.showMessageDialog(null, "Email já cadastrado!");
+                        } else {
+                            dao.salvarUsuario(txtNome.getText(), txtEmail.getText(), txtSenha.getText());
+                            dispose();
+                            new LoginView().login();
+                        }
                     }
                 }
             }

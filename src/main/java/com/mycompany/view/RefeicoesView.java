@@ -57,6 +57,11 @@ public class RefeicoesView extends JFrame {
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
     private User usuarioLogado;
+    private JLabel lblResultadoTmb = new JLabel("Seu TMB é: ");
+    private JLabel lblResultadoProteina = new JLabel("Consumo de porteína: ");
+    private JLabel lblResultadoCarboidrato = new JLabel("Consumo de carboidrato: ");
+    private JLabel lblResultadoGordura = new JLabel("Consumo de gordura: ");
+    private JLabel lblResultadoKcal = new JLabel("Consumo de kcal: ");
     
     public RefeicoesView(User usuario) {
         this.usuarioLogado = usuario;
@@ -97,7 +102,95 @@ public class RefeicoesView extends JFrame {
         };
         backgroundPanel.setLayout(new GridBagLayout());
         
+        // Painel transparente com cantos arredondados
+        JPanel centralPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                Shape forma = new RoundRectangle2D.Float(0, 0, getWidth(), getHeight(), 30, 30);
+                g2.setColor(new Color(255, 255, 255, 200));
+                g2.fill(forma);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+
+        centralPanel.setOpaque(false);
+        centralPanel.setPreferredSize(new Dimension(350, 200));
+        centralPanel.setLayout(new GridBagLayout());
+
+        // Posicionamento no topo absoluto
+        GridBagConstraints positionPainelCentral = new GridBagConstraints();
+        positionPainelCentral.gridx = 0;
+        positionPainelCentral.gridy = 0;
+        positionPainelCentral.weightx = 0;
+        positionPainelCentral.weighty = 0; // ← isso força ele a ficar no topo
+        positionPainelCentral.anchor = GridBagConstraints.CENTER;
+        positionPainelCentral.fill = GridBagConstraints.NONE;
+        positionPainelCentral.insets = new Insets(0, 0, 30, 0); // margem superior
+        backgroundPanel.add(centralPanel, positionPainelCentral);
         
+        lblResultadoTmb.setFont(new Font("Calibri", Font.BOLD, 20));
+        
+        GridBagConstraints posicaoLblTmb = new GridBagConstraints();
+        posicaoLblTmb.gridx = 0;
+        posicaoLblTmb.gridy = 0;
+        posicaoLblTmb.weightx = 0;
+        posicaoLblTmb.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblTmb.anchor = GridBagConstraints.WEST;
+        posicaoLblTmb.fill = GridBagConstraints.NONE;
+        posicaoLblTmb.insets = new Insets(0, 0, 5, 0); // margem superior
+        centralPanel.add(lblResultadoTmb, posicaoLblTmb);
+        
+        
+        lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 20));
+        
+        GridBagConstraints posicaoLblProteina = new GridBagConstraints();
+        posicaoLblProteina.gridx = 0;
+        posicaoLblProteina.gridy = 1;
+        posicaoLblProteina.weightx = 0;
+        posicaoLblProteina.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblProteina.anchor = GridBagConstraints.WEST;
+        posicaoLblProteina.fill = GridBagConstraints.NONE;
+        posicaoLblProteina.insets = new Insets(0, 0, 5, 0); // margem superior
+        centralPanel.add(lblResultadoProteina, posicaoLblProteina);
+        
+        lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 20));
+        
+        GridBagConstraints posicaoLblCarboidrato = new GridBagConstraints();
+        posicaoLblCarboidrato.gridx = 0;
+        posicaoLblCarboidrato.gridy = 2;
+        posicaoLblCarboidrato.weightx = 0;
+        posicaoLblCarboidrato.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblCarboidrato.anchor = GridBagConstraints.WEST;
+        posicaoLblCarboidrato.fill = GridBagConstraints.NONE;
+        posicaoLblCarboidrato.insets = new Insets(0, 0, 5, 0); // margem superior
+        centralPanel.add(lblResultadoCarboidrato, posicaoLblCarboidrato);
+        
+        lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 20));
+        
+        GridBagConstraints posicaoLblGordura = new GridBagConstraints();
+        posicaoLblGordura.gridx = 0;
+        posicaoLblGordura.gridy = 3;
+        posicaoLblGordura.weightx = 0;
+        posicaoLblGordura.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblGordura.anchor = GridBagConstraints.WEST;
+        posicaoLblGordura.fill = GridBagConstraints.NONE;
+        posicaoLblGordura.insets = new Insets(0, 0, 5, 0); // margem superior
+        centralPanel.add(lblResultadoGordura, posicaoLblGordura);
+        
+        lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 20));
+        
+        GridBagConstraints posicaoLblKcal = new GridBagConstraints();
+        posicaoLblKcal.gridx = 0;
+        posicaoLblKcal.gridy = 4;
+        posicaoLblKcal.weightx = 0;
+        posicaoLblKcal.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoLblKcal.anchor = GridBagConstraints.WEST;
+        posicaoLblKcal.fill = GridBagConstraints.NONE;
+        posicaoLblKcal.insets = new Insets(0, 0, 0, 0); // margem superior
+        centralPanel.add(lblResultadoKcal, posicaoLblKcal);
 
         modelo1 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
@@ -266,7 +359,7 @@ public class RefeicoesView extends JFrame {
 
         GridBagConstraints posicaoTable1 = new GridBagConstraints();
         posicaoTable1.gridx = 0;
-        posicaoTable1.gridy = 0;
+        posicaoTable1.gridy = 1;
         posicaoTable1.weightx = 0;
         posicaoTable1.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable1.anchor = GridBagConstraints.CENTER;
@@ -276,7 +369,7 @@ public class RefeicoesView extends JFrame {
 
         GridBagConstraints posicaoTable2 = new GridBagConstraints();
         posicaoTable2.gridx = 1;
-        posicaoTable2.gridy = 0;
+        posicaoTable2.gridy = 1;
         posicaoTable2.weightx = 0;
         posicaoTable2.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable2.anchor = GridBagConstraints.CENTER;
@@ -286,7 +379,7 @@ public class RefeicoesView extends JFrame {
 
         GridBagConstraints posicaoTable3 = new GridBagConstraints();
         posicaoTable3.gridx = 2;
-        posicaoTable3.gridy = 0;
+        posicaoTable3.gridy = 1;
         posicaoTable3.weightx = 0;
         posicaoTable3.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable3.anchor = GridBagConstraints.CENTER;
@@ -296,7 +389,7 @@ public class RefeicoesView extends JFrame {
 
         GridBagConstraints posicaoTable4 = new GridBagConstraints();
         posicaoTable4.gridx = 0;
-        posicaoTable4.gridy = 1;
+        posicaoTable4.gridy = 2;
         posicaoTable4.weightx = 0;
         posicaoTable4.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable4.anchor = GridBagConstraints.CENTER;
@@ -306,7 +399,7 @@ public class RefeicoesView extends JFrame {
 
         GridBagConstraints posicaoTable5 = new GridBagConstraints();
         posicaoTable5.gridx = 1;
-        posicaoTable5.gridy = 1;
+        posicaoTable5.gridy = 2;
         posicaoTable5.weightx = 0;
         posicaoTable5.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable5.anchor = GridBagConstraints.CENTER;
@@ -316,7 +409,7 @@ public class RefeicoesView extends JFrame {
 
         GridBagConstraints posicaoTable6 = new GridBagConstraints();
         posicaoTable6.gridx = 2;
-        posicaoTable6.gridy = 1;
+        posicaoTable6.gridy = 2;
         posicaoTable6.weightx = 0;
         posicaoTable6.weighty = 0; // ← isso força ele a ficar no topo
         posicaoTable6.anchor = GridBagConstraints.CENTER;

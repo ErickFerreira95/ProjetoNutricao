@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.Tmb;
 import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;

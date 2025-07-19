@@ -1,6 +1,7 @@
 package com.mycompany.util.dao;
 
 import com.mycompany.connection.ConnectionDataBase;
+import com.mycompany.model.Tmb;
 import com.mycompany.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,6 +66,24 @@ public class UserDao {
         } catch (Exception e) {
             System.out.println("Erro ao salvar usuário: " + e.getMessage());
             System.out.println(senhaHash);
+            return false;
+        }
+    }
+    
+    public boolean salvarTmb(Tmb tmb) {
+        String sql = "INSERT INTO taxaMetabolicaBasal (tmb, id_usuario) VALUES (?, ?)";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, tmb.getTmb());
+            stmt.setInt(2, tmb.getIdUsuario());
+
+            stmt.executeUpdate();
+            System.out.println("Tmb salvo com sucesso.");
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao salvar tmb: " + e.getMessage());
             return false;
         }
     }

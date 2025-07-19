@@ -63,6 +63,7 @@ com\mycompany\view\MainView$7.class
 com\mycompany\view\PanelEditorRefeicao6.class
 com\mycompany\view\PanelRendererRefeicoes.class
 com\mycompany\view\CadastroAlimentoView.class
+com\mycompany\model\Tmb.class
 com\mycompany\view\EditarAlimentoView.class
 com\mycompany\view\CalculoTmbView$1.class
 com\mycompany\util\dao\UserDao.class
@@ -82,6 +83,7 @@ com\mycompany\view\CadastroAlimentoView$4.class
 com\mycompany\view\CalculoTmbView.class
 com\mycompany\view\MainView$3.class
 com\mycompany\view\AdicionarAlimentoRefeicao$8.class
+com\mycompany\view\RefeicoesView$13.class
 com\mycompany\view\AdicionarAlimentoRefeicao$4.class
 com\mycompany\view\SignUpView$1.class
 com\mycompany\connection\ConnectionDataBase.class

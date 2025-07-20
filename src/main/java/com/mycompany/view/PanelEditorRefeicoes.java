@@ -54,7 +54,6 @@ public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCel
         btnExcluir.addActionListener(e -> {
             JTable tabela = tblTabela;
             AlimentoDao dao = new AlimentoDao();
-            RefeicoesView refeicoes = new RefeicoesView(usuarioLogado);
             int row = tabela.getEditingRow();
 
             if (row != -1) {
@@ -78,8 +77,8 @@ public class PanelEditorRefeicoes extends AbstractCellEditor implements TableCel
                     if (deletado) {
                         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
                         modelo.removeRow(row);
-                        refeicoes.atualizarTotais(modelo);
-
+                        view.atualizarTotais(modelo);
+                        
                         // Evita renderização indevida após a remoção da última linha
                         if (modelo.getRowCount() == 0) {
                             tabela.clearSelection();

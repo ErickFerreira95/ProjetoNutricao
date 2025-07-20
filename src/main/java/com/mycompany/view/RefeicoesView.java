@@ -437,10 +437,6 @@ public class RefeicoesView extends JFrame {
         carregarRefeicao6();
         tabelaAlimentosView();
         cadastroAlimentoView();
-        atualizarTotalProteinas();
-        atualizarTotalCarboidratos();
-        atualizarTotalGorduras();
-        atualizarTotalKcals();
         sair();
     }
 
@@ -627,6 +623,11 @@ public class RefeicoesView extends JFrame {
         modelo.setValueAt(String.format("%.2f", carboidrato), totalRow, 4);
         modelo.setValueAt(String.format("%.2f", gordura), totalRow, 5);
         modelo.setValueAt(String.format("%.2f", kcal), totalRow, 6);
+        
+        atualizarTotalProteinas();
+        atualizarTotalCarboidratos();
+        atualizarTotalGorduras();
+        atualizarTotalKcals();
     }
 
     private double parseDouble(Object valor) {
@@ -649,7 +650,7 @@ public class RefeicoesView extends JFrame {
         });
     }
 
-    private double pegarValorUltimaLinha(JTable tabela, int coluna) {
+    /*private double pegarValorUltimaLinha(JTable tabela, int coluna) {
         int linha = tabela.getRowCount() - 1;
 
         if (linha >= 0) {
@@ -666,52 +667,83 @@ public class RefeicoesView extends JFrame {
         }
 
         return 0;
+    }*/
+    private double somarColuna(JTable tabela, int coluna) {
+        double total = 0;
+        int rowCount = tabela.getRowCount();
+
+        // Se a última linha é o total, ignore ela (assumindo que ela é fixa)
+        int limite = rowCount;
+
+        // Se sua tabela tem uma linha de total no final (ex: com texto "Total"), detecte e ignore
+        if (rowCount > 0) {
+            Object valor = tabela.getValueAt(rowCount - 1, 0); // suponha que coluna 0 tem texto "Total"
+            if (valor != null && valor.toString().equalsIgnoreCase("Total")) {
+                limite = rowCount - 1;
+            }
+        }
+
+        for (int i = 0; i < limite; i++) {
+            Object valorObj = tabela.getValueAt(i, coluna);
+
+            if (valorObj != null && valorObj.toString().matches("[0-9.,]+")) {
+                try {
+                    String valor = valorObj.toString().replace(",", ".");
+                    total += Double.parseDouble(valor);
+                } catch (NumberFormatException e) {
+                    // Ignora valores inválidos
+                }
+            }
+        }
+
+        return total;
     }
 
-    private void atualizarTotalProteinas() {
+    public void atualizarTotalProteinas() {
+        System.out.println("Método chamado");
         double total = 0;
-        total += pegarValorUltimaLinha(tblRefeicao1, 3); // suponha que coluna 2 é proteína
-        total += pegarValorUltimaLinha(tblRefeicao2, 3);
-        total += pegarValorUltimaLinha(tblRefeicao3, 3);
-        total += pegarValorUltimaLinha(tblRefeicao4, 3);
-        total += pegarValorUltimaLinha(tblRefeicao5, 3);
-        total += pegarValorUltimaLinha(tblRefeicao6, 3);
+        total += somarColuna(tblRefeicao1, 3); // suponha que coluna 2 é proteína
+        total += somarColuna(tblRefeicao2, 3);
+        total += somarColuna(tblRefeicao3, 3);
+        total += somarColuna(tblRefeicao4, 3);
+        total += somarColuna(tblRefeicao5, 3);
+        total += somarColuna(tblRefeicao6, 3);
 
         lblResultadoProteina.setText("Consumo de proteína: " + String.format("%.2f", total) + " g");
     }
 
-    private void atualizarTotalCarboidratos() {
+    public void atualizarTotalCarboidratos() {
         double total = 0;
-        total += pegarValorUltimaLinha(tblRefeicao1, 4); // suponha que coluna 2 é proteína
-        total += pegarValorUltimaLinha(tblRefeicao2, 4);
-        total += pegarValorUltimaLinha(tblRefeicao3, 4);
-        total += pegarValorUltimaLinha(tblRefeicao4, 4);
-        total += pegarValorUltimaLinha(tblRefeicao5, 4);
-        total += pegarValorUltimaLinha(tblRefeicao6, 4);
+        total += somarColuna(tblRefeicao1, 4); // suponha que coluna 2 é proteína
+        total += somarColuna(tblRefeicao2, 4);
+        total += somarColuna(tblRefeicao3, 4);
+        total += somarColuna(tblRefeicao4, 4);
+        total += somarColuna(tblRefeicao5, 4);
+        total += somarColuna(tblRefeicao6, 4);
 
         lblResultadoCarboidrato.setText("Consumo de carboidrato: " + String.format("%.2f", total) + " g");
     }
-    
-    private void atualizarTotalGorduras() {
+
+    public void atualizarTotalGorduras() {
         double total = 0;
-        total += pegarValorUltimaLinha(tblRefeicao1, 5); // suponha que coluna 2 é proteína
-        total += pegarValorUltimaLinha(tblRefeicao2, 5);
-        total += pegarValorUltimaLinha(tblRefeicao3, 5);
-        total += pegarValorUltimaLinha(tblRefeicao4, 5);
-        total += pegarValorUltimaLinha(tblRefeicao5, 5);
-        total += pegarValorUltimaLinha(tblRefeicao6, 5);
+        total += somarColuna(tblRefeicao1, 5); // suponha que coluna 2 é proteína
+        total += somarColuna(tblRefeicao2, 5);
+        total += somarColuna(tblRefeicao3, 5);
+        total += somarColuna(tblRefeicao4, 5);
+        total += somarColuna(tblRefeicao5, 5);
+        total += somarColuna(tblRefeicao6, 5);
 
         lblResultadoGordura.setText("Consumo de gordura: " + String.format("%.2f", total) + " g");
     }
-    
-    private void atualizarTotalKcals() {
+
+    public void atualizarTotalKcals() {
         double total = 0;
-        total += pegarValorUltimaLinha(tblRefeicao1, 6); // suponha que coluna 2 é proteína
-        total += pegarValorUltimaLinha(tblRefeicao2, 6);
-        total += pegarValorUltimaLinha(tblRefeicao3, 6);
-        total += pegarValorUltimaLinha(tblRefeicao4, 6);
-        total += pegarValorUltimaLinha(tblRefeicao5, 6);
-        total += pegarValorUltimaLinha(tblRefeicao6, 6);
+        total += somarColuna(tblRefeicao1, 6); // suponha que coluna 2 é proteína
+        total += somarColuna(tblRefeicao2, 6);
+        total += somarColuna(tblRefeicao3, 6);
+        total += somarColuna(tblRefeicao4, 6);
+        total += somarColuna(tblRefeicao5, 6);
+        total += somarColuna(tblRefeicao6, 6);
 
         lblResultadoKcal.setText("Consumo de kal: " + String.format("%.2f", total) + " g");
     }

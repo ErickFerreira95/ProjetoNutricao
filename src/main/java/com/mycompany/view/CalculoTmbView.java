@@ -52,8 +52,8 @@ public class CalculoTmbView extends JFrame {
     private JMenuItem tabelaAlimentos = new JMenuItem("Tabela de Alimentos");
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
-    User usuarioLogado;
-    Tmb tmb = new Tmb();
+    private User usuarioLogado;
+    private Tmb tmb = new Tmb();
 
     public CalculoTmbView(User usuario) {
         this.usuarioLogado = usuario;
@@ -412,8 +412,13 @@ public class CalculoTmbView extends JFrame {
                         
                         double resultado = Math.round(resultadoTmb);
                         lblResultado.setText("Seu TMB é: " + resultado);
+                        
+                        tmb.setIdade(Integer.parseInt(txtIdade.getText()));
+                        tmb.setAltura(Integer.parseInt(txtAltura.getText()));
+                        tmb.setPeso(peso);
+                        tmb.setFatorAtividade(fatorAtividade);
+                        tmb.setTmb(resultado);
                         tmb.setIdUsuario(usuarioLogado.getId());
-                        tmb.setTmb(String.valueOf(resultado));
                         dao.salvarTmb(tmb);
 
                     } catch (NumberFormatException ex) {

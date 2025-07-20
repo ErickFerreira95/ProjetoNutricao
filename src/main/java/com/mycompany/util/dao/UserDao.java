@@ -71,42 +71,27 @@ public class UserDao {
     }
     
     public boolean salvarTmb(Tmb tmb) {
-        String sql = "INSERT INTO taxaMetabolicaBasal (tmb, id_usuario) VALUES (?, ?)";
+        String sql = "INSERT INTO taxaMetabolicaBasal (idade, altura, peso, fatorAtividade, tmb, id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, tmb.getTmb());
-            stmt.setInt(2, tmb.getIdUsuario());
+            stmt.setInt(1, tmb.getIdade());
+            stmt.setInt(2, tmb.getAltura());
+            stmt.setDouble(3, tmb.getPeso());
+            stmt.setDouble(4, tmb.getFatorAtividade());
+            stmt.setDouble(5, tmb.getTmb());
+            stmt.setInt(6, tmb.getIdUsuario());
 
             stmt.executeUpdate();
-            System.out.println("Tmb salvo com sucesso.");
+            System.out.println("Dados pessoais salvo com sucesso.");
             return true;
 
         } catch (Exception e) {
-            System.out.println("Erro ao salvar tmb: " + e.getMessage());
+            System.out.println("Erro ao salvar dados pessoais: " + e.getMessage());
             return false;
         }
     }
 
-    // Autenticar usuário
-    /*public boolean autenticarUsuario(String email, String senhaDigitada) {
-        String sql = "SELECT senha FROM usuario WHERE email = ?";
-
-        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                String senhaHash = rs.getString("senha");
-                return BCrypt.checkpw(senhaDigitada, senhaHash);
-            }
-
-        } catch (Exception e) {
-            System.out.println("Erro ao autenticar usuário: " + e.getMessage());
-        }
-        return false;
-    }*/
     public User autenticarUsuario(String email, String senhaDigitada) {
         String sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ?";
 

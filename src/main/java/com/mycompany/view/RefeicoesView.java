@@ -1,6 +1,7 @@
 package com.mycompany.view;
 
 import com.mycompany.model.Alimento;
+import com.mycompany.model.Tmb;
 import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
 import java.awt.Color;
@@ -57,11 +58,12 @@ public class RefeicoesView extends JFrame {
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
     private User usuarioLogado;
-    private JLabel lblResultadoTmb = new JLabel("Seu TMB é: ");
+    
     private JLabel lblResultadoProteina = new JLabel("Consumo de porteína: ");
     private JLabel lblResultadoCarboidrato = new JLabel("Consumo de carboidrato: ");
     private JLabel lblResultadoGordura = new JLabel("Consumo de gordura: ");
     private JLabel lblResultadoKcal = new JLabel("Consumo de kcal: ");
+    private CalculoTmbView tmbView;
     
     public RefeicoesView(User usuario) {
         this.usuarioLogado = usuario;
@@ -131,6 +133,7 @@ public class RefeicoesView extends JFrame {
         positionPainelCentral.insets = new Insets(0, 0, 30, 0); // margem superior
         backgroundPanel.add(centralPanel, positionPainelCentral);
         
+        JLabel lblResultadoTmb = new JLabel("Seu TMB é: ");
         lblResultadoTmb.setFont(new Font("Calibri", Font.BOLD, 20));
         
         GridBagConstraints posicaoLblTmb = new GridBagConstraints();

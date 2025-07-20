@@ -419,6 +419,7 @@ public class CalculoTmbView extends JFrame {
                         tmb.setFatorAtividade(fatorAtividade);
                         tmb.setTmb(resultado);
                         tmb.setIdUsuario(usuarioLogado.getId());
+                        usuarioLogado.setTmb(resultado);
                         dao.salvarTmb(tmb);
 
                     } catch (NumberFormatException ex) {

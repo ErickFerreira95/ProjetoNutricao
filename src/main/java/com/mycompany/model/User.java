@@ -3,8 +3,17 @@ package com.mycompany.model;
 public class User {
 
     private int id;
-    private String nome, email, senha, tmb;
+    private String nome, email, senha;
     private int idUsuario;
+    private double tmb;
+
+    public double getTmb() {
+        return tmb;
+    }
+
+    public void setTmb(double tmb) {
+        this.tmb = tmb;
+    }
 
     public int getIdUsuario() {
         return idUsuario;
@@ -44,13 +53,5 @@ public class User {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getTmb() {
-        return tmb;
-    }
-
-    public void setTmb(String tmb) {
-        this.tmb = tmb;
     }
 }

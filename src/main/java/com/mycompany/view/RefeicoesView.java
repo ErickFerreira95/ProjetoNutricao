@@ -4,6 +4,7 @@ import com.mycompany.model.Alimento;
 import com.mycompany.model.Tmb;
 import com.mycompany.model.User;
 import com.mycompany.util.dao.AlimentoDao;
+import com.mycompany.util.dao.UserDao;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -58,13 +59,14 @@ public class RefeicoesView extends JFrame {
     private JMenu menuSair = new JMenu("Sair");
     private JMenuItem sair = new JMenuItem("Sair");
     private User usuarioLogado;
-    
-    private JLabel lblResultadoProteina = new JLabel("Consumo de porteína: ");
+
+    JLabel lblResultadoProteina = new JLabel("Consumo de porteína: ");
     private JLabel lblResultadoCarboidrato = new JLabel("Consumo de carboidrato: ");
     private JLabel lblResultadoGordura = new JLabel("Consumo de gordura: ");
     private JLabel lblResultadoKcal = new JLabel("Consumo de kcal: ");
-    private CalculoTmbView tmbView;
-    
+    private Tmb tmb = new Tmb();
+    private UserDao dao = new UserDao();
+
     public RefeicoesView(User usuario) {
         this.usuarioLogado = usuario;
     }
@@ -85,10 +87,10 @@ public class RefeicoesView extends JFrame {
         menuRefeicoes.add(refeicoes);
         menuRefeicoes.add(adicionarRefeicao);
         menuBar.add(menuRefeicoes);
-        
+
         menuSair.add(sair);
         menuBar.add(menuSair);
-        
+
         setJMenuBar(menuBar);
 
         // Painel de fundo
@@ -103,7 +105,7 @@ public class RefeicoesView extends JFrame {
             }
         };
         backgroundPanel.setLayout(new GridBagLayout());
-        
+
         // Painel transparente com cantos arredondados
         JPanel centralPanel = new JPanel() {
             @Override
@@ -132,10 +134,10 @@ public class RefeicoesView extends JFrame {
         positionPainelCentral.fill = GridBagConstraints.NONE;
         positionPainelCentral.insets = new Insets(0, 0, 30, 0); // margem superior
         backgroundPanel.add(centralPanel, positionPainelCentral);
-        
-        JLabel lblResultadoTmb = new JLabel("Seu TMB é: ");
+
+        JLabel lblResultadoTmb = new JLabel("Seu TMB é: " + dao.buscarTmbPorUsuario("tmb", "taxaMetabolicaBasal", usuarioLogado.getId()));
         lblResultadoTmb.setFont(new Font("Calibri", Font.BOLD, 20));
-        
+
         GridBagConstraints posicaoLblTmb = new GridBagConstraints();
         posicaoLblTmb.gridx = 0;
         posicaoLblTmb.gridy = 0;
@@ -145,10 +147,9 @@ public class RefeicoesView extends JFrame {
         posicaoLblTmb.fill = GridBagConstraints.NONE;
         posicaoLblTmb.insets = new Insets(0, 0, 5, 0); // margem superior
         centralPanel.add(lblResultadoTmb, posicaoLblTmb);
-        
-        
+
         lblResultadoProteina.setFont(new Font("Calibri", Font.BOLD, 20));
-        
+
         GridBagConstraints posicaoLblProteina = new GridBagConstraints();
         posicaoLblProteina.gridx = 0;
         posicaoLblProteina.gridy = 1;
@@ -158,9 +159,9 @@ public class RefeicoesView extends JFrame {
         posicaoLblProteina.fill = GridBagConstraints.NONE;
         posicaoLblProteina.insets = new Insets(0, 0, 5, 0); // margem superior
         centralPanel.add(lblResultadoProteina, posicaoLblProteina);
-        
+
         lblResultadoCarboidrato.setFont(new Font("Calibri", Font.BOLD, 20));
-        
+
         GridBagConstraints posicaoLblCarboidrato = new GridBagConstraints();
         posicaoLblCarboidrato.gridx = 0;
         posicaoLblCarboidrato.gridy = 2;
@@ -170,9 +171,9 @@ public class RefeicoesView extends JFrame {
         posicaoLblCarboidrato.fill = GridBagConstraints.NONE;
         posicaoLblCarboidrato.insets = new Insets(0, 0, 5, 0); // margem superior
         centralPanel.add(lblResultadoCarboidrato, posicaoLblCarboidrato);
-        
+
         lblResultadoGordura.setFont(new Font("Calibri", Font.BOLD, 20));
-        
+
         GridBagConstraints posicaoLblGordura = new GridBagConstraints();
         posicaoLblGordura.gridx = 0;
         posicaoLblGordura.gridy = 3;
@@ -182,9 +183,9 @@ public class RefeicoesView extends JFrame {
         posicaoLblGordura.fill = GridBagConstraints.NONE;
         posicaoLblGordura.insets = new Insets(0, 0, 5, 0); // margem superior
         centralPanel.add(lblResultadoGordura, posicaoLblGordura);
-        
+
         lblResultadoKcal.setFont(new Font("Calibri", Font.BOLD, 20));
-        
+
         GridBagConstraints posicaoLblKcal = new GridBagConstraints();
         posicaoLblKcal.gridx = 0;
         posicaoLblKcal.gridy = 4;
@@ -201,57 +202,57 @@ public class RefeicoesView extends JFrame {
                 return row < getRowCount() - 2 && (column == 7);
             }
         };
-        
+
         modelo2 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return row < getRowCount() - 2 && (column == 7);
             }
         };
-        
+
         modelo3 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return row < getRowCount() - 2 && (column == 7);
             }
         };
-        
+
         modelo4 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return row < getRowCount() - 2 && (column == 7);
             }
         };
-        
+
         modelo5 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return row < getRowCount() - 2 && (column == 7);
             }
         };
-        
+
         modelo6 = new DefaultTableModel(new String[]{"ID", "Quantidade(g)", "Alimento", "Proteína", "Carboidrato", "Gordura", "Kcal", ""}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return row < getRowCount() - 2 && (column == 7);
             }
         };
-        
+
         modelo1.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo1.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
-        
+
         modelo2.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo2.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
-        
+
         modelo3.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo3.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
-        
+
         modelo4.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo4.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
-        
+
         modelo5.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo5.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
-        
+
         modelo6.addRow(new Object[]{"", "", "", "", "", "", "", ""});
         modelo6.addRow(new Object[]{"TOTAL", "0,00", "", "0,00", "0,00", "0,00", "0,00", ""});
 
@@ -436,6 +437,10 @@ public class RefeicoesView extends JFrame {
         carregarRefeicao6();
         tabelaAlimentosView();
         cadastroAlimentoView();
+        atualizarTotalProteinas();
+        atualizarTotalCarboidratos();
+        atualizarTotalGorduras();
+        atualizarTotalKcals();
         sair();
     }
 
@@ -499,7 +504,7 @@ public class RefeicoesView extends JFrame {
         // Atualiza os totais após carregar todos os alimentos
         atualizarTotais(modelo2);
     }
-    
+
     private void carregarRefeicao3() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao3(usuarioLogado.getId());
@@ -519,7 +524,7 @@ public class RefeicoesView extends JFrame {
         // Atualiza os totais após carregar todos os alimentos
         atualizarTotais(modelo3);
     }
-    
+
     private void carregarRefeicao4() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao4(usuarioLogado.getId());
@@ -539,7 +544,7 @@ public class RefeicoesView extends JFrame {
         // Atualiza os totais após carregar todos os alimentos
         atualizarTotais(modelo4);
     }
-    
+
     private void carregarRefeicao5() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao5(usuarioLogado.getId());
@@ -559,7 +564,7 @@ public class RefeicoesView extends JFrame {
         // Atualiza os totais após carregar todos os alimentos
         atualizarTotais(modelo5);
     }
-    
+
     private void carregarRefeicao6() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao6(usuarioLogado.getId());
@@ -634,7 +639,7 @@ public class RefeicoesView extends JFrame {
             return 0.0;
         }
     }
-    
+
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -642,5 +647,72 @@ public class RefeicoesView extends JFrame {
                 new LoginView().login();
             }
         });
+    }
+
+    private double pegarValorUltimaLinha(JTable tabela, int coluna) {
+        int linha = tabela.getRowCount() - 1;
+
+        if (linha >= 0) {
+            Object valorObj = tabela.getValueAt(linha, coluna);
+
+            if (valorObj != null && valorObj.toString().matches("[0-9.,]+")) {
+                try {
+                    String valor = valorObj.toString().replace(",", ".");
+                    return Double.parseDouble(valor);
+                } catch (NumberFormatException e) {
+                    // valor inválido, ignora
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    private void atualizarTotalProteinas() {
+        double total = 0;
+        total += pegarValorUltimaLinha(tblRefeicao1, 3); // suponha que coluna 2 é proteína
+        total += pegarValorUltimaLinha(tblRefeicao2, 3);
+        total += pegarValorUltimaLinha(tblRefeicao3, 3);
+        total += pegarValorUltimaLinha(tblRefeicao4, 3);
+        total += pegarValorUltimaLinha(tblRefeicao5, 3);
+        total += pegarValorUltimaLinha(tblRefeicao6, 3);
+
+        lblResultadoProteina.setText("Consumo de proteína: " + String.format("%.2f", total) + " g");
+    }
+
+    private void atualizarTotalCarboidratos() {
+        double total = 0;
+        total += pegarValorUltimaLinha(tblRefeicao1, 4); // suponha que coluna 2 é proteína
+        total += pegarValorUltimaLinha(tblRefeicao2, 4);
+        total += pegarValorUltimaLinha(tblRefeicao3, 4);
+        total += pegarValorUltimaLinha(tblRefeicao4, 4);
+        total += pegarValorUltimaLinha(tblRefeicao5, 4);
+        total += pegarValorUltimaLinha(tblRefeicao6, 4);
+
+        lblResultadoCarboidrato.setText("Consumo de carboidrato: " + String.format("%.2f", total) + " g");
+    }
+    
+    private void atualizarTotalGorduras() {
+        double total = 0;
+        total += pegarValorUltimaLinha(tblRefeicao1, 5); // suponha que coluna 2 é proteína
+        total += pegarValorUltimaLinha(tblRefeicao2, 5);
+        total += pegarValorUltimaLinha(tblRefeicao3, 5);
+        total += pegarValorUltimaLinha(tblRefeicao4, 5);
+        total += pegarValorUltimaLinha(tblRefeicao5, 5);
+        total += pegarValorUltimaLinha(tblRefeicao6, 5);
+
+        lblResultadoGordura.setText("Consumo de gordura: " + String.format("%.2f", total) + " g");
+    }
+    
+    private void atualizarTotalKcals() {
+        double total = 0;
+        total += pegarValorUltimaLinha(tblRefeicao1, 6); // suponha que coluna 2 é proteína
+        total += pegarValorUltimaLinha(tblRefeicao2, 6);
+        total += pegarValorUltimaLinha(tblRefeicao3, 6);
+        total += pegarValorUltimaLinha(tblRefeicao4, 6);
+        total += pegarValorUltimaLinha(tblRefeicao5, 6);
+        total += pegarValorUltimaLinha(tblRefeicao6, 6);
+
+        lblResultadoKcal.setText("Consumo de kal: " + String.format("%.2f", total) + " g");
     }
 }

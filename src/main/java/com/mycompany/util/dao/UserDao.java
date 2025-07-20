@@ -69,7 +69,7 @@ public class UserDao {
             return false;
         }
     }
-    
+
     public boolean salvarTmb(Tmb tmb) {
         String sql = "INSERT INTO taxaMetabolicaBasal (idade, altura, peso, fatorAtividade, tmb, id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -136,5 +136,27 @@ public class UserDao {
             e.printStackTrace();
         }
         return existe;
+    }
+
+    public Double buscarTmbPorUsuario(String tmb, String taxaMetabolicaBasal, int idUsuario) {
+        double valor = 0;
+        String sql = "SELECT " + tmb
+                + " FROM " + taxaMetabolicaBasal
+                + " WHERE id_usuario = ?"
+                + " ORDER BY id DESC LIMIT 1";
+
+        try (Connection conn = connection.getConexaoBd(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idUsuario);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                valor = rs.getDouble(tmb); // ou getInt, getDouble conforme o tipo
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return valor;
     }
 }

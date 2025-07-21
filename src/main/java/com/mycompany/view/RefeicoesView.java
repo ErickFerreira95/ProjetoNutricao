@@ -700,7 +700,6 @@ public class RefeicoesView extends JFrame {
     }
 
     public void atualizarTotalProteinas() {
-        System.out.println("Método chamado");
         double total = 0;
         total += somarColuna(tblRefeicao1, 3); // suponha que coluna 2 é proteína
         total += somarColuna(tblRefeicao2, 3);
@@ -745,6 +744,6 @@ public class RefeicoesView extends JFrame {
         total += somarColuna(tblRefeicao5, 6);
         total += somarColuna(tblRefeicao6, 6);
 
-        lblResultadoKcal.setText("Consumo de kal: " + String.format("%.2f", total) + " g");
+        lblResultadoKcal.setText("Consumo de kcal: " + String.format("%.2f", total) + " g");
     }
 }

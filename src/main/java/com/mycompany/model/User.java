@@ -5,15 +5,6 @@ public class User {
     private int id;
     private String nome, email, senha;
     private int idUsuario;
-    private double tmb;
-
-    public double getTmb() {
-        return tmb;
-    }
-
-    public void setTmb(double tmb) {
-        this.tmb = tmb;
-    }
 
     public int getIdUsuario() {
         return idUsuario;

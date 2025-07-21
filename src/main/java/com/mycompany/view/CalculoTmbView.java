@@ -18,6 +18,9 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -362,8 +365,7 @@ public class CalculoTmbView extends JFrame {
         btnCalcular.addActionListener(new ActionListener() {
             double resultadoTmb = 0;
             UserDao dao = new UserDao();
-            
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!emptyFields()) {
@@ -405,21 +407,22 @@ public class CalculoTmbView extends JFrame {
 
                         if (comboBox.getSelectedIndex() == 1) { // Masculino
                             resultadoTmb = fatorAtividade * (88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * idade));
-                            
                         } else { // Feminino
                             resultadoTmb = fatorAtividade * (447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * idade));
                         }
-                        
-                        double resultado = Math.round(resultadoTmb);
-                        lblResultado.setText("Seu TMB é: " + resultado);
-                        
+
+                        // Formatação do resultado com vírgula como separador decimal
+                        DecimalFormat df = new DecimalFormat("#0.0");
+                        String resultadoFormatado = df.format(resultadoTmb);
+
+                        lblResultado.setText("Seu TMB é: " + resultadoFormatado);
+
                         tmb.setIdade(Integer.parseInt(txtIdade.getText()));
                         tmb.setAltura(Integer.parseInt(txtAltura.getText()));
                         tmb.setPeso(peso);
                         tmb.setFatorAtividade(fatorAtividade);
-                        tmb.setTmb(resultado);
+                        tmb.setTmb(Double.parseDouble(resultadoFormatado.replace(",", ".")));
                         tmb.setIdUsuario(usuarioLogado.getId());
-                        usuarioLogado.setTmb(resultado);
                         dao.salvarTmb(tmb);
 
                     } catch (NumberFormatException ex) {

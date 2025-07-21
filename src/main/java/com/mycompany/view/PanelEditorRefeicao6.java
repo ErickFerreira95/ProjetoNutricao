@@ -76,7 +76,7 @@ public class PanelEditorRefeicao6 extends AbstractCellEditor implements TableCel
                     if (deletado) {
                         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
                         modelo.removeRow(row);
-                        view.atualizarTotais(modelo);
+                        view .atualizarTotais(modelo);
 
                         // Evita renderização indevida após a remoção da última linha
                         if (modelo.getRowCount() == 0) {

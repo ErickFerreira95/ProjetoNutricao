@@ -462,16 +462,23 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
                         if (comboBox.getSelectedIndex() == 0) {
                             dao.salvarAlimentoRefeicao1(alimento);
+                            JOptionPane.showMessageDialog(null, "Alimento adicionado a refeição 1");
                         } else if (comboBox.getSelectedIndex() == 1) {
                             dao.salvarAlimentoRefeicao2(alimento);
+                            JOptionPane.showMessageDialog(null, "Alimento adicionado a refeição 2");
                         } else if (comboBox.getSelectedIndex() == 2) {
                             dao.salvarAlimentoRefeicao3(alimento);
+                            JOptionPane.showMessageDialog(null, "Alimento adicionado a refeição 3");
                         } else if (comboBox.getSelectedIndex() == 3) {
                             dao.salvarAlimentoRefeicao4(alimento);
+                            JOptionPane.showMessageDialog(null, "Alimento adicionado a refeição 4");
                         } else if (comboBox.getSelectedIndex() == 4) {
                             dao.salvarAlimentoRefeicao5(alimento);
+                            JOptionPane.showMessageDialog(null, "Alimento adicionado a refeição 5");
+                            
                         } else {
                             dao.salvarAlimentoRefeicao6(alimento);
+                            JOptionPane.showMessageDialog(null, "Alimento adicionado a refeição 6");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Alimento não encontrado");

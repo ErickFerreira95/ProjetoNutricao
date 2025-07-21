@@ -305,6 +305,7 @@ public class CadastroAlimentoView extends JFrame {
                         alimento.setGordura(txtGordura.getText());
 
                         dao.salvarAlimento(alimento);
+                        JOptionPane.showMessageDialog(null, "Alimento cadastrado com sucesso!");
                         dispose();
                         new CadastroAlimentoView(usuarioLogado).cadastroAlimentoView();
                     }

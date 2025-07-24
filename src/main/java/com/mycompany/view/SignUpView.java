@@ -39,7 +39,7 @@ public class SignUpView extends JFrame {
     private void configurarUI() {
         setTitle("Cadastre-se");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1280, 720);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
@@ -267,7 +267,7 @@ public class SignUpView extends JFrame {
     }
 
     public boolean validarNome(String nome) {
-        String regex = "^[a-z A-Z]{1,50}$";
+        String regex = "^[\\p{L}\\s,]{1,50}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(nome);
         return matcher.matches();

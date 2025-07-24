@@ -61,9 +61,9 @@ public class AdicionarAlimentoRefeicao extends JFrame {
     }
 
     private void configurarUI() {
-        setTitle("Adionar Alimentos nas Refeições");
+        setTitle("Adicionar Alimentos nas Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1280, 720);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
         menuCadastrarAlimento.add(tabelaAlimentos);

@@ -50,9 +50,9 @@ public class MainView extends JFrame {
     private User usuarioLogado;
 
     private void configurarUI() {
-        setTitle("Login");
+        setTitle("Tabela de Alimentos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1280, 720);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
         menuCadastrarAlimento.add(tabelaAlimentos);
@@ -84,7 +84,7 @@ public class MainView extends JFrame {
 
         backgroundPanel.setLayout(new GridBagLayout());
 
-        modelo = new DefaultTableModel(new String[]{"ID", "Nome Alimento", "Quantidade(g)", "Proteína(g)", "Carboidrato(g)", "Gordura(g)", "Kcal", "Ações"}, 0) {
+        modelo = new DefaultTableModel(new String[]{"ID", "Alimento", "Quantidade(g)", "Proteína(g)", "Carboidrato(g)", "Gordura(g)", "Kcal", "Ações"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 // Permite edição apenas nas colunas 0 (Alimento) e 1 (Quantidade),
@@ -102,7 +102,7 @@ public class MainView extends JFrame {
         tblAlimentos.getColumnModel().getColumn(5).setPreferredWidth(200);
         tblAlimentos.getColumnModel().getColumn(6).setPreferredWidth(150);
         tblAlimentos.getColumnModel().getColumn(7).setPreferredWidth(350);
-        tblAlimentos.setPreferredScrollableViewportSize(new Dimension(950, 500));
+        tblAlimentos.setPreferredScrollableViewportSize(new Dimension(1500, 800));
         tblAlimentos.getTableHeader().setBackground(Color.WHITE);
         tblAlimentos.getTableHeader().setFont(new Font("Calibri", Font.BOLD, 14));
         tblAlimentos.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -141,8 +141,8 @@ public class MainView extends JFrame {
     public void mainView() {
         configurarUI();
         setVisible(true);
-        CadastroAlimentoView();
         carregarTabela();
+        CadastroAlimentoView();
         calculoTmbView();
         refeicoesView();
         adicionarRefeicaoView();

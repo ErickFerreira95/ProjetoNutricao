@@ -72,9 +72,10 @@ public class RefeicoesView extends JFrame {
     }
 
     private void configurarUI() {
+        
         setTitle("Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920, 900);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
 
         menuCadastrarAlimento.add(tabelaAlimentos);
@@ -130,7 +131,7 @@ public class RefeicoesView extends JFrame {
         positionPainelCentral.gridy = 0;
         positionPainelCentral.weightx = 0;
         positionPainelCentral.weighty = 0; // ← isso força ele a ficar no topo
-        positionPainelCentral.anchor = GridBagConstraints.CENTER;
+        positionPainelCentral.anchor = GridBagConstraints.WEST;
         positionPainelCentral.fill = GridBagConstraints.NONE;
         positionPainelCentral.insets = new Insets(0, 0, 30, 0); // margem superior
         backgroundPanel.add(centralPanel, positionPainelCentral);
@@ -425,8 +426,8 @@ public class RefeicoesView extends JFrame {
     }
 
     public void refeifoes() {
-        setVisible(true);
         configurarUI();
+        setVisible(true);
         calculoTmbView();
         adicionarRefeicaoView();
         carregarRefeicao1();

@@ -85,7 +85,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
 
         // Painel de fundo
         JPanel backgroundPanel = new JPanel() {
-            private final Image imagemFundo = new ImageIcon("/C:/Users/Erick/OneDrive/Documentos/NetBeansProjects/1-Projetos/AppNutricao/build/classes/images/background.jpg").getImage();
+            private final Image imagemFundo = new ImageIcon("C:\\Users\\Erick\\OneDrive\\Documentos\\NetBeansProjects\\1-Projetos\\ProjetoNutricao\\src\\images\\background.jpg").getImage();
 
             @Override
             protected void paintComponent(Graphics g) {

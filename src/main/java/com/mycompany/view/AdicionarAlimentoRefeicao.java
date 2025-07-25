@@ -60,6 +60,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         this.usuarioLogado = usuario;
     }
 
+    //Construtor que configura o JFrame
     private void configurarUI() {
         setTitle("Adicionar Alimentos nas Refeições");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -376,6 +377,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         sair();
     }
 
+    //Método que carrega as informações nutricionais dos alimentos e calcula de acordo com a quantidade digitada
     public void carregarAlimento() {
         btnBuscar.addActionListener(new ActionListener() {
 
@@ -427,6 +429,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    //Método que adiciona os aimentos as refeições
     public void adicionarAlimentoRefeicao() {
         btnAdicionarAlimento.addActionListener(new ActionListener() {
 
@@ -488,6 +491,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    //Método que chama a tela cadastroAlimentoView
     public void CadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -497,6 +501,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    //Método que chama a tela calculoTmbView
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -508,6 +513,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    //Método que chama a tela refeicoesView
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -519,6 +525,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    //Método que chama a tela Mainview
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -530,6 +537,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    //Método para deslogar o usuário
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -539,6 +547,7 @@ public class AdicionarAlimentoRefeicao extends JFrame {
         });
     }
 
+    // Método que verifica se os campos estão vazios
     public boolean emptyFields() {
 
         boolean empty = true;

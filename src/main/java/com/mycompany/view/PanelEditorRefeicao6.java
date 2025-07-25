@@ -31,7 +31,7 @@ public class PanelEditorRefeicao6 extends AbstractCellEditor implements TableCel
         this.usuarioLogado = usuario;
 
         painel = new JPanel(new GridBagLayout());
-        //btnExcluir = new JButton(new ImageIcon("src/images/lixeira.png"));
+        
         btnExcluir = new JButton("Excluir");
         btnExcluir.setBackground(new Color(255, 99, 71));
         btnExcluir.setOpaque(true);
@@ -44,10 +44,10 @@ public class PanelEditorRefeicao6 extends AbstractCellEditor implements TableCel
         posicaoBtnExcluir.gridx = 1;
         posicaoBtnExcluir.gridy = 0;
         posicaoBtnExcluir.weightx = 0;
-        posicaoBtnExcluir.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoBtnExcluir.weighty = 0;
         posicaoBtnExcluir.anchor = GridBagConstraints.CENTER;
         posicaoBtnExcluir.fill = GridBagConstraints.NONE;
-        posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0); // margem superior
+        posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0);
         painel.add(btnExcluir, posicaoBtnExcluir);
 
         btnExcluir.addActionListener(e -> {
@@ -69,7 +69,6 @@ public class PanelEditorRefeicao6 extends AbstractCellEditor implements TableCel
 
                 if (confirmar == JOptionPane.YES_OPTION) {
                     // Pare a edição ANTES de remover a linha
-
                     fireEditingStopped();
                     boolean deletado = dao.deletarAlimentoRefeicao6(id);
 

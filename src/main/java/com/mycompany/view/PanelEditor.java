@@ -33,14 +33,14 @@ public class PanelEditor extends AbstractCellEditor implements TableCellEditor {
         this.usuarioLogado = usuario;
         
         painel = new JPanel(new GridBagLayout());
-        //btnEditar = new JButton(new ImageIcon("src/images/lapis.png"));
+        
         btnEditar = new JButton("Editar");
         btnEditar.setToolTipText("Editar");
         btnEditar.setBackground(new Color(0, 191, 255));
         btnEditar.setOpaque(true);
         btnEditar.setBorderPainted(false);
         btnEditar.setForeground(Color.WHITE);
-        //btnExcluir = new JButton(new ImageIcon("src/images/lixeira.png"));
+        
         btnExcluir = new JButton("Excluir");
         btnExcluir.setBackground(new Color(255, 99, 71));
         btnExcluir.setOpaque(true);

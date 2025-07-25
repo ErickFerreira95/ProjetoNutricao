@@ -62,6 +62,7 @@ public class CalculoTmbView extends JFrame {
         this.usuarioLogado = usuario;
     }
 
+    //Método construtor que configura o JFrame
     private void configurarUI() {
         setTitle("Cálculo Taxa Metabólica Basal");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -361,6 +362,7 @@ public class CalculoTmbView extends JFrame {
         sair();
     }
 
+    //Método que calcula o Tmb do usuário e salva
     public void calcularTmb() {
         btnCalcular.addActionListener(new ActionListener() {
             double resultadoTmb = 0;
@@ -433,6 +435,7 @@ public class CalculoTmbView extends JFrame {
         });
     }
 
+    //Método que chama a tela cadastroAlimentoView
     public void CadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -442,6 +445,7 @@ public class CalculoTmbView extends JFrame {
         });
     }
 
+    //Método que chama a tela refeicoesView
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -453,6 +457,7 @@ public class CalculoTmbView extends JFrame {
         });
     }
 
+    //Método que chama a tela mainView
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -464,6 +469,7 @@ public class CalculoTmbView extends JFrame {
         });
     }
 
+    //Método que chama a tela adicionarAlimentoRefeicao
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -473,6 +479,7 @@ public class CalculoTmbView extends JFrame {
         });
     }
 
+    //Método que desloga o usuário
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -482,6 +489,7 @@ public class CalculoTmbView extends JFrame {
         });
     }
 
+    //Método que verifica os campos vazios
     public boolean emptyFields() {
 
         boolean empty = true;
@@ -495,6 +503,7 @@ public class CalculoTmbView extends JFrame {
         return empty;
     }
 
+    //Método que valida a entrada de idade e altura
     public boolean validarIdadeAltura(String idadeAltura) {
         String regex = "[0-9]{1,3}";
         Pattern pattern = Pattern.compile(regex);
@@ -502,6 +511,7 @@ public class CalculoTmbView extends JFrame {
         return matcher.matches();
     }
 
+    //Método que valida o peso e fator atividade
     public boolean validarPesoFator(String pesoFator) {
         String regex = "^[0-9]{1,3}([.,][0-9]{1,2})?$";
         return pesoFator.matches(regex);

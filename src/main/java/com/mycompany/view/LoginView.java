@@ -38,6 +38,7 @@ public class LoginView extends JFrame {
     private JButton btnLogin = new JButton("Login");
     private JLabel lblCadastrar = new JLabel("<html><a href=''>Cadastre-se</a></html>");
 
+    //Método construtor que configura o JFrame
     private void configurarUI() {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -195,32 +196,7 @@ public class LoginView extends JFrame {
         fazerLogin();
     }
 
-    /*public void fazerLogin() {
-        btnLogin.addActionListener(new ActionListener() {
-            UserDao dao = new UserDao();
-            SignUpView signUpView = new SignUpView();
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!emptyFields()) {
-                    if (validarEmail(txtEmail.getText()) == false) {
-                        JOptionPane.showMessageDialog(null, "Formato email incorreto! \n"
-                                + "Ex: nome@email.com");
-                    } else if (validarSenha(txtSenha.getText()) == false) {
-                        JOptionPane.showMessageDialog(null, "A senha deve conter no mínimo 6 caracteres e no máximo 40");
-                    } else {
-                        if (dao.autenticarUsuario(txtEmail.getText(), txtSenha.getText())) {
-                            dispose();
-                            new MainView().mainView();
-                        } else {
-                            System.out.println("Email ou senha inválidos.");
-                        }
-                    }
-                }
-            }
-
-        });
-    }*/
+    //Método que faz o login
     public void fazerLogin() {
         btnLogin.addActionListener(new ActionListener() {
             UserDao dao = new UserDao();
@@ -249,7 +225,7 @@ public class LoginView extends JFrame {
         });
     }
 
-    // Ação ao clicar signUp
+    //Método que chama a tela SignUp
     public void SignUpView() {
         lblCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,6 +240,7 @@ public class LoginView extends JFrame {
         );
     }
 
+    //Método que verifica os campos vazios
     public boolean emptyFields() {
 
         boolean empty = true;
@@ -276,6 +253,7 @@ public class LoginView extends JFrame {
         return empty;
     }
 
+    //Método que valida o email
     public boolean validarEmail(String email) {
         String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
@@ -283,6 +261,7 @@ public class LoginView extends JFrame {
         return matcher.matches();
     }
 
+    //Método que valida a senha
     public boolean validarSenha(String senha) {
         String regex = "^.{6,}$";
         Pattern pattern = Pattern.compile(regex);

@@ -29,10 +29,10 @@ public class PanelRendererRefeicao6 extends JPanel implements TableCellRenderer 
         posicaoBtnExcluir.gridx = 1;
         posicaoBtnExcluir.gridy = 0;
         posicaoBtnExcluir.weightx = 0;
-        posicaoBtnExcluir.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoBtnExcluir.weighty = 0;
         posicaoBtnExcluir.anchor = GridBagConstraints.CENTER;
         posicaoBtnExcluir.fill = GridBagConstraints.NONE;
-        posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0); // margem superior
+        posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0);
         add(btnExcluir, posicaoBtnExcluir);
     }
 

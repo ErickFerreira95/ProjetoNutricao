@@ -49,6 +49,7 @@ public class MainView extends JFrame {
     private JMenuItem sair = new JMenuItem("Sair");
     private User usuarioLogado;
 
+    //Método construtor que configura o JFrame
     private void configurarUI() {
         setTitle("Tabela de Alimentos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -152,15 +153,8 @@ public class MainView extends JFrame {
     public MainView(User usuario) {
         this.usuarioLogado = usuario;
     }
-
-    /*private void carregarTabela() {
-        AlimentoDao dao = new AlimentoDao();
-        List<Alimento> alimentos = dao.carregarAlimentos();
-
-        for (Alimento a : alimentos) {
-            modelo.addRow(new Object[]{a.getId(), a.getNomeAlimento(), a.getQuantidade(), a.getProteina(), a.getCarboidrato(), a.getGordura(), a.getKcal()});
-        }
-    }*/
+    
+    //Método que carrega os alimentos do banco para o JTable
     private void carregarTabela() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorUsuario(usuarioLogado.getId());
@@ -176,7 +170,7 @@ public class MainView extends JFrame {
         }
     }
 
-    // Adiciona ações
+    //Método que chama a tela cadastroAlimentoView
     public void CadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -186,6 +180,7 @@ public class MainView extends JFrame {
         });
     }
 
+    //Método que chama a tela calculoTmbView
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -197,6 +192,7 @@ public class MainView extends JFrame {
         });
     }
 
+    //Método que chama a tela refeicoesView
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -208,6 +204,7 @@ public class MainView extends JFrame {
         });
     }
 
+    //Método que chama a tela adicionarAlimentoRefeicao
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -217,6 +214,7 @@ public class MainView extends JFrame {
         });
     }
 
+    //Método que desloga o usuário
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

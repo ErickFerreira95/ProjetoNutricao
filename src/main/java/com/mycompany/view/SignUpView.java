@@ -36,6 +36,7 @@ public class SignUpView extends JFrame {
     private JButton btnCadastrar = new JButton("Cadastrar");
     private JLabel lblVoltar = new JLabel("<html><a href=''>Voltar</a></html>");
 
+    //Método que configura o JFrame
     private void configurarUI() {
         setTitle("Cadastre-se");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -210,6 +211,7 @@ public class SignUpView extends JFrame {
         voltar();
     }
 
+    //Método que salva o usuário cadastrado
     public void salvarUsuario() {
 
         btnCadastrar.addActionListener(new ActionListener() {
@@ -240,6 +242,7 @@ public class SignUpView extends JFrame {
         });
     }
 
+    //Método que chama a tela loginView
     public void voltar() {
         lblVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -254,6 +257,7 @@ public class SignUpView extends JFrame {
         );
     }
 
+    //Método que verifica os campos vazios
     public boolean emptyFields() {
 
         boolean empty = true;
@@ -266,6 +270,7 @@ public class SignUpView extends JFrame {
         return empty;
     }
 
+    //Método que valida o nome
     public boolean validarNome(String nome) {
         String regex = "^[\\p{L}\\s,]{1,50}$";
         Pattern pattern = Pattern.compile(regex);

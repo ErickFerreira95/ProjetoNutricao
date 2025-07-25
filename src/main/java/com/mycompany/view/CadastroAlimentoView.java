@@ -54,8 +54,8 @@ public class CadastroAlimentoView extends JFrame {
         this.usuarioLogado = usuario;
     }
 
+    //Método construtor que configura o JFrame
     private void configurarUI() {
-        
         
         setTitle("Cadastro de Alimento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -272,6 +272,7 @@ public class CadastroAlimentoView extends JFrame {
         sair();
     }
 
+    //Método que salva o alimento cadastrado pelo usuário logado
     public void salvarAlimento() {
         botaoCadastrar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
@@ -315,6 +316,7 @@ public class CadastroAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela calculoTmbView
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -326,6 +328,7 @@ public class CadastroAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela refeicoesView
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -337,6 +340,7 @@ public class CadastroAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela mainView
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -348,7 +352,7 @@ public class CadastroAlimentoView extends JFrame {
         });
     }
 
-    // Adiciona ações
+    //Método que chama a tela adicionarAlimentoRefeicao
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -358,6 +362,7 @@ public class CadastroAlimentoView extends JFrame {
         });
     }
 
+    //Método que desloga o usuário
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -367,6 +372,7 @@ public class CadastroAlimentoView extends JFrame {
         });
     }
 
+    //Método que verifica os campos vazios
     public boolean emptyFields() {
 
         boolean empty = true;

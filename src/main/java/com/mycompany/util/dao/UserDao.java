@@ -20,32 +20,6 @@ public class UserDao {
         this.conn = this.connection.getConexaoBd();
     }
 
-    public List<User> getUsuario() {
-        String sql = "SELECT * FROM usuarios";
-
-        try {
-            PreparedStatement stmt = this.conn.prepareStatement(sql);
-
-            ResultSet rs = stmt.executeQuery();
-
-            List<User> listaUsuarios = new ArrayList<>();
-
-            while (rs.next()) { //.next retorna verdadeiro caso exista uma próxima posição dentro do array
-                User user = new User();
-
-                user.setId(rs.getInt("id"));
-                user.setNome(rs.getString("nome"));
-                user.setEmail(rs.getString("email"));
-                user.setSenha(rs.getString("senha"));
-
-                listaUsuarios.add(user);
-            }
-            return listaUsuarios;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     // Salvar usuário com senha criptografada
     public boolean salvarUsuario(String nome, String email, String senha) {
         String sql = "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)";
@@ -70,6 +44,7 @@ public class UserDao {
         }
     }
 
+    //Método que salva o TMB do usuário
     public boolean salvarTmb(Tmb tmb) {
         String sql = "INSERT INTO taxaMetabolicaBasal (idade, altura, peso, fatorAtividade, tmb, id_usuario) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -92,6 +67,7 @@ public class UserDao {
         }
     }
 
+    //Método que autentica o usuário ao fazer login
     public User autenticarUsuario(String email, String senhaDigitada) {
         String sql = "SELECT id, nome, email, senha FROM usuarios WHERE email = ?";
 
@@ -118,6 +94,7 @@ public class UserDao {
         return null;
     }
 
+    //Método que verifica se o email já existe no banco
     public boolean emailExiste(String email) {
         User user = null;
         boolean existe = false;
@@ -138,6 +115,7 @@ public class UserDao {
         return existe;
     }
 
+    //Método que busca o tmb de cada usuário
     public Double buscarTmbPorUsuario(String tmb, String taxaMetabolicaBasal, int idUsuario) {
         double valor = 0;
         String sql = "SELECT " + tmb

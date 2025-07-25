@@ -71,6 +71,7 @@ public class RefeicoesView extends JFrame {
         this.usuarioLogado = usuario;
     }
 
+    //Método que configura o JFrame
     private void configurarUI() {
         
         setTitle("Refeições");
@@ -441,7 +442,7 @@ public class RefeicoesView extends JFrame {
         sair();
     }
 
-    // Adiciona ações
+    //Método que chama a tela adicionarAlimentoRefeicao
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -451,6 +452,7 @@ public class RefeicoesView extends JFrame {
         });
     }
 
+    //Método que chama a tela calculoTmbView
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -462,6 +464,7 @@ public class RefeicoesView extends JFrame {
         });
     }
 
+    //Método que carrega a refeicao1
     private void carregarRefeicao1() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao1(usuarioLogado.getId());
@@ -482,6 +485,7 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo1);
     }
 
+    //Método que carrega a refeicao2
     private void carregarRefeicao2() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao2(usuarioLogado.getId());
@@ -502,6 +506,7 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo2);
     }
 
+    //Método que carrega a refeicao3
     private void carregarRefeicao3() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao3(usuarioLogado.getId());
@@ -522,6 +527,7 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo3);
     }
 
+    //Método que carrega a refeicao4
     private void carregarRefeicao4() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao4(usuarioLogado.getId());
@@ -542,6 +548,7 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo4);
     }
 
+    //Método que carrega a refeicao5
     private void carregarRefeicao5() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao5(usuarioLogado.getId());
@@ -562,6 +569,7 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo5);
     }
 
+    //Método que carrega a refeicao6
     private void carregarRefeicao6() {
         AlimentoDao dao = new AlimentoDao();
         List<Alimento> alimentos = dao.listarPorusuarioRefeicao6(usuarioLogado.getId());
@@ -582,6 +590,7 @@ public class RefeicoesView extends JFrame {
         atualizarTotais(modelo6);
     }
 
+    //Método que chama a tela mainView
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -593,6 +602,7 @@ public class RefeicoesView extends JFrame {
         });
     }
 
+    //Método que chama a tela cadastroAlimentoView
     public void cadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -602,6 +612,7 @@ public class RefeicoesView extends JFrame {
         });
     }
 
+    // Método que atuliza o total dos macros e exibe no JLabel
     public void atualizarTotais(DefaultTableModel modelo) {
         double proteina = 0.0;
         double carboidrato = 0.0;
@@ -642,6 +653,7 @@ public class RefeicoesView extends JFrame {
         }
     }
 
+    //Método que desloga o usuário
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -651,24 +663,7 @@ public class RefeicoesView extends JFrame {
         });
     }
 
-    /*private double pegarValorUltimaLinha(JTable tabela, int coluna) {
-        int linha = tabela.getRowCount() - 1;
-
-        if (linha >= 0) {
-            Object valorObj = tabela.getValueAt(linha, coluna);
-
-            if (valorObj != null && valorObj.toString().matches("[0-9.,]+")) {
-                try {
-                    String valor = valorObj.toString().replace(",", ".");
-                    return Double.parseDouble(valor);
-                } catch (NumberFormatException e) {
-                    // valor inválido, ignora
-                }
-            }
-        }
-
-        return 0;
-    }*/
+    //Método que soma os valores de cada coluna e mostra no total
     private double somarColuna(JTable tabela, int coluna) {
         double total = 0;
         int rowCount = tabela.getRowCount();
@@ -700,6 +695,7 @@ public class RefeicoesView extends JFrame {
         return total;
     }
 
+    //Método que atualiza o total de proteina
     public void atualizarTotalProteinas() {
         double total = 0;
         total += somarColuna(tblRefeicao1, 3); // suponha que coluna 2 é proteína
@@ -712,6 +708,7 @@ public class RefeicoesView extends JFrame {
         lblResultadoProteina.setText("Consumo de proteína: " + String.format("%.2f", total) + " g");
     }
 
+    //Método que atualiza o total de carboidrato
     public void atualizarTotalCarboidratos() {
         double total = 0;
         total += somarColuna(tblRefeicao1, 4); // suponha que coluna 2 é proteína
@@ -724,6 +721,7 @@ public class RefeicoesView extends JFrame {
         lblResultadoCarboidrato.setText("Consumo de carboidrato: " + String.format("%.2f", total) + " g");
     }
 
+    //Método que atualiza o total de gordura
     public void atualizarTotalGorduras() {
         double total = 0;
         total += somarColuna(tblRefeicao1, 5); // suponha que coluna 2 é proteína
@@ -736,6 +734,7 @@ public class RefeicoesView extends JFrame {
         lblResultadoGordura.setText("Consumo de gordura: " + String.format("%.2f", total) + " g");
     }
 
+    //Método que atualiza o total de kcal
     public void atualizarTotalKcals() {
         double total = 0;
         total += somarColuna(tblRefeicao1, 6); // suponha que coluna 2 é proteína

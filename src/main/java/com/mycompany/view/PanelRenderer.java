@@ -17,9 +17,6 @@ public class PanelRenderer extends JPanel implements TableCellRenderer {
 
     public PanelRenderer() {
         setLayout(new GridBagLayout());
-        //add(new JButton(new ImageIcon("src/images/lapis.png"))).setEnabled(true);
-        //add(new JButton(new ImageIcon("src/images/lixeira.png"))).setEnabled(true);
-        
 
         JButton btnEditar = new JButton("Editar");
         JButton btnExcluir = new JButton("Excluir");
@@ -42,20 +39,20 @@ public class PanelRenderer extends JPanel implements TableCellRenderer {
         posicaoBtnEditar.gridx = 0;
         posicaoBtnEditar.gridy = 0;
         posicaoBtnEditar.weightx = 0;
-        posicaoBtnEditar.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoBtnEditar.weighty = 0;
         posicaoBtnEditar.anchor = GridBagConstraints.CENTER;
         posicaoBtnEditar.fill = GridBagConstraints.NONE;
-        posicaoBtnEditar.insets = new Insets(0, 0, 0, 5); // margem superior
+        posicaoBtnEditar.insets = new Insets(0, 0, 0, 5);
         add(btnEditar, posicaoBtnEditar);
 
         GridBagConstraints posicaoBtnExcluir = new GridBagConstraints();
         posicaoBtnExcluir.gridx = 1;
         posicaoBtnExcluir.gridy = 0;
         posicaoBtnExcluir.weightx = 0;
-        posicaoBtnExcluir.weighty = 0; // ← isso força ele a ficar no topo
+        posicaoBtnExcluir.weighty = 0;
         posicaoBtnExcluir.anchor = GridBagConstraints.CENTER;
         posicaoBtnExcluir.fill = GridBagConstraints.NONE;
-        posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0); // margem superior
+        posicaoBtnExcluir.insets = new Insets(0, 0, 0, 0);
         add(btnExcluir, posicaoBtnExcluir);
     }
 

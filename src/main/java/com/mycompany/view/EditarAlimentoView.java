@@ -58,6 +58,7 @@ public class EditarAlimentoView extends JFrame {
 
     Alimento alimento = new Alimento();
 
+    //Método construtor que configura o JFrame
     private void configurarUI() {
         setTitle("Editar Alimento");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -280,6 +281,7 @@ public class EditarAlimentoView extends JFrame {
         sair();
     }
 
+    //Método que edita/atualiza o alimento
     public void editarAlimento() {
         btnSalvar.addActionListener(new ActionListener() {
             AlimentoDao dao = new AlimentoDao();
@@ -319,6 +321,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que pega o alimento escolhido pelo usuário
     public Alimento getAlimento(Alimento alimento) {
         txtNomeAlimento.setText(alimento.getNomeAlimento());
         txtQuantidade.setText(alimento.getQuantidade());
@@ -329,6 +332,7 @@ public class EditarAlimentoView extends JFrame {
         return alimento;
     }
 
+    //Método que chama a tela calculoTmbView
     public void calculoTmbView() {
         calcularTmb.addActionListener(new ActionListener() {
 
@@ -340,6 +344,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela refeicoesView
     public void refeicoesView() {
         refeicoes.addActionListener(new ActionListener() {
 
@@ -351,6 +356,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela mainView
     public void tabelaAlimentosView() {
         tabelaAlimentos.addActionListener(new ActionListener() {
 
@@ -362,6 +368,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela cadastroAlimentoView
     public void cadastroAlimentoView() {
         cadastrarAlimento.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -371,6 +378,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que chama a tela adicionarAlimentoRefeicao
     public void adicionarRefeicaoView() {
         adicionarRefeicao.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -380,6 +388,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que desloga o usuário
     public void sair() {
         sair.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -389,6 +398,7 @@ public class EditarAlimentoView extends JFrame {
         });
     }
 
+    //Método que verifica os campos vazios
     public boolean emptyFields() {
 
         boolean empty = true;
@@ -402,6 +412,7 @@ public class EditarAlimentoView extends JFrame {
         return empty;
     }
 
+    //Método que valida as entradas numéricas
     public boolean validarEntradaNumerica(String numero) {
         String regex = "^\\d+(,\\d+)?$";
         Pattern pattern = Pattern.compile(regex);
